@@ -46,11 +46,10 @@ public class GameManagerEx
 
         return go;
     }
-    public GameObject MonsterSpawn(Define.Monsters monsterType, string path, Transform parent = null) // 스폰하는 위치도 지정
+    public GameObject MonsterSpawn(Define.Monsters monsterType, string path, Transform parent = null)
     {
         GameObject go = Managers.Resource.Instantiate($"Monsters/{path}", parent);
 
-        // 소환 위치 지정
 
         switch (monsterType)
         {

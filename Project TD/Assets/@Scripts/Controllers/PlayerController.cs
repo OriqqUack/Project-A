@@ -79,7 +79,7 @@ public class PlayerController : BaseController
 	{
 		if (_lockTarget != null)
 		{
-			Stat targetStat = _lockTarget.GetComponent<Stat>();
+			MonsterStat targetStat = _lockTarget.GetComponent<MonsterStat>();
 			targetStat.OnAttacked(_stat);
 		}
 

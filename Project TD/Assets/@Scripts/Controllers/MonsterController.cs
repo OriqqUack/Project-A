@@ -83,7 +83,7 @@ public class MonsterController : BaseController
 		if (_lockTarget != null)
 		{
 			// 체력
-			Stat targetStat = _lockTarget.GetComponent<Stat>();
+			PlayerStat targetStat = _lockTarget.GetComponent<PlayerStat>();
 			targetStat.OnAttacked(_stat);
 
 			if (targetStat.Hp > 0)
