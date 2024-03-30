@@ -1,13 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerStat : Stat
 {
 	[SerializeField]
 	protected int _exp;
 	[SerializeField]
+	protected int _totalExp;
+	[SerializeField]
 	protected int _gold;
+	[SerializeField]
+	protected int _luck;
+
+
+	public Action<int> OnLuckChanged;
 
 	public int Exp
 	{
@@ -16,29 +24,36 @@ public class PlayerStat : Stat
 		{
 			_exp = value;
 
-			int level = 1;
 			while (true)
 			{
 				Data.Stat stat;
-				if (Managers.Data.StatDict.TryGetValue(level + 1, out stat) == false)
+				if (Managers.Data.StatDict.TryGetValue(Level, out stat) == false)
 					break;
 				if (_exp < stat.totalExp)
 					break;
-				level++;
-			}
-
-			if (level != Level)
-			{
-				Debug.Log("Level Up!");
-				Level = level;
+				Level++;
+				Debug.Log($"Level Up!{Level}");
 				SetStat(Level);
+				Exp = 0;
 			}
 		}
 	}
 
 	public int Gold { get { return _gold; } set { _gold = value; } }
 
-	private void Start()
+	public int TotalExp { get { return _totalExp; } set { _totalExp = value; } }
+
+	public int Luck
+    {
+        get { return _luck; }
+        set
+        {
+			_luck = value;
+			OnLuckChanged?.Invoke(_luck);
+        }
+    }
+
+	private void Awake()
 	{
 		_level = 1;
 		_exp = 0;
@@ -57,9 +72,10 @@ public class PlayerStat : Stat
 	{
 		Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
 		Data.Stat stat = dict[level];
-		_hp = stat.maxHp;
-		_maxHp = stat.maxHp;
-		_attack = stat.attack;
+		Hp = stat.maxHp;
+		MaxHp = stat.maxHp;
+		Attack = stat.attack;
+		TotalExp = stat.totalExp;
 	}
 
 	protected override void OnDead(Stat attacker)

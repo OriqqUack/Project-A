@@ -13,6 +13,8 @@ public class GameManagerEx
 
     public Action<int> OnSpawnEvent;
 
+    public Action wasChangedHP;
+
     public GameObject GetPlayer() { return _player; }
     public GameObject GetTower() { return _currentTower; }
 
