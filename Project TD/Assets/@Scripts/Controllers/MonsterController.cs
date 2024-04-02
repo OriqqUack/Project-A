@@ -54,7 +54,7 @@ public class MonsterController : BaseController
 
 		// 이동
 		Vector3 dir = _destPos - transform.position;
-		if (dir.magnitude < 0.1f)
+		if (dir.magnitude < _stat.ScanRange)
 		{
 			State = Define.State.Idle;
 		}
