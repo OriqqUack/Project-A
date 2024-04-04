@@ -85,7 +85,7 @@ public class Stat : MonoBehaviour
 
     private void Start()
     {
-        _level = 1;
+        /*_level = 1;
         _hp = 100;
         _maxHp = 100;
         _attack = 10;
@@ -93,7 +93,7 @@ public class Stat : MonoBehaviour
         _moveSpeed = 5.0f;
         _dashingPower = 10.0f;
         _dashingTime = 0.2f;
-        _dashingCooldown = 0.1f;
+        _dashingCooldown = 0.1f;*/
     }
 
     public virtual void OnAttacked(Stat attacker)

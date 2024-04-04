@@ -25,4 +25,9 @@ public class SettingMenu : MonoBehaviour
             activeUI.SetActive(true);
         }
     }
+
+    public void Save()
+    {
+        DataController.instance.SaveData();
+    }
 }
