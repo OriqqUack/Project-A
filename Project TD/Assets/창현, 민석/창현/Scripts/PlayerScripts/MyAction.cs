@@ -8,6 +8,13 @@ public class MyAction : MonoBehaviour
 
     private State myState;
 
+    private Animator anim;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     private void Start()
     {
         SetActionType(Define.State.Idle);
@@ -51,10 +58,12 @@ public class MyAction : MonoBehaviour
                 break;
             case Define.State.Idle:
                 myState = gameObject.AddComponent<ConcreteStateIdle>();
+                anim.SetBool("isMoving", false);
                 myState.DoAction(state);
                 break;
             case Define.State.Moving:
                 myState = gameObject.AddComponent<ConcreteStateMove>();
+                anim.SetBool("isMoving", true);
                 myState.DoAction(state);
                 break;
             case Define.State.Jump:
@@ -71,6 +80,4 @@ public class MyAction : MonoBehaviour
                 break;
         }
     }
-
-    
 }

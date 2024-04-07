@@ -4,28 +4,25 @@ using UnityEngine;
 
 public class ConcreteStateIdle : State
 {
+    float _hAxis;
+    float _vAxis;
     public override void DoAction(Define.State state)
     {
         CoroutineRunningCheck();
-        _coroutine = StartCoroutine("MovingCheck");
     }
 
-    IEnumerator MovingCheck()
+    private void Update()
     {
-        while (true)
-        {
-            float _hAxis = Input.GetAxisRaw("Horizontal");
-            float _vAxis = Input.GetAxisRaw("Vertical");
+        _hAxis = Input.GetAxisRaw("Horizontal");
+        _vAxis = Input.GetAxisRaw("Vertical");
 
-            bool _isMoving = MovingCheck(_hAxis, _vAxis);
-            if (_isMoving)
-            {
-                GetComponent<MyAction>().SetActionType(Define.State.Moving);
-                StopCoroutine("MovingCheck");
-            }
-            yield return null;
+        bool _isMoving = MovingCheck(_hAxis, _vAxis);
+        if (_isMoving)
+        {
+            GetComponent<MyAction>().SetActionType(Define.State.Moving);
         }
     }
+
 
     
 }

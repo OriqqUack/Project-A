@@ -18,11 +18,12 @@ public abstract class State : MonoBehaviour
         _anim = GetComponent<Animator>();
     }
 
+
     protected virtual bool MovingCheck(float horizon, float vertical)
     {
         Vector3 dir = new Vector3(horizon, 0, vertical);
 
-        if (dir.magnitude < 0.1f || (horizon == 0 && vertical == 0))
+        if (dir.magnitude < 0.01f && (horizon == 0 && vertical == 0))
             return false;
         else
             return true;

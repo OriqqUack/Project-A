@@ -55,10 +55,10 @@ public class BuildManager : MonoBehaviour
 
     private void Awake()
     {
-        UI = Managers.Resource.Instantiate("TD UI/BuildUI");
-		buildUI = UI.GetComponent<BuildUI>();
-		ghostTowerObject = Managers.Resource.Instantiate("TD UI/PossibleTowerGhost");
-		ghostTower = ghostTowerObject.GetComponent<GhostTower>();
+        //UI = Managers.Resource.Instantiate("TD UI/BuildUI");
+		//buildUI = UI.GetComponent<BuildUI>();
+		//ghostTowerObject = Managers.Resource.Instantiate("TD UI/PossibleTowerGhost");
+		//ghostTower = ghostTowerObject.GetComponent<GhostTower>();
 
 		TowerParent = new GameObject();
         TowerParent.name = "Towers";

@@ -8,6 +8,7 @@ public class ConcreteStateMove : State
     float InputZ;
 
     float fallDownPer = 0.001f;
+    float rotationSpeed = 10.0f;
     public override void DoAction(Define.State state)
     {
         CoroutineRunningCheck();
@@ -20,13 +21,14 @@ public class ConcreteStateMove : State
         {
             InputX = Input.GetAxisRaw("Horizontal");
             InputZ = Input.GetAxisRaw("Vertical");
-            Vector3 dir = new Vector3(InputX, 0, InputZ);
+            Debug.Log(InputX.ToString() + " " + InputZ.ToString());
+            Vector3 dir = new Vector3(InputX, 0, InputZ).normalized;
 
             //넘어지기 체크
             if (IsFallDown())
             {
-                _rb.velocity = Vector3.zero;
                 yield return new WaitForSeconds(0.1f);
+                _anim.SetBool("isTripping", true);
                 GetComponent<MyAction>().SetActionType(Define.State.FallDown);
                 break;
             }
@@ -40,6 +42,10 @@ public class ConcreteStateMove : State
             }
 
             _rb.velocity = dir * _stat.MoveSpeed;
+            Quaternion targetRotation = Quaternion.LookRotation(dir);
+
+            // 부드러운 회전을 위해 Slerp 함수를 사용합니다.
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             yield return null;
         }
         
@@ -48,7 +54,6 @@ public class ConcreteStateMove : State
     private bool IsFallDown()
     {
         float randomNumber = Random.value;
-        Debug.Log(randomNumber);
         if (randomNumber < fallDownPer)
             return true;
         return false;
