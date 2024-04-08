@@ -7,8 +7,9 @@ public class Monster1 : MonoBehaviour
     [SerializeField]
     MonsterStat _stat;
 
+
     public Define.Monsters MonsterType { get; private set; } = Define.Monsters.Monster1;
-    public void Init()
+    void Start()
     {
         _stat = gameObject.GetComponent<MonsterStat>();
         
@@ -16,5 +17,5 @@ public class Monster1 : MonoBehaviour
             Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform);
     }
 
-
+    
 }

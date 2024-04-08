@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class MonsterController : BaseController
 {
 	[SerializeField]
-	MonsterStat _stat;
+	protected MonsterStat _stat;
 
     public Define.Monsters MonsterType { get; protected set; } = Define.Monsters.Unknown; // Despawn 하기위해
 
@@ -54,9 +54,14 @@ public class MonsterController : BaseController
 
 		// 이동
 		Vector3 dir = _destPos - transform.position;
-		if (dir.magnitude < _stat.ScanRange)
+		// 목표물과의 거리가 스캔범위보다 멀어지면 Idle로 상태 변환
+		/* 내비메시의 speed값이 그대로 남아 계속 질질 끌고 오는 버그가 있어 
+		 내비메시의 speed값을 0으로 조정해줌 다른 방법이 있을듯 보임....*/
+		if (dir.magnitude > _stat.ScanRange)
 		{
-			State = Define.State.Idle;
+            NavMeshAgent nma = gameObject.GetOrAddComponent<NavMeshAgent>();
+            nma.speed = 0f;
+            State = Define.State.Idle;
 		}
 		else
 		{
