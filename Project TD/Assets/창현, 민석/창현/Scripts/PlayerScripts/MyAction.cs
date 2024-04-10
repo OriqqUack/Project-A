@@ -18,6 +18,9 @@ public class MyAction : MonoBehaviour
     private void Start()
     {
         SetActionType(Define.State.Idle);
+        Managers.Input.KeyAction -= OnKeyboard;
+        Managers.Input.KeyAction += OnKeyboard;
+
     }
 
     private void Update()
@@ -78,6 +81,20 @@ public class MyAction : MonoBehaviour
                 myState = gameObject.AddComponent<ConcreteStateFallDown>();
                 myState.DoAction(state);
                 break;
+        }
+    }
+
+    void OnKeyboard()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Managers.UI.ShowUI("Menu");
+            Managers.Input.lastKey = "I";
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            Managers.UI.ShowUI("Menu");
+            Managers.Input.lastKey = "B";
         }
     }
 }

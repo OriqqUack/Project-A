@@ -10,12 +10,16 @@ public class InputManager   // 상태 체크
     public Action<Define.MouseEvent> MouseAction = null;
     public Action<Define.State> Key = null;
 
-    bool _pressed = false;
-    float _pressedTime = 0;
+    public string lastKey;
 
     public void OnUpdate()
     {
-        
+        if (Input.anyKey == false) return;
+
+        if (KeyAction != null)
+        {
+            KeyAction.Invoke();
+        }
     }
 
     public void Clear()

@@ -8,6 +8,7 @@ public class InGameScene : BaseScene
     {
         base.Init();
 
+        Managers.UI.Root.transform.Find("Menu").gameObject.SetActive(false);
         /*base.Init();
 
         SceneType = Define.Scene.Game;

@@ -9,6 +9,8 @@ public class UIManager
     Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
     UI_Scene _sceneUI = null;
 
+    Stack<Transform> _popupUIStack = new Stack<Transform>();
+
     public Stack<UI_Popup> PopupStack
     {
         get { return _popupStack; }
@@ -25,6 +27,34 @@ public class UIManager
             return root;
 		}
     }
+
+    #region TurnOn/Off
+    public void ShowUI(string name)
+    {
+        Transform ui = Root.transform.Find(name);
+
+        if (ui.gameObject.activeSelf)
+        {
+            CloseUI();
+            return;
+        }
+
+        _popupUIStack.Push(ui);
+        ui.gameObject.SetActive(true);
+    }
+
+    public void CloseUI()
+    {
+        Transform ui = _popupUIStack.Pop();
+        ui.gameObject.SetActive(false);
+    }
+
+    public void CloseAllUI()
+    {
+        while (_popupUIStack.Count > 0)
+            CloseUI();
+    }
+    #endregion
 
     public void SetCanvas(GameObject go, bool sort = true)
     {

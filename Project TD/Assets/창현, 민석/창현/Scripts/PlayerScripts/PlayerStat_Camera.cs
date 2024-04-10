@@ -2,19 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UserIcon_Camera : MonoBehaviour
+public class PlayerStat_Camera : MonoBehaviour
 {
     [SerializeField]
-    private Transform _playerHead;
+    private Transform _playerBody;
     [SerializeField]
-    private float distance = 3.0f;
-
-    private void Update()
+    private float distance = 4.0f;
+    void Start()
     {
-        Vector3 targetPosition = _playerHead.position;
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Vector3 targetPosition = _playerBody.position;
 
         // 플레이어의 방향을 가져옴
-        Vector3 playerDirection = _playerHead.forward;
+        Vector3 playerDirection = _playerBody.forward;
 
         // 플레이어의 방향을 고려하여 카메라의 위치를 계산
         Vector3 cameraPosition = targetPosition + playerDirection * distance;

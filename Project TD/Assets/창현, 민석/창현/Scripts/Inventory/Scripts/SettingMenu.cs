@@ -26,7 +26,7 @@ public class SettingMenu : MonoBehaviour
         }
     }
 
-    public void Save()
+    public void Save() 
     {
         DataController.instance.SaveData();
     }
