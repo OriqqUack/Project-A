@@ -4,13 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventoryItem : MonoBehaviour, IPointerClickHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     Image itemIcon;
     public CanvasGroup canvasGroup { get; private set; }
 
     public Item myItem { get; set; }
     public InventorySlot activeSlot { get; set; }
+
+    public Vector3 startPosition;
+    public Transform startParent;
 
     void Awake()
     {
@@ -26,11 +29,30 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
         itemIcon.sprite = item.sprite;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    //아이템 클릭하면 draggable로 이동
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        if(eventData.button == PointerEventData.InputButton.Left)
+        startPosition = transform.position;
+        startParent = transform.parent;
+
+        Inventory.Singleton.OnClickedItem.Invoke(myItem);
+
+        Inventory.Singleton.SetCarriedItem(this);
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        transform.position = Input.mousePosition;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+
+        canvasGroup.blocksRaycasts = true;
+        if(transform.parent == Inventory.Singleton.draggablesTransform)
         {
-            Inventory.Singleton.SetCarriedItem(this);
+            transform.position = startPosition;
+            transform.SetParent(startParent);
         }
     }
 }

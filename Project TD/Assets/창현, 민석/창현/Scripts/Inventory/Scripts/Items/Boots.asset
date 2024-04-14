@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f01cccb2c080ea45b4d365239347695, type: 3}
   m_Name: Boots
   m_EditorClassIdentifier: 
+  ItemName: Boots
   sprite: {fileID: 769413093, guid: 383aef37898fa624db3efdbee6c0df52, type: 3}
   itemTag: 4
+  equipmentPrefab: {fileID: 0}

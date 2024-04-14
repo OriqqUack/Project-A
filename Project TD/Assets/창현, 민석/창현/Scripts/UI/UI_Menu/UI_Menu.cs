@@ -12,8 +12,6 @@ public class UI_Menu : UI_Base
     {
         PlayerStat,
         Inventory,
-        Craft,
-        Npc,
         Index,
         Setting
     }

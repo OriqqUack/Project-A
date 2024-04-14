@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using Random = UnityEngine.Random;
 
 public class Inventory : MonoBehaviour
 {
@@ -9,8 +11,10 @@ public class Inventory : MonoBehaviour
     public static InventoryItem carriedItem;
 
     [SerializeField] InventorySlot[] inventorySlots;
-
-    [SerializeField] Transform draggablesTransform;
+    public InventorySlot[] sceneHotBarSlots;
+    public InventorySlot[] weaponSlots;
+ 
+    public Transform draggablesTransform;
     [SerializeField] InventoryItem itemPrefab;
 
     [Header("Item List")]
@@ -18,6 +22,8 @@ public class Inventory : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] Button giveItemBtn;
+
+    public Action<Item> OnClickedItem;
 
     void Awake()
     {
@@ -27,9 +33,6 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        if(carriedItem == null) return;
-
-        carriedItem.transform.position = Input.mousePosition;
     }
 
     public void SetCarriedItem(InventoryItem item)
@@ -39,9 +42,18 @@ public class Inventory : MonoBehaviour
             if(item.activeSlot.myTag != SlotTag.None && item.activeSlot.myTag != carriedItem.myItem.itemTag) return;
             item.activeSlot.SetItem(carriedItem);
         }
-
+        
         if(item.activeSlot.myTag != SlotTag.None)
         { EquipEquipment(item.activeSlot.myTag, null); }
+
+        if (item.activeSlot.myTag == SlotTag.HotSlot)
+        {
+            Destroy(sceneHotBarSlots[item.activeSlot.transform.GetSiblingIndex()].transform.GetChild(0).gameObject);
+        }
+        if (item.activeSlot.myTag == SlotTag.Weapon)
+        {
+            Destroy(weaponSlots[item.activeSlot.transform.GetSiblingIndex()].transform.GetChild(0).gameObject);
+        }
 
         carriedItem = item;
         carriedItem.canvasGroup.blocksRaycasts = false;
@@ -69,6 +81,8 @@ public class Inventory : MonoBehaviour
             case SlotTag.Legs:
                 break;
             case SlotTag.Feet:
+                break;
+            case SlotTag.Weapon:
                 break;
         }
     }
