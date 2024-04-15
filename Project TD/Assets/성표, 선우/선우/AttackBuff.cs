@@ -13,17 +13,15 @@ public class AttackBuff : StatusEffect
         this.attackIncrease = attackIncrease;
     }
 
-    public override int ApplyEffect(int attack)
+    public override void ApplyEffect(MonsterStat monsterStat)
     {
-        attack += attackIncrease;
+        monsterStat.Attack += attackIncrease;
         Debug.Log("Attack buff applied: +" + attackIncrease + " Attack");
-        return attack;
     }
 
-    public override int RemoveEffect(int attack)
+    public override void RemoveEffect(MonsterStat monsterStat)
     {
-        attack -= attackIncrease;
+        monsterStat.Attack -= attackIncrease;
         Debug.Log("Attack buff removed: -" + attackIncrease + " Attack");
-        return attack;
     }
 }

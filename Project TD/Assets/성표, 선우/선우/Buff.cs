@@ -15,7 +15,7 @@ public class Buff : MonoBehaviour
 
     public void ApplyBuff(StatusEffect effect)
     {
-        effect.ApplyEffect(_stat.Attack);
+        effect.ApplyEffect(_stat);
         activeEffects.Add(effect);
         StartCoroutine(RemoveEffectAfterDuration(effect));
     }
@@ -23,7 +23,7 @@ public class Buff : MonoBehaviour
     private IEnumerator RemoveEffectAfterDuration(StatusEffect effect)
     {
         yield return new WaitForSeconds(effect.Duration);
-        effect.RemoveEffect();
+        effect.RemoveEffect(_stat);
         activeEffects.Remove(effect);
     }
 
@@ -31,7 +31,7 @@ public class Buff : MonoBehaviour
     {
         foreach (StatusEffect effect in activeEffects)
         {
-            effect.RemoveEffect();
+            effect.RemoveEffect(_stat);
         }
         activeEffects.Clear();
     }

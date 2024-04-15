@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class StatusEffect : MonoBehaviour
+public abstract class StatusEffect
 {
     protected float duration;
     protected GameObject target;
@@ -16,6 +16,6 @@ public abstract class StatusEffect : MonoBehaviour
         this.target = target;
     }
 
-    public abstract int ApplyEffect(int attack);
-    public abstract int RemoveEffect(int attack);
+    public abstract void ApplyEffect(MonsterStat monsterStat);
+    public abstract void RemoveEffect(MonsterStat monsterStat);
 }
