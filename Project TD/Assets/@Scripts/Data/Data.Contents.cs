@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Data
 { 
-#region Stat
+    #region Stat
 	[Serializable]
 	public class Stat
 	{
@@ -30,7 +30,7 @@ namespace Data
 	}
     #endregion
 
-    #region shop
+    #region Shop
     [Serializable]
     public class JsonItem
     {
@@ -107,6 +107,31 @@ namespace Data
             Dictionary<int, JsonShopWeaponGradePercentage> dict = new Dictionary<int, JsonShopWeaponGradePercentage>();
             foreach (JsonShopWeaponGradePercentage stat in weaponPercentage)
                 dict.Add(stat.raw, stat);
+            return dict;
+        }
+    }
+    #endregion
+
+    #region 도감
+    [Serializable]
+    public class CollectionEntry
+    {
+        public int itemNuber;
+        public string name;
+        public string description;
+        public string imagePath;
+    }
+
+    [Serializable]
+    public class CollectionData : ILoader<int, CollectionEntry>
+    {
+        public List<CollectionEntry> collections = new List<CollectionEntry>();
+
+        public Dictionary<int, CollectionEntry> MakeDict()
+        {
+            Dictionary<int, CollectionEntry> dict = new Dictionary<int, CollectionEntry>();
+            foreach (CollectionEntry c in collections)
+                dict.Add(c.itemNuber, c);
             return dict;
         }
     }

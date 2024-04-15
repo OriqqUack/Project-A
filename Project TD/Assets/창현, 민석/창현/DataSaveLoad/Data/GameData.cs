@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
+    #region 플레이어 스탯
     public string _name;
     public int _level;
     public int _hp;
@@ -21,9 +22,16 @@ public class GameData
     public float _dashingPower;
     public float _dashingTime;
     public float _dashingCooldown;
+    #endregion
+
+    #region 도감
+    public Data.CollectionEntry[] collectionEntries;
+    public bool[] collectionDiscovered;
+    #endregion
 
     public GameData()
     {
+        #region 플레이어 스탯
         this._name = "";
         this._level = 1;
         this._gold = 0;
@@ -40,6 +48,11 @@ public class GameData
         this._maxHp = 100;
         this._attack = 5;
         this._totalExp = 10;
+        #endregion
+
+        #region 도감
+
+        #endregion
     }
 }
 
