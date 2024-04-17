@@ -29,6 +29,8 @@ public abstract class State : MonoBehaviour
             return true;
     }
 
+    protected virtual void Attack() { }
+
     protected virtual void CoroutineRunningCheck()
     {
         if (_coroutine != null)

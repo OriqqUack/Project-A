@@ -35,6 +35,11 @@ public class GameManagerEx
         _gold -= gold;
     }
 
+    public void SetPlayer(GameObject player)
+    {
+        _player = player;
+    }
+
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
     {
         GameObject go = Managers.Resource.Instantiate(path, parent);

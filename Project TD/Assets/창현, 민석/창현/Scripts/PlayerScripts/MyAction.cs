@@ -13,11 +13,13 @@ public class MyAction : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        Managers.Game.SetPlayer(gameObject);
     }
 
     private void Start()
     {
         SetActionType(Define.State.Idle);
+        
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
 

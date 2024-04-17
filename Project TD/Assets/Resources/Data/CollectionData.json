@@ -1,19 +1,19 @@
 {
-  "collections": [
+  "collections":[
     {
-      "itemNumber": 0,
+      "itemNumber":"100",
       "name": "WoodSword",
       "description:": "damage : 1",
       "imagePath": "Textures/Collection/Item/#1 - Transparent Icons_73"
     },
     {
-      "itemNumber": 1,
+      "itemNumber": "101",
       "name": "IronSword",
       "description:": "damage : 2",
       "imagePath": "Textures/Collection/Item/#1 - Transparent Icons_74"
     },
     {
-      "itemNumber": 2,
+      "itemNumber":"102",
       "name": "EmeraldSword",
       "description:": "damage : 3",
       "imagePath": "Textures/Collection/Item/#1 - Transparent Icons_75"

@@ -1,6 +1,8 @@
 using Data;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +27,7 @@ public class CollectionManager : MonoBehaviour, IDataPersistence
 
         collectionContent.RemoveAt(0);
         #endregion
+
     }
     private void Start()
     {
@@ -34,7 +37,6 @@ public class CollectionManager : MonoBehaviour, IDataPersistence
     void InitializeCollection()
     {
         LoadCollectionEntries();
-
         for(int i = 0; i < collectionEntries.Length; i++)
         {
             GameObject collectionEntryObj = Instantiate(collectionEntryPrefab, collectionContent[i]);
@@ -69,10 +71,25 @@ public class CollectionManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    void OnFoundCollection(string name)
+    {
+        
+    }
+
     public void LoadData(GameData data)
     {
-        collectionEntries = data.collectionEntries;
-        discovered = data.collectionDiscovered;
+        if (collectionEntries == null)
+        {
+            collectionEntries = Managers.Data.CollectionDict.Values.ToArray();
+            discovered = new bool[Managers.Data.CollectionDict.Count];
+        }
+        else
+        {
+            collectionEntries = new CollectionEntry[data.collectionEntries.Length];
+            Array.Copy(data.collectionEntries, collectionEntries, data.collectionEntries.Length);
+            discovered = new bool[data.collectionDiscovered.Length];
+            Array.Copy(data.collectionDiscovered, discovered, data.collectionDiscovered.Length);
+        }
     }
 
     public void SaveData(ref GameData data)

@@ -9,6 +9,7 @@ public class InGameScene : BaseScene
         base.Init();
 
         Managers.UI.Root.transform.Find("Menu").gameObject.SetActive(false);
+        Managers.Game.Spawn(Define.WorldObject.Monster, "Knight");
         /*base.Init();
 
         SceneType = Define.Scene.Game;

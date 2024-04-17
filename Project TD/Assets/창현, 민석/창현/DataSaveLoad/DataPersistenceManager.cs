@@ -27,13 +27,14 @@ public class DataPersistenceManager : MonoBehaviour
             Debug.LogError("Not exist Data Persistence Manager in the scene.");
         }
         instance = this;
+
+        fileName = Path.Combine("save", nowSlot.ToString());
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        this.dataPersistenceObjects = FindAllDataPersistenceObejcts();
     }
 
     private void Start()
     {
-        fileName = Path.Combine("save", nowSlot.ToString());
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-        this.dataPersistenceObjects = FindAllDataPersistenceObejcts();
         LoadGame();
     }
 

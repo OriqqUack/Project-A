@@ -12,7 +12,7 @@ public class UI_Menu : UI_Base
     {
         PlayerStat,
         Inventory,
-        Index,
+        Collection,
         Setting
     }
 

@@ -116,7 +116,7 @@ namespace Data
     [Serializable]
     public class CollectionEntry
     {
-        public int itemNuber;
+        public int itemNumber;
         public string name;
         public string description;
         public string imagePath;
@@ -131,7 +131,9 @@ namespace Data
         {
             Dictionary<int, CollectionEntry> dict = new Dictionary<int, CollectionEntry>();
             foreach (CollectionEntry c in collections)
-                dict.Add(c.itemNuber, c);
+            {
+                dict.Add(c.itemNumber, c);
+            }
             return dict;
         }
     }
