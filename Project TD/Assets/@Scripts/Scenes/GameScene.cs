@@ -11,6 +11,8 @@ public class GameScene : BaseScene
         SceneType = Define.Scene.Game;
 
         Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
+        Dictionary<string, Data.MonsterStat> dict2 = Managers.Data.MonsterDict;
+
         gameObject.GetOrAddComponent<CursorController>();
 
         if (Managers.Input._isSingle)
