@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
-//Äù½ºÆ®¸¦ °ü¸® quest µî·Ï ¹× º¸°í, ÀúÀå°ú °°Àº Àü¹İÀûÀÎ ¿ªÇÒ ´ã´ç
+//í€˜ìŠ¤íŠ¸ë¥¼ ê´€ë¦¬ quest ë“±ë¡ ë° ë³´ê³ , ì €ì¥ê³¼ ê°™ì€ ì „ë°˜ì ì¸ ì—­í•  ë‹´ë‹¹
 
 public class QuestSystem : MonoBehaviour
 {
@@ -33,8 +33,10 @@ public class QuestSystem : MonoBehaviour
                 instance = FindObjectOfType<QuestSystem>();
                 if (instance == null)
                 {
+
                     /*instance = new GameObject("Quest System").AddComponent<QuestSystem>();
                     DontDestroyOnLoad(instance.gameObject);*/
+
                 }
             }
             return instance;
@@ -78,7 +80,7 @@ public class QuestSystem : MonoBehaviour
     private void OnApplicationQuit()
     {
         isApplicationQuitting = true;
-    } // ¿À·ù³ª ¹ö±×¿¡ ÀÇÇÏ¸é ÀúÀåÀÌ ¾ÈµÊ.
+    } // ì˜¤ë¥˜ë‚˜ ë²„ê·¸ì— ì˜í•˜ë©´ ì €ì¥ì´ ì•ˆë¨.
 
     public Quest Register(Quest quest)
     {
@@ -118,7 +120,7 @@ public class QuestSystem : MonoBehaviour
 
     private void ReceiveReport(List<Quest> quests, string category, object target, int successCount)
     {
-        foreach (var quest in quests.ToArray()) // »çº»À» ¸¸µå´Â ÀÌÀ¯´Â Äù½ºÆ® ½Ã½ºÅÛÀÌ µ¹¾Æ°¡´ÂÁß¿¡ Äù½ºÆ®°¡ ¿Ï¼ºµÉ¼öµµ ÀÖ¾î¼­ / ¸ñ·ÏÀÌ ¹Ù²î¸é ¿¡·¯°¡ ³ª±â ¶§¹®
+        foreach (var quest in quests.ToArray()) // ì‚¬ë³¸ì„ ë§Œë“œëŠ” ì´ìœ ëŠ” í€˜ìŠ¤íŠ¸ ì‹œìŠ¤í…œì´ ëŒì•„ê°€ëŠ”ì¤‘ì— í€˜ìŠ¤íŠ¸ê°€ ì™„ì„±ë ìˆ˜ë„ ìˆì–´ì„œ / ëª©ë¡ì´ ë°”ë€Œë©´ ì—ëŸ¬ê°€ ë‚˜ê¸° ë•Œë¬¸
             quest.ReceiveReport(category, target, successCount);
     }
 
@@ -166,19 +168,19 @@ public class QuestSystem : MonoBehaviour
             return false;
     }
 
-    //Save Data¸¦ ¸¸µå´Â ÇÔ¼ö
+    //Save Dataë¥¼ ë§Œë“œëŠ” í•¨ìˆ˜
     private JArray CreateSaveDatas(IReadOnlyList<Quest> quests)
     {
         var saveDatas = new JArray();
         foreach (var quest in quests)
         {
             if(quest.IsSavable)
-                saveDatas.Add(JObject.FromObject(quest.ToSaveData())); //SaveData¸¦ JsonÇüÅÂ·Î º¯È¯½ÃÅ² µÚ JsonArray¿¡ ³Ö¾îÁÜ
+                saveDatas.Add(JObject.FromObject(quest.ToSaveData())); //SaveDataë¥¼ Jsoní˜•íƒœë¡œ ë³€í™˜ì‹œí‚¨ ë’¤ JsonArrayì— ë„£ì–´ì¤Œ
         }
         return saveDatas;
     }
 
-    //JToken ÀÚ¸®¿¡ CreateSaveData°¡ µé¾î¿Ã°ÅÀÓ
+    //JToken ìë¦¬ì— CreateSaveDataê°€ ë“¤ì–´ì˜¬ê±°ì„
     private void LoadSaveDatas(JToken datasToken, QuestDatabase database, System.Action<QuestSaveData, Quest> onSuccess)
     {
         var datas = datasToken as JArray;

@@ -11,6 +11,10 @@ public class InputManager   // 상태 체크
     public Action<Define.KeyEvent> Key = null;
 
     bool _pressed = false;
+    public bool _tp0 = false;
+    public bool _tp1 = false;
+    public bool _tp2 = false;
+    public bool _isSingle = false;
     float _pressedTime = 0;
 
     public void OnUpdate()
