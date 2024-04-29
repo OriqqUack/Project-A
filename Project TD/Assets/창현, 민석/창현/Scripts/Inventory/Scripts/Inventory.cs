@@ -1,0 +1,112 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using System;
+using Random = UnityEngine.Random;
+
+public class Inventory : MonoBehaviour
+{
+    public static Inventory Singleton;
+    public static InventoryItem carriedItem;
+
+    [SerializeField] InventorySlot[] inventorySlots;
+    public InventorySlot[] sceneHotBarSlots;
+    public InventorySlot[] weaponSlots;
+ 
+    public Transform draggablesTransform;
+    [SerializeField] InventoryItem itemPrefab;
+
+    [Header("Item List")]
+    [SerializeField] Item[] items;
+
+    [Header("Debug")]
+    [SerializeField] Button giveItemBtn;
+
+    public Action<Item> OnClickedItem;
+
+    void Awake()
+    {
+        Singleton = this;
+        giveItemBtn.onClick.AddListener( delegate { SpawnInventoryItem(); } );
+    }
+
+    void Update()
+    {
+    }
+
+    public void SetCarriedItem(InventoryItem item)
+    {
+        if(carriedItem != null)
+        {
+            if(item.activeSlot.myTag != SlotTag.None && item.activeSlot.myTag != carriedItem.myItem.itemTag) return;
+            item.activeSlot.SetItem(carriedItem);
+        }
+        
+        if(item.activeSlot.myTag != SlotTag.None)
+        { EquipEquipment(item.activeSlot.myTag, null); }
+
+        if (item.activeSlot.myTag == SlotTag.HotSlot)
+        {
+            Destroy(sceneHotBarSlots[item.activeSlot.transform.GetSiblingIndex()].transform.GetChild(0).gameObject);
+        }
+        if (item.activeSlot.myTag == SlotTag.Weapon)
+        {
+            Destroy(weaponSlots[item.activeSlot.transform.GetSiblingIndex()].transform.GetChild(0).gameObject);
+        }
+
+        carriedItem = item;
+        carriedItem.canvasGroup.blocksRaycasts = false;
+        item.transform.SetParent(draggablesTransform);
+    }
+
+    public void EquipEquipment(SlotTag tag, InventoryItem item = null)
+    {
+        switch (tag)
+        {
+            case SlotTag.Head:
+                if(item == null)
+                {
+                    // Destroy item.equipmentPrefab on the Player Object;
+                    Debug.Log("Unequipped helmet on " + tag);
+                }
+                else
+                {
+                    // Instantiate item.equipmentPrefab on the Player Object;
+                    Debug.Log("Equipped " + item.myItem.name + " on " + tag);
+                }
+                break;
+            case SlotTag.Chest:
+                break;
+            case SlotTag.Legs:
+                break;
+            case SlotTag.Feet:
+                break;
+            case SlotTag.Weapon:
+                break;
+        }
+    }
+
+    public void SpawnInventoryItem(Item item = null)
+    {
+        Item _item = item;
+        if(_item == null)
+        { _item = PickRandomItem(); }
+
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            // Check if the slot is empty
+            if(inventorySlots[i].myItem == null)
+            {
+                Instantiate(itemPrefab, inventorySlots[i].transform).Initialize(_item, inventorySlots[i]);
+                break;
+            }
+        }
+    }
+
+    Item PickRandomItem()
+    {
+        int random = Random.Range(0, items.Length);
+        return items[random];
+    }
+}
