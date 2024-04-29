@@ -9,15 +9,20 @@ public class DataPersistenceManager : MonoBehaviour
     public string fileName;
 
     private GameData gameData;
+    private GlobalData globalData;
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
-
-    public int nowSlot;
 
     public GameData GameData
     {
         get { return gameData; }
     }
+
+    public GlobalData GlobalData
+    {
+        get { return globalData; }
+    }
+
     public static DataPersistenceManager instance { get; private set; }
 
     private void Awake()
@@ -28,14 +33,15 @@ public class DataPersistenceManager : MonoBehaviour
         }
         instance = this;
 
-        fileName = Path.Combine("save", nowSlot.ToString());
+        fileName = "GlobalData";
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.dataPersistenceObjects = FindAllDataPersistenceObejcts();
+
+        //this.globaldata
     }
 
     private void Start()
     {
-        LoadGame();
     }
 
     public void NewGame()
@@ -43,9 +49,13 @@ public class DataPersistenceManager : MonoBehaviour
         this.gameData = new GameData();
     }
 
-    public void LoadGame()
+    public void LoadGame(int nowSlot)
     {
-        this.gameData = dataHandler.Load();
+        fileName = Path.Combine("save", nowSlot.ToString());
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        
+
+        this.gameData = dataHandler.DataLoad<GameData>();
 
         if (this.gameData == null)
         {
@@ -71,7 +81,6 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void DataClear()
     {
-        nowSlot -= 1;
         gameData = new GameData();
     }
 

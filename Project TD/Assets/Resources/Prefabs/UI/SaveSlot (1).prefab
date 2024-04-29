@@ -469,6 +469,7 @@ GameObject:
   - component: {fileID: 9098268774142731482}
   - component: {fileID: 6895865363922736432}
   - component: {fileID: 4293066816749047484}
+  - component: {fileID: 6073016283021943972}
   m_Layer: 5
   m_Name: SaveSlot (1)
   m_TagString: Untagged
@@ -582,14 +583,28 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+        m_TargetAssemblyTypeName: DataSelec, Assembly-CSharp
+        m_MethodName: Slot
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6073016283021943972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8174724195059433909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93563f3b972ee464d9e8b1a4a0d2e6ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotName: {fileID: 6346628526696899514}
+  playTime: {fileID: 6096845025852243961}
