@@ -21,10 +21,10 @@ public class DataSelec : MonoBehaviour
             if (File.Exists(Path.Combine("save", i.ToString())))
             {
                 _saveFile[i] = true;
-                _slot[i].slotName.text = DataPersistenceManager.instance.GameData._name;
+                _slot[i].slotName = DataPersistenceManager.instance.GameData._name;
             }
             else
-                _slot[i].slotName.text = "비어있음";
+                _slot[i].slotName = "비어있음";
         }
     }
 
@@ -45,8 +45,8 @@ public class DataSelec : MonoBehaviour
 
     public void CreateName()
     {
-        _slot[DataController.instance.nowSlot].slotName.text = _newPlayerName.text;
-        _slot[DataController.instance.nowSlot].playTime.text = "플레이타임 : 0";
+        _slot[DataController.instance.nowSlot].slotName = _newPlayerName.text;
+        _slot[DataController.instance.nowSlot].playTime = 0;
         _newPlayerName.text = "";
         _saveFile[DataController.instance.nowSlot] = true;
 

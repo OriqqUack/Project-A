@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[System.Serializable]
 public class PlayerStat : Stat, IDataPersistence
 {
 	[SerializeField]
@@ -57,9 +56,12 @@ public class PlayerStat : Stat, IDataPersistence
 			OnLuckChanged?.Invoke(_luck);
         }
     }
+	public Define.Players PlayerType { get; protected set; } = Define.Players.Unknown; // Despawn 하기위해
 
-    private void Update()
+
+	private void Start()
     {
+		_moveSpeed = 5.0f;
     }
 
     public void SetStat(int level)
@@ -96,7 +98,7 @@ public class PlayerStat : Stat, IDataPersistence
 
 		this.Defense = data._defense;
 		this.AttackDistance = data._attackDistance;
-		this.MoveSpeed = data._moveSpeed;
+		//this.MoveSpeed = data._moveSpeed;
 		this._dashingPower = data._dashingPower;
 		this._dashingTime = data._dashingTime;
 		this._dashingCooldown = data._dashingCooldown;

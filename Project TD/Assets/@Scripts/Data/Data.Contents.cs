@@ -28,6 +28,33 @@ namespace Data
 			return dict;
 		}
 	}
+
+    [Serializable]
+    public class MonsterStat
+    {
+        public string monsterName;
+        public int level;
+        public int maxHp;
+        public int attack;
+        public float moveSpeed;
+        public float attackSpeed;
+        public float scanRange;
+        public float attackRange;
+    }
+
+    [Serializable]
+    public class MonsterData : ILoader<string, MonsterStat>
+    {
+        public List<MonsterStat> monsters = new List<MonsterStat>();
+
+        public Dictionary<string, MonsterStat> MakeDict()
+        {
+            Dictionary<string, MonsterStat> dict = new Dictionary<string, MonsterStat>();
+            foreach (MonsterStat monsterStat in monsters)
+                dict.Add(monsterStat.monsterName, monsterStat);
+            return dict;
+        }
+    }
     #endregion
 
     #region Shop

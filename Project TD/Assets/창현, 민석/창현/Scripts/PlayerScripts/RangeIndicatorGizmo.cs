@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RangeIndicatorGizmo : MonoBehaviour
 {
-    float _attackDistance = 5;
+    public float _attackDistance = 5;
     void Start()
     {
         _attackDistance = GetComponent<PlayerStat>().AttackDistance;

@@ -85,6 +85,7 @@ public class Stat : MonoBehaviour
 
     private void Start()
     {
+        _moveSpeed = 5.0f;
         /*_level = 1;
         _hp = 100;
         _maxHp = 100;
@@ -115,6 +116,6 @@ public class Stat : MonoBehaviour
             playerStat.Exp += 15;
         }
 
-        Managers.Game.Despawn(gameObject);
+        //Managers.Game.Despawn(gameObject);
     }
 }

@@ -11,7 +11,7 @@ public class CraftManual : MonoBehaviour
     private GameObject go_BaseUI; // 기본 베이스 UI
 
     private GameObject go_Preview; // 미리 보기 프리팹을 담을 변수
-    private GameObject go_Prefab; // 실제 생성될 프리팹을 담을 변수 
+    //private GameObject go_Prefab; // 실제 생성될 프리팹을 담을 변수 
 
     [SerializeField]
     private Transform tf_Player;  // 플레이어 위치
@@ -75,7 +75,7 @@ public class CraftManual : MonoBehaviour
         isPreviewActivated = false;
 
         go_Preview = null;
-        go_Prefab = null;
+        //go_Prefab = null;
 
         go_BaseUI.SetActive(false);
     }
