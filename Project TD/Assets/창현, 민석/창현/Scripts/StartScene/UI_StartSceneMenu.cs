@@ -18,10 +18,9 @@ public class UI_StartSceneMenu : UI_Base
     public CinemachineVirtualCamera saveCam;
     public CinemachineVirtualCamera settingCam;
 
-    private int _order;
-
     public override void Init()
     {
+        Managers.UI.ShowUI("Buttons");
         Bind<Button>(typeof(GameObjects));
         GetButton((int)GameObjects.Start).onClick.AddListener(delegate { OnClickedStartBtn(); });
         GetButton((int)GameObjects.Setting).onClick.AddListener(delegate { OnClickedSettingBtn(); });
@@ -29,16 +28,15 @@ public class UI_StartSceneMenu : UI_Base
 
     public void OnClickedStartBtn()
     {
-        this.transform.GetChild(0).gameObject.SetActive(false);
+        Managers.UI.CloseUI();
+        //this.transform.GetChild(0).gameObject.SetActive(false);
         saveCam.MoveToTopOfPrioritySubqueue();
-        _order++;
     }
 
     public void OnClickedSettingBtn()
     {
-        this.transform.GetChild(0).gameObject.SetActive(false);
+        Managers.UI.CloseUI();
         settingCam.MoveToTopOfPrioritySubqueue();
-        _order++;
     }
 
     public void OnClickedCreditBtn()
@@ -54,18 +52,18 @@ public class UI_StartSceneMenu : UI_Base
     public void OnClickedCancelBtn()
     {
         menuCam.MoveToTopOfPrioritySubqueue();
+        Managers.UI.ShowUI("Buttons");
         Debug.Log("ClickedCancel");
-
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (_order != 0)
+            if (Managers.UI.PopupUIStack.Count == 0)
             {
                 menuCam.MoveToTopOfPrioritySubqueue();
-                this.transform.GetChild(0).gameObject.SetActive(true);
+                Managers.UI.ShowUI("Buttons");
             }
             Debug.Log("EscClicked");
         }

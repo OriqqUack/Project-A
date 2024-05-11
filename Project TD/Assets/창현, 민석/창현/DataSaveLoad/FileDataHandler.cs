@@ -65,4 +65,43 @@ public class FileDataHandler
             Debug.LogError("Error occured when trying to save data to file : " + fullPath + "\n" + e);
         }
     }
+
+    public void Save(GlobalData data)
+    {
+        string fullPath = Path.Combine(dataDirPath, "GlobalData");
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+
+            string dataToStore = JsonUtility.ToJson(data, true); //true시 읽기 쉬운 형태 false는 압축
+            //FileStream을 사용하여 파일을 생성하거나 열고 파일에 데이터를 씁니다.
+            //StreamWriter를 사용하여 파일에 데이터를 씁니다.
+            using (FileStream stream = new FileStream(fullPath, FileMode.Create)) //using 사용시 FileStream과  // 없을 시 새파일 생성, 존재시 해당파일 덮어쓰기
+            {                                                                     //StreamWriter 사용된 후 알아서 닫힘
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.Write(dataToStore);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error occured when trying to save data to file : " + fullPath + "\n" + e);
+        }
+    }
+
+    public void DeleteSave()
+    {
+        string fullPath = Path.Combine(dataDirPath, dataFileName);
+
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+            Debug.Log($"Delete SaveFile : {fullPath}");
+        }
+        else
+        {
+            Debug.LogWarning("Not found SaveFile");
+        }
+    }
 }

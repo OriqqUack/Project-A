@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PlayerStat : Stat, IDataPersistence
+public class PlayerStat : Stat, IGameDataPersistence
 {
 	[SerializeField]
 	protected string _name;

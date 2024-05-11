@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CollectionManager : MonoBehaviour, IDataPersistence
+public class CollectionManager : MonoBehaviour, IGameDataPersistence
 {
     public GameObject collectionEntryPrefab;
     public List<Transform> collectionContent;

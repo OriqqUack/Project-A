@@ -7,10 +7,12 @@ using System.IO;
 public class DataPersistenceManager : MonoBehaviour
 {
     public string fileName;
+    public int nowSlot;
 
     private GameData gameData;
     private GlobalData globalData;
-    private List<IDataPersistence> dataPersistenceObjects;
+    private List<IGameDataPersistence> gameDataPersistenceObjects;
+    private List<IGlobalDataPersistence> globalDataPersistenceObjects;
     private FileDataHandler dataHandler;
 
     public GameData GameData
@@ -27,33 +29,64 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Awake()
     {
+        nowSlot = 4;
         if (instance != null)
         {
             Debug.LogError("Not exist Data Persistence Manager in the scene.");
         }
         instance = this;
 
-        fileName = "GlobalData";
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-        this.dataPersistenceObjects = FindAllDataPersistenceObejcts();
-
-        //this.globaldata
+        
     }
 
     private void Start()
     {
+        LoadStartScene();
+        SaveGame();
     }
 
-    public void NewGame()
+    #region GlobalData
+    public void LoadStartScene()
     {
-        this.gameData = new GameData();
+        fileName = "GlobalData";
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        this.globalDataPersistenceObjects = FindAllGlobalDataPersistenceObejcts();
+
+        this.globalData = dataHandler.DataLoad<GlobalData>();
+
+        if (this.globalData == null)
+        {
+            Debug.Log("No data was FOund. Initialzing data to defaults");
+            StartGame();
+            return;
+        }
+
+        foreach (IGlobalDataPersistence dataPersistenceObj in globalDataPersistenceObjects)
+        {
+            dataPersistenceObj.LoadData(globalData);
+        }
     }
 
+    private List<IGlobalDataPersistence> FindAllGlobalDataPersistenceObejcts()
+    {
+        IEnumerable<IGlobalDataPersistence> dataPersistenceObjects =
+            FindObjectsOfType<MonoBehaviour>().OfType<IGlobalDataPersistence>();
+
+        return new List<IGlobalDataPersistence>(dataPersistenceObjects);
+    }
+
+    public void StartGame()
+    {
+        this.globalData = new GlobalData();
+    }
+    #endregion
+
+    #region GameData
     public void LoadGame(int nowSlot)
     {
-        fileName = Path.Combine("save", nowSlot.ToString());
+        fileName = Path.Combine($"save{nowSlot}");
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-        
+        this.gameDataPersistenceObjects = FindAllGameDataPersistenceObejcts();
 
         this.gameData = dataHandler.DataLoad<GameData>();
 
@@ -61,39 +94,74 @@ public class DataPersistenceManager : MonoBehaviour
         {
             Debug.Log("No data was FOund. Initialzing data to defaults");
             NewGame();
+            return;
         }
 
-        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+        foreach (IGameDataPersistence dataPersistenceObj in gameDataPersistenceObjects)
         {
             dataPersistenceObj.LoadData(gameData);
         }
+
+        LoadSceneController.LoadScene("City");
     }
+
+    private List<IGameDataPersistence> FindAllGameDataPersistenceObejcts()
+    {
+        IEnumerable<IGameDataPersistence> dataPersistenceObjects =
+            FindObjectsOfType<MonoBehaviour>().OfType<IGameDataPersistence>();
+
+        return new List<IGameDataPersistence>(dataPersistenceObjects);
+    }
+
+    public void NewGame()
+    {
+        this.gameData = new GameData();
+    }
+    #endregion
 
     public void SaveGame()
     {
-        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+        if(gameDataPersistenceObjects != null)
         {
-            dataPersistenceObj.SaveData(ref gameData);
+            foreach (IGameDataPersistence dataPersistenceObj in gameDataPersistenceObjects)
+            {
+                dataPersistenceObj.SaveData(ref gameData);
+            }
+        }
+
+        foreach (IGlobalDataPersistence dataPersistenceObj in globalDataPersistenceObjects)
+        {
+            dataPersistenceObj.SaveData(ref globalData);
         }
 
         dataHandler.Save(gameData);
+        dataHandler.Save(globalData);
+
     }
 
-    public void DataClear()
+    public void DataClear(int nowSlot)
     {
-        gameData = new GameData();
+        fileName = Path.Combine($"save{nowSlot}");
+        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        globalDataPersistenceObjects = FindAllGlobalDataPersistenceObejcts();
+        dataHandler.DeleteSave();
+
+        globalData.existSaveFile[nowSlot] = false;
+        globalData.SaveSlotName[nowSlot] = "비어있음";
+        globalData.SaveSlotPlayTime[nowSlot] = 0;
+        dataHandler.Save(globalData);
+
+        dataHandler = new FileDataHandler(Application.persistentDataPath, "GlobalData");
+        globalData = dataHandler.DataLoad<GlobalData>();
+
+        foreach (IGlobalDataPersistence dataPersistenceObj in globalDataPersistenceObjects)
+        {
+            dataPersistenceObj.LoadData(globalData);
+        }
     }
 
     private void OnApplicationQuit()
     {
         SaveGame();
-    }
-
-    private List<IDataPersistence> FindAllDataPersistenceObejcts()
-    {
-        IEnumerable<IDataPersistence> dataPersistenceObjects = 
-            FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
-
-        return new List<IDataPersistence>(dataPersistenceObjects);
     }
 }

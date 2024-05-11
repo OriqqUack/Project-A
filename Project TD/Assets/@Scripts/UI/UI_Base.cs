@@ -12,9 +12,14 @@ public abstract class UI_Base : MonoBehaviour
 	protected Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
 	public abstract void Init();
 
-	private void Start()
-	{
+    private void Awake()
+    {
 		Init();
+    }
+
+    private void Start()
+	{
+		
 	}
 
 	// UI 자동화, 다른 UI클래스끼리 연동

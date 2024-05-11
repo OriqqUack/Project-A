@@ -178,8 +178,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Empty
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d9b454495b7d24a7a933eb61bdfa0607, type: 2}
-  m_sharedMaterial: {fileID: 7409485994217783921, guid: d9b454495b7d24a7a933eb61bdfa0607,
+  m_fontAsset: {fileID: 11400000, guid: 60ad110d15ed106478c6fb2cf9f715a3, type: 2}
+  m_sharedMaterial: {fileID: 7243560595444660149, guid: 60ad110d15ed106478c6fb2cf9f715a3,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 68.25
   m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 5109016385078812634}
   - component: {fileID: 6096845025852243961}
   m_Layer: 5
-  m_Name: Text_Info
+  m_Name: PlayTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -606,5 +606,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93563f3b972ee464d9e8b1a4a0d2e6ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotName: {fileID: 6346628526696899514}
-  playTime: {fileID: 6096845025852243961}

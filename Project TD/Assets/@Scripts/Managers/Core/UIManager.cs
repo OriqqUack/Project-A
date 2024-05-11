@@ -17,6 +17,12 @@ public class UIManager
         set { _popupStack = value; }
     }
 
+    public Stack<Transform> PopupUIStack
+    {
+        get { return _popupUIStack; }
+        set { }
+    }
+
     public GameObject Root
     {
         get
