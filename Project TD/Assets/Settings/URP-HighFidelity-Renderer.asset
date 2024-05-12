@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31201445e18074848a36e20349f95806, type: 3}
   m_Name: Neon
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     intensity: 0.104
     strength: 0.196
