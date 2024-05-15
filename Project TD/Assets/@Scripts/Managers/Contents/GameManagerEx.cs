@@ -7,13 +7,17 @@ using static Define;
 
 public class GameManagerEx
 {
-    GameObject _player;
+    GameObject _rocket;
+    GameObject _player = GameObject.Find("Rocket");
+    GameObject _tower = GameObject.Find("Tower");
     //Dictionary<int, GameObject> _players = new Dictionary<int, GameObject>();
     HashSet<GameObject> _monsters = new HashSet<GameObject>(); // 여러마리가 소환되어야하니 HashSet을 써줌
 
     public Action<int> OnSpawnEvent;
 
+    public GameObject GetRocket() { return _rocket; }
     public GameObject GetPlayer() { return _player; }
+    public GameObject GetTower() { return _tower; }
 
     public GameObject PlayerSpawn(Define.Players playerType, string path, Transform parent = null)
     {
