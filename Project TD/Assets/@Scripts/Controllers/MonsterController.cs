@@ -14,7 +14,6 @@ public class MonsterController : BaseController
 
 	GameObject player;
 	GameObject rocket;
-	GameObject tower;
 
     public override void Init()
     {
@@ -27,7 +26,6 @@ public class MonsterController : BaseController
 
         player = Managers.Game.GetPlayer();
         rocket = Managers.Game.GetRocket();
-		tower = Managers.Game.GetTower();
     }
 
 	protected override void UpdateIdle()
@@ -106,7 +104,7 @@ public class MonsterController : BaseController
 
     public GameObject FindClosestObject(string[] tags)
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, scanRange);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _stat.ScanRange);
         GameObject closestObject = null;
         float closestDistance = Mathf.Infinity;
 

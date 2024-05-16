@@ -19,7 +19,7 @@ public class AttackTrigger : MonoBehaviour
     {
         MonsterStat monsterStat = other.GetComponent<MonsterStat>();
         monsterStat.Attack += 10;
-        
+
     }
 
     private void OnTriggerExit(Collider other)
