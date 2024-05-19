@@ -69,13 +69,15 @@ public class Define
     public enum Scene
     {
         Unknown,
+        Loading,
         Start,
         Main,
         Login,
         City,
         Lobby,
         Game,
-        Home
+        Home,
+        GridTestScene //삭제 해야함
     }
 
     public enum Sound

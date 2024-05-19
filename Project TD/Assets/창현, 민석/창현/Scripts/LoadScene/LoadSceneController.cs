@@ -5,18 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class LoadSceneController : MonoBehaviour
+public class LoadSceneController : BaseScene
 {
-    static string nextScene;
-
     [SerializeField]
     Slider progressBar;
 
-    public static void LoadScene(string sceneName)
-    {
-        nextScene = sceneName;
-        SceneManager.LoadScene("LoadingScene");
-    }
 
     private void Start()
     {
@@ -25,7 +18,7 @@ public class LoadSceneController : MonoBehaviour
 
     IEnumerator LoadSceneProgress()
     {
-        AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
+        AsyncOperation op = SceneManager.LoadSceneAsync(Managers.Scene.NextSceneName);
         op.allowSceneActivation = false;
 
         while (!op.isDone)
@@ -41,5 +34,10 @@ public class LoadSceneController : MonoBehaviour
             if (progressBar.value >= 1f && op.progress >= 0.9f)
                 op.allowSceneActivation = true;
         }
+    }
+
+    public override void Clear()
+    {
+        
     }
 }

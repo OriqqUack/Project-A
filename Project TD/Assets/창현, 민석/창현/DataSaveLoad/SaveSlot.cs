@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
+using MoreMountains.Feedbacks;
 
-public class SaveSlot : UI_Base
+public class SaveSlot : UI_Base, IPointerEnterHandler, IPointerExitHandler
 {
     private string slotName = "비어있음";
     private float playTime;
+
+    public MMF_Player mmfPlayer;
 
     public string SlotName 
     {
@@ -46,5 +50,19 @@ public class SaveSlot : UI_Base
 
     private void Start()
     {
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        mmfPlayer?.PlayFeedbacks();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+    }
+
+    void OnDisable()
+    {
+        mmfPlayer?.ResumeFeedbacks();
     }
 }

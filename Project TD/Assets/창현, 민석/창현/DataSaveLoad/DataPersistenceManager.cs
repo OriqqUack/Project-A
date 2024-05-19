@@ -29,14 +29,22 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Awake()
     {
-        nowSlot = 4;
-        if (instance != null)
-        {
-            Debug.LogError("Not exist Data Persistence Manager in the scene.");
-        }
-        instance = this;
 
-        
+        if (instance == null)
+        {
+            GameObject go = GameObject.Find("@DataManager");
+            if (go == null)
+            {
+                go = new GameObject { name = "@DataManager" };
+                go.AddComponent<Managers>();
+            }
+
+            DontDestroyOnLoad(go);
+            instance = go.GetComponent<DataPersistenceManager>();
+
+            instance.nowSlot = 4;
+        }
+
     }
 
     private void Start()
@@ -82,7 +90,7 @@ public class DataPersistenceManager : MonoBehaviour
     #endregion
 
     #region GameData
-    public void LoadGame(int nowSlot)
+    public void LoadGame()
     {
         fileName = Path.Combine($"save{nowSlot}");
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
@@ -101,8 +109,6 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.LoadData(gameData);
         }
-
-        LoadSceneController.LoadScene("City");
     }
 
     private List<IGameDataPersistence> FindAllGameDataPersistenceObejcts()
@@ -116,6 +122,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void NewGame()
     {
         this.gameData = new GameData();
+        SaveGame();
     }
     #endregion
 
@@ -136,11 +143,13 @@ public class DataPersistenceManager : MonoBehaviour
 
         dataHandler.Save(gameData);
         dataHandler.Save(globalData);
-
     }
 
     public void DataClear(int nowSlot)
     {
+        if (globalData.existSaveFile[nowSlot] == false)
+            return;
+
         fileName = Path.Combine($"save{nowSlot}");
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         globalDataPersistenceObjects = FindAllGlobalDataPersistenceObejcts();

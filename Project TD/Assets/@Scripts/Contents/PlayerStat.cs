@@ -61,7 +61,6 @@ public class PlayerStat : Stat, IGameDataPersistence
 
 	private void Start()
     {
-		_moveSpeed = 5.0f;
     }
 
     public void SetStat(int level)

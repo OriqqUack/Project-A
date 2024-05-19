@@ -13,6 +13,8 @@ public class GameScene : BaseScene
         SceneType = Define.Scene.Game;
 
         Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
+        DataPersistenceManager.instance.LoadGame();
+
         gameObject.GetOrAddComponent<CursorController>();
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "UnityChan");
         for (int i = 0; i < 3; i++)

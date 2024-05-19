@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
 using TMPro;
+using MoreMountains.Feedbacks;
 
 public class DataSelec : MonoBehaviour, IGlobalDataPersistence
 {
@@ -26,14 +27,13 @@ public class DataSelec : MonoBehaviour, IGlobalDataPersistence
         {
             if (_saveFile[number])
             {
-                DataPersistenceManager.instance.LoadGame(number);
+                Managers.Scene.LoadScene(Define.Scene.GridTestScene);
             }
             else
             {
                 Create();
             }
         }
-
         DataPersistenceManager.instance.nowSlot = number;
     }
 
@@ -52,7 +52,9 @@ public class DataSelec : MonoBehaviour, IGlobalDataPersistence
         _newPlayerName.text = "";
         _saveFile[slotNum] = true;
 
-        DataPersistenceManager.instance.LoadGame(slotNum);
+        DataPersistenceManager.instance.nowSlot = slotNum;
+
+        DataPersistenceManager.instance.LoadGame();
         DataPersistenceManager.instance.SaveGame();
 
         _create.gameObject.SetActive(false);
