@@ -14,7 +14,7 @@ public class StartScene : BaseScene
 
     private void Start()
     {
-        Managers.Sound.Play("StartSceneBGM",Define.Sound.Bgm);
+        Managers.Sound.Play("StartSceneBGM",Define.Sound.BGM);
     }
 
     public override void Clear()

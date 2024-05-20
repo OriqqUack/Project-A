@@ -69,7 +69,6 @@ public class DataSelec : MonoBehaviour, IGlobalDataPersistence
     {
         for (int i = 0; i < _slot.Length; i++)
         {
-            Debug.Log(data.existSaveFile[i]);
             _saveFile[i] = data.existSaveFile[i];
             _slot[i].SlotName = data.SaveSlotName[i];
             _slot[i].PlayTime = data.SaveSlotPlayTime[i];
