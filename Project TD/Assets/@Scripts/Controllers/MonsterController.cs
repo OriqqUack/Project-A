@@ -53,12 +53,9 @@ public class MonsterController : BaseController
         // 플레이어가 내 사정거리보다 가까우면 공격
         if (_lockTarget != null)
 		{
-            // lockTarget이 Rocket이었다가 플레이어가 ScanRange보다 가까워지면 락타겟 변경
-            float distancePlayer = (player.transform.position - transform.position).magnitude;
-            if (distancePlayer <= _stat.ScanRange)
-            {
-                _lockTarget = player;
-            }
+			string[] tags = { "player", "tower" };
+            // 스캔 범위에 들어오는 오브젝트의 태그를 확인해 lockTarget변경
+            _lockTarget = FindClosestObject(tags);
 
             _destPos = _lockTarget.transform.position;
 			float distanceAttack = (_destPos - transform.position).magnitude;
