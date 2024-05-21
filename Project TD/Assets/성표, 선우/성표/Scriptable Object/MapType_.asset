@@ -16,9 +16,9 @@ MonoBehaviour:
   mapType: 2
   mapLevel: 1
   prefabs:
-  - {fileID: 4738923073224208982, guid: df9b2594a1af93c41aa8d2e086fb0383, type: 3}
-  - {fileID: 4738923073224208982, guid: df9b2594a1af93c41aa8d2e086fb0383, type: 3}
-  - {fileID: 4738923073224208982, guid: df9b2594a1af93c41aa8d2e086fb0383, type: 3}
-  - {fileID: 4738923073224208982, guid: df9b2594a1af93c41aa8d2e086fb0383, type: 3}
-  - {fileID: 4738923073224208982, guid: df9b2594a1af93c41aa8d2e086fb0383, type: 3}
-  - {fileID: 4738923073224208982, guid: df9b2594a1af93c41aa8d2e086fb0383, type: 3}
+  - {fileID: 8393588017719703812, guid: b83ee1be6f127154d8cd191a40ca62fa, type: 3}
+  - {fileID: 8393588017719703812, guid: b83ee1be6f127154d8cd191a40ca62fa, type: 3}
+  - {fileID: 8393588017719703812, guid: b83ee1be6f127154d8cd191a40ca62fa, type: 3}
+  - {fileID: 8393588017719703812, guid: b83ee1be6f127154d8cd191a40ca62fa, type: 3}
+  - {fileID: 8393588017719703812, guid: b83ee1be6f127154d8cd191a40ca62fa, type: 3}
+  - {fileID: 8393588017719703812, guid: b83ee1be6f127154d8cd191a40ca62fa, type: 3}
