@@ -25,6 +25,11 @@ public class InputManager   // 상태 체크
         {
             KeyAction.Invoke();
         }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Managers.UI.ClosePopupUI();
+        }
     }
 
     public void Clear()

@@ -29,25 +29,33 @@ public class UI_StartSceneMenu : UI_Base
 
     public override void Init()
     {
-        Managers.UI.ShowUI("Buttons");
         Bind<Button>(typeof(GameObjects));
+
+        menuCam = GameObject.Find("MenuCam").GetComponent<CinemachineVirtualCamera>();
+        saveCam = GameObject.Find("SaveCam").GetComponent<CinemachineVirtualCamera>();
+        settingCam = GameObject.Find("SettingCam").GetComponent<CinemachineVirtualCamera>();
+
+        volume = GameObject.Find("ETC").transform.Find("PostProcessingGlitch").GetComponent<Volume>();
+
         GetButton((int)GameObjects.Start).onClick.AddListener(delegate { OnClickedStartBtn(); });
         GetButton((int)GameObjects.Setting).onClick.AddListener(delegate { OnClickedSettingBtn(); });
     }
 
     public void OnClickedStartBtn()
     {
-        Managers.UI.CloseUI();
+        Managers.UI.ClosePopupUI();
         //this.transform.GetChild(0).gameObject.SetActive(false);
         saveCam.MoveToTopOfPrioritySubqueue();
         StartCoroutine(TriggerGlitch(false));
+        gameObject.GetComponent<Canvas>().enabled = false;
     }
 
     public void OnClickedSettingBtn()
     {
-        Managers.UI.CloseUI();
+        Managers.UI.ClosePopupUI();
         settingCam.MoveToTopOfPrioritySubqueue();
         StartCoroutine(TriggerGlitch(false));
+        gameObject.GetComponent<Canvas>().enabled = false;
     }
 
     public void OnClickedCreditBtn()
@@ -76,16 +84,15 @@ public class UI_StartSceneMenu : UI_Base
         yield return new WaitForSeconds(1.3f);
 
         if(isCancelBtn)
-            Managers.UI.ShowUI("Buttons");
+            gameObject.GetComponent<Canvas>().enabled = true;
         analog.active = false;
     }
-
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Managers.UI.PopupUIStack.Count == 0)
+            if (Managers.UI.PopupStack.Count == 0)
             {
                 menuCam.MoveToTopOfPrioritySubqueue();
                 StartCoroutine(TriggerGlitch(true));
@@ -93,5 +100,4 @@ public class UI_StartSceneMenu : UI_Base
             Debug.Log("EscClicked");
         }
     }
-
 }

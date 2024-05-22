@@ -29,7 +29,9 @@ public class UIManager
         {
 			GameObject root = GameObject.Find("@UI_Root");
 			if (root == null)
-				root = new GameObject { name = "@UI_Root" };
+            {
+                root = new GameObject { name = "@UI_Root" };
+            }
             return root;
 		}
     }
@@ -64,7 +66,23 @@ public class UIManager
 
     public void SetCanvas(GameObject go, bool sort = true)
     {
-        Canvas canvas = Util.GetOrAddComponent<Canvas>(go);
+        Canvas canvas;
+        canvas = go.GetComponent<Canvas>();
+        if (canvas != null)
+        {
+            if (sort)
+            {
+                canvas.sortingOrder = _order;
+                _order++;
+            }
+            else
+            {
+                canvas.sortingOrder = 0;
+            }
+            return;
+        }
+        
+        canvas = Util.GetOrAddComponent<Canvas>(go);
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.overrideSorting = true;
 

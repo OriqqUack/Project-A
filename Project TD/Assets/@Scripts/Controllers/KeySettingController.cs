@@ -19,7 +19,7 @@ public class KeySettingController : MonoBehaviour
 
     private void OnEnable()
     {
-        mOriginKeyCode = Managers.Key.GetKeyCode(mKeyBindingName);
+        mOriginKeyCode = KeyManager.instance.GetKeyCode(mKeyBindingName);
         mKeyButtonText.text = ((char)mOriginKeyCode).ToString().ToUpper();
     }
 
@@ -44,10 +44,11 @@ public class KeySettingController : MonoBehaviour
                         if (mKeyButtonColorCor != null) { StopCoroutine(mKeyButtonColorCor); }
 
                         // 키 설정을 할 수 있는경우?
-                        if (Managers.Key.CheckKey(kcode, mOriginKeyCode))
+                        if (KeyManager.instance.CheckKey(kcode, mOriginKeyCode))
                         {
+                            KeyManager.instance.isKeyChanged = true;
                             // 키 지정
-                            Managers.Key.AssignKey(kcode, mKeyBindingName);
+                            KeyManager.instance.AssignKey(kcode, mKeyBindingName);
                             mOriginKeyCode = kcode;
 
                             // 키 레이블을 변경

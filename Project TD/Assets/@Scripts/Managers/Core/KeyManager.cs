@@ -26,15 +26,32 @@ public class KeyData
 /// <summary>
 /// 키 입력에 대한 정보를 가지고있고, 특정한 기능에 대응하는 키를 관리하는 매니저 클래스
 /// </summary>
-public class KeyManager : IGameDataPersistence 
+public class KeyManager : MonoBehaviour
 {
+    public static KeyManager instance { get; private set; }
+
     private static string mOptionDataFileName = "/KeyData.json"; //키 데이터 파일 이름
     private static string mFilePath;
 
     private Dictionary<string, KeyCode> mKeyDictionary;
 
+    public bool isKeyChanged = false;
+
     void Awake()
     {
+        if (instance == null)
+        {
+            GameObject go = GameObject.Find("@KeyManager");
+            if (go == null)
+            {
+                go = new GameObject { name = "@KeyManager" };
+                go.AddComponent<KeyManager>();
+            }
+
+            DontDestroyOnLoad(go);
+            instance = go.GetComponent<KeyManager>();
+        }
+
         mKeyDictionary = new Dictionary<string, KeyCode>();
         mFilePath = Application.persistentDataPath + mOptionDataFileName;
 
@@ -62,6 +79,8 @@ public class KeyManager : IGameDataPersistence
 
             ResetOptionData();
         }
+
+        isKeyChanged = false;
     }
 
     /// <summary>
@@ -74,26 +93,27 @@ public class KeyManager : IGameDataPersistence
 
         //씬 내에서 사용할 키 데이터들//
         mKeyDictionary.Add("Inventory", KeyCode.I); //아이템 인벤토리
-        mKeyDictionary.Add("Equipment", KeyCode.O); //장비 인벤토리
         mKeyDictionary.Add("Stat", KeyCode.P); //스탯
-        mKeyDictionary.Add("Skill", KeyCode.K); //스킬
-        mKeyDictionary.Add("Quest", KeyCode.Q); //퀘스트
+        mKeyDictionary.Add("Rolling", KeyCode.Space); //스킬
+        mKeyDictionary.Add("Interaction", KeyCode.F); //상호작용
+        mKeyDictionary.Add("IndexBook", KeyCode.C); //도감
+        mKeyDictionary.Add("Build", KeyCode.B); //건물짓기
 
-        mKeyDictionary.Add("ItemQuickSlot0", KeyCode.Alpha1); //아이템 퀵슬롯 1번
-        mKeyDictionary.Add("ItemQuickSlot1", KeyCode.Alpha2); //아이템 퀵슬롯 2번
-        mKeyDictionary.Add("ItemQuickSlot2", KeyCode.Alpha3); //아이템 퀵슬롯 3번
-        mKeyDictionary.Add("ItemQuickSlot3", KeyCode.Alpha4); //아이템 퀵슬롯 4번
-        mKeyDictionary.Add("ItemQuickSlot4", KeyCode.Alpha5); //아이템 퀵슬롯 5번
-
-        mKeyDictionary.Add("SkillQuickSlot0", KeyCode.Z); //스킬 퀵슬롯 1번
-        mKeyDictionary.Add("SkillQuickSlot1", KeyCode.X); //스킬 퀵슬롯 2번
-        mKeyDictionary.Add("SkillQuickSlot2", KeyCode.C); //스킬 퀵슬롯 3번
-        mKeyDictionary.Add("SkillQuickSlot3", KeyCode.V); //스킬 퀵슬롯 4번
-        mKeyDictionary.Add("SkillQuickSlot4", KeyCode.B); //스킬 퀵슬롯 5번  
+        mKeyDictionary.Add("ItemQuickSlot1", KeyCode.Alpha1); //아이템 퀵슬롯 1번
+        mKeyDictionary.Add("ItemQuickSlot2", KeyCode.Alpha2); //아이템 퀵슬롯 2번
+        mKeyDictionary.Add("ItemQuickSlot3", KeyCode.Alpha3); //아이템 퀵슬롯 3번
+        mKeyDictionary.Add("ItemQuickSlot4", KeyCode.Alpha4); //아이템 퀵슬롯 4번
+        mKeyDictionary.Add("ItemQuickSlot5", KeyCode.Alpha5); //아이템 퀵슬롯 5번
+        mKeyDictionary.Add("ItemQuickSlot6", KeyCode.Alpha5); //아이템 퀵슬롯 6번
 
         Debug.Log(GetType() + " 초기화");
 
         SaveOptionData();
+    }
+
+    public void CancelOptionData()
+    {
+        LoadOptionData();
     }
 
     public void SaveOptionData()
@@ -197,7 +217,7 @@ public class KeyManager : IGameDataPersistence
         mKeyDictionary[keyName] = keyCode;
 
         //키 파일을 로컬에 저장
-        SaveOptionData();
+        //SaveOptionData();
     }
 
     public void LoadData(GameData data)

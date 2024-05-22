@@ -36,7 +36,7 @@ public class DataPersistenceManager : MonoBehaviour
             if (go == null)
             {
                 go = new GameObject { name = "@DataManager" };
-                go.AddComponent<Managers>();
+                go.AddComponent<DataPersistenceManager>();
             }
 
             DontDestroyOnLoad(go);
