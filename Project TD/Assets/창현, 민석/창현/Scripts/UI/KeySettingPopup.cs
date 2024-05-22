@@ -21,21 +21,24 @@ public class KeySettingPopup : UI_Base
     {
         Bind<Button>(typeof(GameObjects));
 
-        GetButton((int)GameObjects.Confirm).onClick.AddListener(delegate { });
-        GetButton((int)GameObjects.Cancel).onClick.AddListener(delegate { });
-        GetButton((int)GameObjects.Button_Close).onClick.AddListener(delegate { });
-        GetButton((int)GameObjects.Save).onClick.AddListener(delegate { });
-        GetButton((int)GameObjects.PopupCancel).onClick.AddListener(delegate { });
+        GetButton((int)GameObjects.Confirm).onClick.AddListener(delegate { OnClickedConfirmBtn(); });
+        GetButton((int)GameObjects.Cancel).onClick.AddListener(delegate { OnClickedCancelBtn(); });
+        GetButton((int)GameObjects.Button_Close).onClick.AddListener(delegate { OnClickedButtonClose(); });
+        GetButton((int)GameObjects.Save).onClick.AddListener(delegate { OnClickedSaveBtn(); });
+        GetButton((int)GameObjects.PopupCancel).onClick.AddListener(delegate { OnClickedPopupCancel(); });
+
+        confirmPopup.SetActive(false);
     }
 
     public void OnClickedConfirmBtn()
     {
         KeyManager.instance.SaveOptionData();
+        Managers.UI.ClosePopupUI();
     }
 
     public void OnClickedCancelBtn()
     {
-        KeyManager.instance.CancelOptionData();
+        KeyManager.instance.SaveOptionData();
         Managers.UI.ClosePopupUI();
     }
 
@@ -47,7 +50,18 @@ public class KeySettingPopup : UI_Base
             return;
         }
 
-        KeyManager.instance.CancelOptionData();
+        confirmPopup.SetActive(true);
+    }
+
+    public void OnClickedSaveBtn()
+    {
+        KeyManager.instance.SaveOptionData();
+        Managers.UI.ClosePopupUI();
+    }
+    
+    public void OnClickedPopupCancel()
+    {
+        KeyManager.instance.SaveOptionData();
         Managers.UI.ClosePopupUI();
     }
 

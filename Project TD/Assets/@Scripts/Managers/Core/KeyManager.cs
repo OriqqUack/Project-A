@@ -5,6 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.Text;
 using Unity.VisualScripting;
+using System.Linq;
 
 [System.Serializable]
 public class KeyData
@@ -34,8 +35,10 @@ public class KeyManager : MonoBehaviour
     private static string mFilePath;
 
     private Dictionary<string, KeyCode> mKeyDictionary;
+    private Dictionary<string, KeyCode> beforeChangedKeyDictionary;
 
-    public bool isKeyChanged = false;
+
+    public bool isKeyChanged = true;
 
     void Awake()
     {
@@ -55,6 +58,8 @@ public class KeyManager : MonoBehaviour
         mKeyDictionary = new Dictionary<string, KeyCode>();
         mFilePath = Application.persistentDataPath + mOptionDataFileName;
 
+        ResetOptionData();
+
         LoadOptionData();
     }
 
@@ -70,6 +75,7 @@ public class KeyManager : MonoBehaviour
             foreach (var data in keyList)
             {
                 mKeyDictionary.Add(data.keyName, data.keyCode);
+                beforeChangedKeyDictionary.Add(data.keyName, data.keyCode);
             }
         }
         // 저장된 게임이 없다면
@@ -79,8 +85,6 @@ public class KeyManager : MonoBehaviour
 
             ResetOptionData();
         }
-
-        isKeyChanged = false;
     }
 
     /// <summary>
@@ -108,12 +112,8 @@ public class KeyManager : MonoBehaviour
 
         Debug.Log(GetType() + " 초기화");
 
+        beforeChangedKeyDictionary = mKeyDictionary.ToDictionary(entry => entry.Key, entry => entry.Value);
         SaveOptionData();
-    }
-
-    public void CancelOptionData()
-    {
-        LoadOptionData();
     }
 
     public void SaveOptionData()
@@ -125,7 +125,11 @@ public class KeyManager : MonoBehaviour
         //KeyData를 오브젝트로 담을 리스트
         List<KeyData> keys = new List<KeyData>();
 
-        //모든 딕셔너리에 있는 키 값을 리스트에 넣어준다.
+        if(isKeyChanged) //키가 바뀌었으면 mkey, 안바뀌었으면 before를 씀
+        {
+            mKeyDictionary = beforeChangedKeyDictionary.ToDictionary(entry => entry.Key, entry => entry.Value);
+        }
+
         foreach (KeyValuePair<string, KeyCode> keyName in mKeyDictionary)
         {
             keys.Add(new KeyData(keyName.Key, keyName.Value));
