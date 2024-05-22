@@ -26,5 +26,6 @@ namespace KSP
         [Header("¸Ê ¸®½ºÆ®")]
         #endregion Header Map Type List
         public MapTypeListSO mapTypeList;
+
     }
 }

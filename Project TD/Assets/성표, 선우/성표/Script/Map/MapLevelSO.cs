@@ -1,6 +1,7 @@
 using KSP;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MapTypeLevel_", menuName = "Scriptable Objects/Map/Map Level")]
@@ -24,6 +25,11 @@ public class MapLevelSO : ScriptableObject
 #if UNITY_EDITOR
     private void OnValidate()
     {
+        if(list.Count < Settings.maxMapDepth)
+        {
+            Debug.Log("Null Error : List count must be greater than the maximum map depth.Current count - " + list.Count + ", Max depth - " + Settings.maxMapDepth);
+        }
+
         HelperUtilite.ValidateCheckEnumerableValues(this, nameof(list), list);
     }
 #endif

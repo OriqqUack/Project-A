@@ -16,7 +16,7 @@ public enum MapType
 public enum MapLevel
 {
     None,
-    level_1 = 1,
-    level_2 = 2,
-    level_3 = 3
+    level_1,
+    level_2,
+    level_3
 }

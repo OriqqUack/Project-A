@@ -152,9 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea2dc3ea7abf404a84bf5f69f059e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapTilePostion: []
   tilemap: {fileID: 1885579759}
   mapTypeList: {fileID: 11400000, guid: 27f34828ba9b2ec40bf9fb31b7880d66, type: 2}
+  tileObjects: []
 --- !u!4 &621654077
 Transform:
   m_ObjectHideFlags: 0
@@ -167,8 +167,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 963194742}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &881525172
@@ -326,13 +325,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194740}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1885579757}
-  m_Father: {fileID: 621654077}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1310621326
 GameObject:
@@ -644,3 +643,4 @@ SceneRoots:
   - {fileID: 881525174}
   - {fileID: 621654077}
   - {fileID: 1921043436}
+  - {fileID: 963194742}
