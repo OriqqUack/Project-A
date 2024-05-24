@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class MonsterStat : Stat
 {
+    private string objectTag;
+
+    public void SetGameObjectTag(GameObject go)
+    {
+        objectTag = go.tag;
+    }
+
     [SerializeField]
     protected string _monsterName;
     //[SerializeField]
@@ -34,11 +41,16 @@ public class MonsterStat : Stat
     public float ScanRange { get { return _scanRange; } set { _scanRange = value; } }
     public float AttackRange { get { return _attackRange; } set { _attackRange = value; } }
 
-    
+    // 지금 그러면 Define.Monsters에서 어떤 몬스터인지
+    // 타입을 받아온다고 치면 그 타입을 넣어서 몬스터의 스텟을 자동으로
+    // 설정할 수 있게끔 만들어야하는데 어떻게 해야할까
+    // 태그로 할까? 아님 타입으로 바로 지정해서 넣는게 가능할까?
 
     void Start()
     {
-        SetStat(_monsterName);
+
+        SetGameObjectTag(gameObject);
+        SetStat(objectTag);
     }
 
 
@@ -59,6 +71,7 @@ public class MonsterStat : Stat
     {
         Dictionary<string, Data.MonsterStat> dict = Managers.Data.MonsterDict;
         Data.MonsterStat monsterStat = dict[monsterName];
+        _monsterName = monsterStat.monsterName;
         _hp = monsterStat.maxHp;
         _maxHp = monsterStat.maxHp;
         _attack = monsterStat.attack;

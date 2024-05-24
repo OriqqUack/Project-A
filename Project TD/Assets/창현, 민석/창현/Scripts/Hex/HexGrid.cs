@@ -1,71 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-
-public class HexGrid : Hex
-{
-    private void OnMouseDown()
+    public class HexGrid : MonoBehaviour
     {
-        if (!BuildManager.Instance.canBuild)
-            return;
-
-        if (EventSystem.current.IsPointerOverGameObject()) //ui°¡ ´©¸£¸é true
-            return;
-
-        #region Highligh
-        /*DisableHighlight();*/
-
-        /*if(BuildManager.Instance._currentHex != null)
+        private void Start()
         {
-            foreach (Vector3Int neighbour in BuildManager.Instance._currentHex.neighbours)
+            foreach (Hex hex in FindObjectsOfType<Hex>())
             {
-                BuildManager.Instance.GetTileAt(neighbour).DisableHighlight();
+                Managers.Build.hexTileDict[hex.HexCoords] = hex;
             }
-        }*/
-
-        /*neighbours = BuildManager.Instance.GetNeighboursFor(HexCoords);*/
-
-        /*foreach (Vector3Int neighbour in neighbours)
-        {
-            BuildManager.Instance.GetTileAt(neighbour).EnableHighlight();
-        }*/
-        #endregion
-
-        BuildManager.Instance._currentHex = this;
-
-        if (turret != null)
-        {
-            BuildManager.Instance.SelectNode(this);
-            return;
         }
 
-        if (!BuildManager.Instance.CanBuild)
-            return;
-
-        turret = BuildManager.Instance.BuildTurret(GetBuildPosition());
-        BuildManager.Instance.canBuild = false;
-        BuildManager.Instance.ghostTowerObject.SetActive(false);
     }
 
-    private void OnMouseEnter()
+    public static class Direction
     {
-        if (!BuildManager.Instance.canBuild)
-            return;
-
-        BuildManager.Instance.ghostTowerObject.SetActive(true);
-
-        BuildManager.Instance.ghostTowerObject.transform.position = GetBuildPosition();
-
-        foreach (MeshRenderer meshRenderer in BuildManager.Instance.ghostTower._meshRender)
-        {
-            meshRenderer.sharedMaterial = turret == null ? BuildManager.Instance.ghostTower._valid : BuildManager.Instance.ghostTower._inValid;
-        }
-    }
-
-    private void OnMouseExit()
+        public static List<Vector3Int> directionsOffsetOdd = new List<Vector3Int>
     {
+        new Vector3Int(-1,0,1), //N1
+        new Vector3Int(0,0,1),  //N2
+        new Vector3Int(1,0,0),  //E
+        new Vector3Int(0,0,-1), //S2
+        new Vector3Int(-1,0,-1),//S1
+        new Vector3Int(-1,0,0), //W
+    }; // È¦¼ö
 
+        public static List<Vector3Int> directionsOffsetEven = new List<Vector3Int>
+    {
+        new Vector3Int(0,0,1), //N1
+        new Vector3Int(1,0,1), //N2
+        new Vector3Int(1,0,0), //E
+        new Vector3Int(1,0,-1),//S2
+        new Vector3Int(0,0,-1),//S1
+        new Vector3Int(-1,0,0),//W
+    }; //Â¦¼ö
+
+        public static List<Vector3Int> GetDirectionList(int z)
+                => z % 2 == 0 ? directionsOffsetEven : directionsOffsetOdd;
     }
-}
+
+

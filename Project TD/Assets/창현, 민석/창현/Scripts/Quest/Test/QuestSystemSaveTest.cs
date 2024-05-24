@@ -13,7 +13,7 @@ public class QuestSystemSaveTest : MonoBehaviour
 
     private void Start()
     {
-        var questSystem = QuestSystem.Instance;
+        var questSystem = Managers.Quest;
 
         if (questSystem.ActiveQuests.Count == 0)
         {
@@ -34,16 +34,12 @@ public class QuestSystemSaveTest : MonoBehaviour
     private void OnApplicationQuit()
     {
         Debug.Log("Á¾·á");
-        QuestSystem.Instance.Save();
+        Managers.Quest.Save();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-        {
-
-            QuestSystem.Instance.ReceiveReport(category, target, 1);
-            Debug.Log("click");
-        }
+            Managers.Quest.ReceiveReport(category, target, 1);
     }
 }

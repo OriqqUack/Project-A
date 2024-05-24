@@ -17,7 +17,7 @@ public class CityScene : BaseScene
 
         Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
         gameObject.GetOrAddComponent<CursorController>();
-        GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "SPlayer");
+        GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "MainCharacter/character");
 
         if (go == null)
         {

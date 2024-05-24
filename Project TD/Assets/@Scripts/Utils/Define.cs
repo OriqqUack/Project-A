@@ -11,32 +11,16 @@ public class Define
         Monster,
         Tower,
         Box,
-        Npc,
-        TP,
-        Roket,
+        Npc
     }
 
-    public enum ObjectNumber
-    {
-        Box = 1,
-        Npc = 5,
-        TP = 3,
-    }
-
-    public enum State
+	public enum State
 	{
 		Die,
 		Moving,
 		Idle,
 		Skill,
 	}
-
-    public enum Monsters
-    {
-        Unknown,
-        Slime,
-        Ork
-    }
 
     public enum Layer
     {
@@ -51,7 +35,7 @@ public class Define
         Start,
         Main,
         Login,
-        City,
+        Lobby,
         Game,
         Home
     }

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using Photon.Pun;
-using UnityEngine.UIElements;
 
 public class PlayerController : BaseController
 {
@@ -25,10 +23,7 @@ public class PlayerController : BaseController
     PlayerStat _stat;
     Rigidbody _rb;
     CapsuleCollider _cc;
-
-    private GameObject _camObject;
-
-    bool _stopSkill = false;
+	bool _stopSkill = false;
     private bool _canDash = true;
     private bool _isDashing = true;
     private bool _canMove = true;
@@ -43,73 +38,32 @@ public class PlayerController : BaseController
         _rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         _cc.isTrigger = false;
 
-        //_camObject = GameObject.Find("PlayerCam");
-        if (this.gameObject.GetComponent<PhotonView>().IsMine == true)
-        {
-            Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(this.gameObject);
-
-            // 플레이어 OnMouseEvent의 중복을 피하기 위해서 (-)로 함수를 제거해주고 (+)로 다시 실행
-            Managers.Input.Key -= OnKeyEvent;
-            Managers.Input.Key += OnKeyEvent;
-            /*_cam = _camObject.GetComponent<CinemachineVirtualCamera>();
-            _cam.Follow = this.gameObject.transform;
-            _cam.LookAt = this.gameObject.transform;*/
-        }
-        else
-        {
-            this.gameObject.GetComponent<PlayerController>().enabled = false;
-            this.gameObject.GetComponent<NpcController>().enabled = false;
-            this.gameObject.GetComponent<BoxController>().enabled = false;
-            this.gameObject.GetComponent<TPController>().enabled = false;
-        }
+        // 플레이어 OnMouseEvent의 중복을 피하기 위해서 (-)로 함수를 제거해주고 (+)로 다시 실행
+        Managers.Input.Key -= OnKeyEvent;
+        Managers.Input.Key += OnKeyEvent;
 
         if (gameObject.GetComponentInChildren<UI_HPBar>() == null)
             Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform);
     }
 
-    protected void FixedUpdate()
-    {
-        UpdateCamera();
-        TelePort();
-        
-        if (_canMove)
-            UpdateMoving();
-    }
-
     protected void Update()
     {
+        UpdateCamera();
+
         if (IsOnSlope() || _canDash)
             _rb.useGravity = true;
+
+        if (_canMove)
+            UpdateMoving();
 
         if (Input.GetKeyDown(KeyCode.Space) && _canDash)
             StartCoroutine(Dash());
 
         if (Input.GetKeyUp(KeyCode.I))
             Inventory();
-    }
 
-    public void TelePort()
-    {
-        if (Managers.Input._tp0 && this.gameObject.GetComponent<PhotonView>().IsMine == true)
-        {
-            GameObject go = GameObject.Find("Point0");
-            gameObject.transform.position = go.transform.position;
-            Managers.Input._tp0 = false;
-        }
-
-        if (Managers.Input._tp1 && this.gameObject.GetComponent<PhotonView>().IsMine == true)
-        {
-            GameObject go = GameObject.Find("Point1");
-            gameObject.transform.position = go.transform.position;
-            Managers.Input._tp1 = false;
-        }
-
-        if (Managers.Input._tp2 && this.gameObject.GetComponent<PhotonView>().IsMine == true)
-        {
-            GameObject go = GameObject.Find("Point2");
-            gameObject.transform.position = go.transform.position;
-            Managers.Input._tp2 = false;
-        }
+        NpcScript("UI_NPC_Text");
+        BoxScript("UI_Box_Text");
     }
 
     public bool IsOnSlope()
@@ -161,6 +115,40 @@ public class PlayerController : BaseController
         }
     }
 
+    private void NpcScript(string prefab = null)
+    {
+        GameObject root = Managers.UI.Root.gameObject;
+
+        if (Util.FindChild(gameObject, prefab, true) == null)
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F) && Util.FindChild(root, "Dialogue", true) == null)
+        {
+            Managers.UI.ShowPopupUI<UI_Popup>("Script/Dialogue");
+            GameObject go = Util.FindChild(gameObject, "UI_NPC_Text", true);
+            Destroy(go);
+        }
+    }
+
+    private void BoxScript(string prefab = null)
+    {
+        GameObject root = Managers.UI.Root.gameObject;
+
+        if (Util.FindChild(gameObject, prefab, true) == null)
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F) && Util.FindChild(root, "CoBox", true) == null)
+        {
+            Managers.UI.ShowPopupUI<UI_Popup>("Box/CoBox");
+            GameObject go = Util.FindChild(gameObject, "UI_Box_Text", true);
+            Destroy(go);
+        }
+    }
+
     protected void UpdateCamera()
     {
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -185,7 +173,6 @@ public class PlayerController : BaseController
         Vector3 dir = new Vector3(hAxis, 0, vAxis);
         Vector3 velocity = CalculateNextFrameGroundAngle(_stat.MoveSpeed) < maxSlopeAngle ? dir : Vector3.zero;
         Vector3 gravity = Vector3.down * Mathf.Abs(_rb.velocity.y);
-        //Vector3 rotateY = new Vector3(0, Input.GetAxis("Mouse X") * 100.0f * Time.deltaTime, 0);
 
         if (isGrounded && isOnSlope)         // 경사로에 있을 때
         {
@@ -210,7 +197,6 @@ public class PlayerController : BaseController
                 _rb.velocity = Vector3.zero;
                 State = Define.State.Idle;
             }
-            //_rb.MoveRotation(_rb.rotation * Quaternion.Euler(rotateY));
             _rb.velocity = velocity * _stat.MoveSpeed + gravity;
             //State = Define.State.Moving;
             //float moveDist = Mathf.Clamp(_stat.MoveSpeed * Time.deltaTime, 0, dir.magnitude);

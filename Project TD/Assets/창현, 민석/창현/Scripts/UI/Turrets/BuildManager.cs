@@ -2,25 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class BuildManager : MonoBehaviour 
-{
-	public static BuildManager instance;
-	public static BuildManager Instance
-	{
-		get
-		{
-			if (instance == null)
-			{
-				instance = FindObjectOfType<BuildManager>();
-				if (instance == null)
-				{
-					instance = new GameObject("BuildManager").AddComponent<BuildManager>();
-					DontDestroyOnLoad(instance.gameObject);
-				}
-			}
-			return instance;
-		}
-	}
+public class BuildManager : MonoBehaviour {
 
 	[HideInInspector]
 	public Dictionary<Vector3Int, Hex> hexTileDict = new Dictionary<Vector3Int, Hex>();
@@ -33,7 +15,6 @@ public class BuildManager : MonoBehaviour
 	public GameObject sellEffect;
 	public GameObject ghostTowerObject;
 	public GhostTower ghostTower;
-	public bool canBuild = false;
 
 	private TurretBlueprint turretToBuild;
 	private WallBlueprint wallToBuild;
@@ -45,38 +26,25 @@ public class BuildManager : MonoBehaviour
 	public GameObject UI;
 	public BuildUI buildUI;
 
-	private Vector3 offsetPosition = new Vector3(0, 20, 0);
-
 	public bool CanBuild { get { return turretToBuild != null; } }
 	public bool HasMoney { get { return PlayerStats.Money >= turretToBuild.cost; } }
 
 	public GameObject TowerParent;
 	public GameObject WallParent;
 
-    private void Awake()
+    public void Init()
     {
-        UI = Managers.Resource.Instantiate("TD UI/BuildUI");
+        /*UI = Managers.Resource.Instantiate("TD UI/BuildUI");
 		buildUI = UI.GetComponent<BuildUI>();
 		ghostTowerObject = Managers.Resource.Instantiate("TD UI/PossibleTowerGhost");
-		ghostTower = ghostTowerObject.GetComponent<GhostTower>();
+		ghostTower = ghostTowerObject.GetComponent<GhostTower>();*/
 
 		TowerParent = new GameObject();
         TowerParent.name = "Towers";
 		WallParent = new GameObject();
 		WallParent.name = "Walls";
+    }
 
-		foreach (Hex hex in FindObjectsOfType<Hex>())
-		{
-			hexTileDict[hex.HexCoords] = hex;
-		}
-	}
-
-    private void Start()
-    {
-		
-	}
-
-	//coordinate µÈ ÁÂÇ¥ÀÇ Hex¸¦ °¡Á®¿È
     public Hex GetTileAt(Vector3Int hexCoordinates)
 	{
 		Hex result = null;
@@ -84,7 +52,6 @@ public class BuildManager : MonoBehaviour
 		return result;
 	}
 
-	//hexCoordinatesµÈ ÁÂÇ¥ÀÇ HexÀÇ ÀÌ¿ôÀ» °¡Á®¿È
 	public List<Vector3Int> GetNeighboursFor(Vector3Int hexCoordinates)
 	{
 		if (hexTileDict.ContainsKey(hexCoordinates) == false)
@@ -108,16 +75,28 @@ public class BuildManager : MonoBehaviour
 	public void SelectNode(Hex node)
 	{
 		if (selectedNode == node)
+		{
+			DeselectNode();
 			return;
+		}
 
 		selectedNode = node;
 		turretToBuild = null;
+
+		buildUI.SetTarget(node);
 	}
 
+	public void DeselectNode()
+	{
+		selectedNode = null;
+		//buildUI.Hide();
+	}
 
 	public void SelectTurretToBuild (TurretBlueprint turret)
 	{
 		turretToBuild = turret;
+
+		DeselectNode();
 	}
 
 	public void SetWall(WallBlueprint wall)
@@ -125,32 +104,20 @@ public class BuildManager : MonoBehaviour
 		wallToBuild = wall;
     }
 
+	public TurretBlueprint GetTurretToBuild ()
+	{
+		return turretToBuild;
+	}
 
-	public WallBlueprint GetWallToBuild() => wallToBuild;
+	public WallBlueprint GetWallToBuild()
+    {
+		return wallToBuild;
+    }
 
 	public void ClearTurret()
     {
 		turretToBuild = null;
 	}
 
-	public GameObject BuildTurret(Vector3 position)
-	{
-		if (PlayerStats.Money < turretToBuild.cost)
-		{
-			Debug.Log("Not enough money to build that!");
-			return null;
-		}
-
-		PlayerStats.Money -= turretToBuild.cost;
-
-		GameObject _turret = Managers.Resource.Instantiate(turretToBuild.prefab, position + offsetPosition, Quaternion.identity, TowerParent.transform);
-
-		//GameObject effect = (GameObject)Instantiate(BuildManager.Instance.buildEffect, GetBuildPosition(), Quaternion.identity);
-		//Destroy(effect, 5f);
-		Debug.Log("Turret build!");
-		ClearTurret();
-
-		return _turret;
-	}
 
 }

@@ -66,7 +66,6 @@ public class PoolManager
 
 	Dictionary<string, Pool> _pool = new Dictionary<string, Pool>();
     Transform _root;
-    public int _playerCount = 0;
 
     public void Init()
     {

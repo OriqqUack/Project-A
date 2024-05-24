@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HexCoordinates : MonoBehaviour
 {
-    public float xOffset, yOffset, zOffset;
+    public static float xOffset = 2f, yOffset = 1f, zOffset = 1.5f;
 
     internal Vector3Int GetHexCoords()
         => offsetCoordinates;

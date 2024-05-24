@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 8158688917007626603}
   - component: {fileID: 6493302242418894575}
   - component: {fileID: 3513133340426841074}
+  - component: {fileID: 6387973092743471371}
   m_Layer: 0
   m_Name: Npc1
-  m_TagString: NPC
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3783200991920957126}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -13.61, y: 0, z: -9.82}
+  m_LocalRotation: {x: -0, y: -0.73108417, z: -0, w: 0.6822873}
+  m_LocalPosition: {x: 11.34, y: 0, z: -5.18}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -78,6 +79,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7, y: 7, z: 7}
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &6387973092743471371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3783200991920957126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86414f6239a4bd409d0e148b1c0276b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9091291973761990640
 PrefabInstance:
   m_ObjectHideFlags: 0

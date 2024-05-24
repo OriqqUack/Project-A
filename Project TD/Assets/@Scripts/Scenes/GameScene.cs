@@ -8,24 +8,24 @@ public class GameScene : BaseScene
     {
         base.Init();
 
+        base.Init();
+
         SceneType = Define.Scene.Game;
 
         Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
-        Dictionary<string, Data.MonsterStat> dict2 = Managers.Data.MonsterDict;
-
         gameObject.GetOrAddComponent<CursorController>();
-
-        if (Managers.Input._isSingle)
+        GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "UnityChan");
+        for (int i = 0; i < 3; i++)
         {
-            GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "SPlayer");
+            GameObject npc = Managers.Game.Spawn(Define.WorldObject.Npc, $"NPC/Npc{i}");
         }
-
-        //Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);
+        GameObject box = Managers.Game.Spawn(Define.WorldObject.Box, $"Box/Box");
+        Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);
 
         //Managers.Game.Spawn(Define.WorldObject.Monster, "Knight");
-        /*GameObject go = new GameObject { name = "SpawningPool" };
+        GameObject go = new GameObject { name = "SpawningPool" };
         SpawningPool pool = go.GetOrAddComponent<SpawningPool>();
-        pool.SetKeepMonsterCount(0);*/
+        pool.SetKeepMonsterCount(0);
     }
 
     protected void Update()

@@ -9,9 +9,12 @@ public class Managers : MonoBehaviour
 
 	#region Contents
 	GameManagerEx _game = new GameManagerEx();
+    BuildManager _build = new BuildManager();
+    QuestSystem _quest = new QuestSystem();
 
     public static GameManagerEx Game {  get { return Instance._game; } }
-    
+    public static BuildManager Build { get { return Instance._build; } }
+    public static QuestSystem Quest { get { return Instance._quest; } }
 	#endregion
 
 	#region Core
@@ -58,6 +61,7 @@ public class Managers : MonoBehaviour
             s_instance._data.Init();
             s_instance._pool.Init();
             s_instance._sound.Init();
+            s_instance._build.Init();
         }		
 	}
 

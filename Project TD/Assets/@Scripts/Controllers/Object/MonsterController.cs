@@ -1,22 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class MonsterController : BaseController
 {
-	MonsterStat _stat;
+	Stat _stat;
 
-    public Define.Monsters MonsterType { get; set; } = Define.Monsters.Unknown;
+	[SerializeField]
+	float _scanRange = 10;
+
+	[SerializeField]
+	float _attackRange = 2;
 
     public override void Init()
     {
 		WorldObjectType = Define.WorldObject.Monster;
+		_stat = gameObject.GetComponent<Stat>();
 
-		_stat = gameObject.GetComponent<MonsterStat>();
-
-        if (gameObject.GetComponentInChildren<UI_HPBar>() == null)
+		if (gameObject.GetComponentInChildren<UI_HPBar>() == null)
 			Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform);
 	}
 
@@ -27,7 +29,7 @@ public class MonsterController : BaseController
 			return;
 
 		float distance = (player.transform.position - transform.position).magnitude;
-		if (distance <= _stat.ScanRange)
+		if (distance <= _scanRange)
 		{
 			_lockTarget = player;
 			State = Define.State.Moving;
@@ -42,7 +44,7 @@ public class MonsterController : BaseController
 		{
 			_destPos = _lockTarget.transform.position;
 			float distance = (_destPos - transform.position).magnitude;
-			if (distance <= _stat.AttackRange)
+			if (distance <= _attackRange)
 			{
 				NavMeshAgent nma = gameObject.GetOrAddComponent<NavMeshAgent>();
 				nma.SetDestination(transform.position);
@@ -88,7 +90,7 @@ public class MonsterController : BaseController
 			if (targetStat.Hp > 0)
 			{
 				float distance = (_lockTarget.transform.position - transform.position).magnitude;
-				if (distance <= _stat.AttackRange)
+				if (distance <= _attackRange)
 					State = Define.State.Skill;
 				else
 					State = Define.State.Moving;
