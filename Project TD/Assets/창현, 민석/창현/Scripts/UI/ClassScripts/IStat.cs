@@ -12,12 +12,18 @@ public interface IStat
 public class EXP : IStat
 {
     [JsonProperty]
-    private int _level;
+    public int _level;
 
     [JsonProperty]
-    private int _nowExp;
+    public int _nowExp;
 
     public int NowExp { get { return _nowExp; } private set { } }
+
+    public EXP(int level, int nowExp) 
+    {
+        this._level = level;
+        this._nowExp = nowExp;  
+    }
 
     private int[] _xpTable = new int[10]
     {
@@ -54,26 +60,26 @@ public class EXP : IStat
 public class Health : IStat
 {
     [JsonProperty]
-    private float _value;
+    private float _healthValue;
 
     public Health(float value)
     {
-        this._value = value;
+        this._healthValue = value;
     }
 
     public void Increase(float amount)
     {
-        _value += amount;
+        _healthValue += amount;
     }
 
     public void Remove(float amount)
     {
-        _value -= amount;
+        _healthValue -= amount;
     }
 
     public float GetValue()
     {
-        return _value;
+        return _healthValue;
     }
 }
 
@@ -81,26 +87,26 @@ public class Health : IStat
 public class Speed : IStat
 {
     [JsonProperty]
-    private float _value;
+    private float _speedValue;
 
     public Speed(float value)
     {
-        this._value = value;
+        this._speedValue = value;
     }
 
     public void Increase(float amount)
     {
-        _value += amount;
+        _speedValue += amount;
     }
 
     public void Remove(float amount)
     {
-        _value -= amount;
+        _speedValue -= amount;
     }
 
     public float GetValue()
     {
-        return _value;
+        return _speedValue;
     }
 }
 
@@ -108,26 +114,26 @@ public class Speed : IStat
 public class AttackStat : IStat
 {
     [JsonProperty]
-    private float _value;
+    private float _attackValue;
 
     public AttackStat(float value)
     {
-        this._value = value;
+        this._attackValue = value;
     }
 
     public void Increase(float amount)
     {
-        _value += amount;
+        _attackValue += amount;
     }
 
     public void Remove(float amount)
     {
-        _value -= amount;
+        _attackValue -= amount;
     }
 
     public float GetValue()
     {
-        return _value;
+        return _attackValue;
     }
 }
 
@@ -135,26 +141,26 @@ public class AttackStat : IStat
 public class AttackSpeed : IStat
 {
     [JsonProperty]
-    private float _value;
+    private float _attackSpeedValue;
 
     public AttackSpeed(float value)
     {
-        this._value = value;
+        this._attackSpeedValue = value;
     }
 
     public void Increase(float amount)
     {
-        _value += amount;
+        _attackSpeedValue += amount;
     }
 
     public void Remove(float amount)
     {
-        _value -= amount;
+        _attackSpeedValue -= amount;
     }
 
     public float GetValue()
     {
-        return _value;
+        return _attackSpeedValue;
     }
 }
 
@@ -162,26 +168,26 @@ public class AttackSpeed : IStat
 public class Defense : IStat
 {
     [JsonProperty]
-    private float _value;
+    private float _defenseValue;
 
     public Defense(float value)
     {
-        this._value = value;
+        this._defenseValue = value;
     }
 
     public void Increase(float amount)
     {
-        _value += amount;
+        _defenseValue += amount;
     }
 
     public void Remove(float amount)
     {
-        _value -= amount;
+        _defenseValue -= amount;
     }
 
     public float GetValue()
     {
-        return _value;
+        return _defenseValue;
     }
 }
 
@@ -189,26 +195,26 @@ public class Defense : IStat
 public class CriticalPer : IStat
 {
     [JsonProperty]
-    private float _value;
+    private float _criticalValue;
 
     public CriticalPer(float value)
     {
-        this._value = value;
+        this._criticalValue = value;
     }
 
     public void Increase(float amount)
     {
-        _value += amount;
+        _criticalValue += amount;
     }
 
     public void Remove(float amount)
     {
-        _value -= amount;
+        _criticalValue -= amount;
     }
 
     public float GetValue()
     {
-        return _value;
+        return _criticalValue;
     }
 }
 
@@ -216,25 +222,25 @@ public class CriticalPer : IStat
 public class CriticalAtk : IStat
 {
     [JsonProperty]
-    private float _value;
+    private float _criticalAtkValue;
 
     public CriticalAtk(float value)
     {
-        this._value = value;
+        this._criticalAtkValue = value;
     }
 
     public void Increase(float amount)
     {
-        _value += amount;
+        _criticalAtkValue += amount;
     }
 
     public void Remove(float amount)
     {
-        _value -= amount;
+        _criticalAtkValue -= amount;
     }
 
     public float GetValue()
     {
-        return _value;
+        return _criticalAtkValue;
     }
 }

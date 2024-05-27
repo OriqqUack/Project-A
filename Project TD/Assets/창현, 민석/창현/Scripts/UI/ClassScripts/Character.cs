@@ -9,7 +9,7 @@ public class Character
 {
     [JsonProperty]
     private Dictionary<string, IStat> _stats;
-    [JsonProperty]
+    [JsonProperty]  
     public string ClassName { get; private set; }
 
     public Character(string className)
@@ -18,7 +18,7 @@ public class Character
         //TODO : 클래스별로 switch로 나누어야함
         _stats = new Dictionary<string, IStat>
         {
-            { "EXP", new EXP() },
+            { "EXP", new EXP(1,0) },
             { "Health", new Health(10) },
             { "Speed", new Speed(10) },
             { "Attack", new AttackStat(10) },

@@ -50,9 +50,9 @@ public class FileDataHandler
         this.dataDirPath = dataDirPath;
         this.dataFileName = dataFileName;
 
-        settings= new JsonSerializerSettings
+        settings = new JsonSerializerSettings
         {
-            TypeNameHandling = TypeNameHandling.Auto, // 또는 TypeNameHandling.Objects
+            TypeNameHandling = TypeNameHandling.Auto,
             TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
             Converters = new List<JsonConverter> { new IStatConverter() }
         };
@@ -157,34 +157,42 @@ public class IStatConverter : JsonConverter
         string type = (typeToken != null) ? typeToken.ToString() : null;
 
         IStat stat;
-        Debug.Log(type);
         type = type.Replace(", Assembly-CSharp","");
         switch (type)
         {
             case "Health":
-                float healthValue = obj["value"]?.ToObject<float>() ?? 0;  // JSON 데이터에서 값을 가져옵니다.
+                Debug.Log(obj["_healthValue"]);
+                float healthValue = obj["_healthValue"]?.ToObject<float>() ?? 0;
                 stat = new Health(healthValue);
                 break;
             case "EXP":
-                stat = new EXP();
+                int level = obj["_level"]?.ToObject<int>() ?? 0;
+                int nowExp = obj["_nowExp"]?.ToObject<int>() ?? 0;
+                stat = new EXP(level, nowExp);
                 break;
             case "Speed":
-                stat = new Speed(0);
+                float speedValue = obj["_speedValue"]?.ToObject<float>() ?? 0;
+                stat = new Speed(speedValue);
                 break;
             case "AttackStat":
-                stat = new AttackStat(0);
+                float attackValue = obj["_attackStatValue"]?.ToObject<float>() ?? 0;
+                stat = new AttackStat(attackValue);
                 break;
             case "AttackSpeed":
-                stat = new AttackSpeed(0);
+                float attackSpeedValue = obj["_attackSpeedValue"]?.ToObject<float>() ?? 0;
+                stat = new AttackSpeed(attackSpeedValue);
                 break;
             case "Defense":
-                stat = new Defense(0);
+                float defenseValue = obj["_defenseValue"]?.ToObject<float>() ?? 0;
+                stat = new Defense(defenseValue);
                 break;
             case "CriticalPer":
-                stat = new CriticalPer(0);
+                float criticalPerValue = obj["_criticalPerValue"]?.ToObject<float>() ?? 0;
+                stat = new CriticalPer(criticalPerValue);
                 break;
             case "CriticalAtk":
-                stat = new CriticalAtk(0);
+                float criticalAtkValue = obj["_criticalAtkValue"]?.ToObject<float>() ?? 0;
+                stat = new CriticalAtk(criticalAtkValue);
                 break;
             default:
                 throw new JsonSerializationException($"Unknown type: {type}");
