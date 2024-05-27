@@ -15,16 +15,6 @@ public class DataPersistenceManager : MonoBehaviour
     private List<IGlobalDataPersistence> globalDataPersistenceObjects;
     private FileDataHandler dataHandler;
 
-    public GameData GameData
-    {
-        get { return gameData; }
-    }
-
-    public GlobalData GlobalData
-    {
-        get { return globalData; }
-    }
-
     public static DataPersistenceManager instance { get; private set; }
 
     private void Awake()
@@ -50,7 +40,7 @@ public class DataPersistenceManager : MonoBehaviour
     private void Start()
     {
         LoadStartScene();
-        SaveGame();
+        SaveGlobalData();
     }
 
     #region GlobalData
@@ -97,6 +87,7 @@ public class DataPersistenceManager : MonoBehaviour
         this.gameDataPersistenceObjects = FindAllGameDataPersistenceObejcts();
 
         this.gameData = dataHandler.DataLoad<GameData>();
+        Managers.Game.characterManager.LoadData(gameData);
 
         if (this.gameData == null)
         {
@@ -122,26 +113,33 @@ public class DataPersistenceManager : MonoBehaviour
     public void NewGame()
     {
         this.gameData = new GameData();
-        SaveGame();
+        SaveGlobalData();
+        SaveGameData();
     }
     #endregion
 
-    public void SaveGame()
+    public void SaveGameData()
     {
-        if(gameDataPersistenceObjects != null)
+        if (gameDataPersistenceObjects != null)
         {
             foreach (IGameDataPersistence dataPersistenceObj in gameDataPersistenceObjects)
             {
                 dataPersistenceObj.SaveData(ref gameData);
             }
+            Debug.Log(gameData == null);
+
+            Managers.Game.characterManager.SaveData(ref gameData);
         }
 
+        dataHandler.Save(gameData);
+    }
+
+    public void SaveGlobalData()
+    {
         foreach (IGlobalDataPersistence dataPersistenceObj in globalDataPersistenceObjects)
         {
             dataPersistenceObj.SaveData(ref globalData);
         }
-
-        dataHandler.Save(gameData);
         dataHandler.Save(globalData);
     }
 
@@ -171,6 +169,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        SaveGame();
+        SaveGameData();
+        SaveGlobalData();
     }
 }

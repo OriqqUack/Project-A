@@ -27,6 +27,10 @@ public class KeySettingPopup : UI_Base
         GetButton((int)GameObjects.Save).onClick.AddListener(delegate { OnClickedSaveBtn(); });
         GetButton((int)GameObjects.PopupCancel).onClick.AddListener(delegate { OnClickedPopupCancel(); });
 
+
+        Managers.Input.KeyAction -= KeyEvent;
+        Managers.Input.KeyAction += KeyEvent;
+
         confirmPopup.SetActive(false);
     }
 
@@ -38,7 +42,7 @@ public class KeySettingPopup : UI_Base
 
     public void OnClickedCancelBtn()
     {
-        KeyManager.instance.SaveOptionData();
+        KeyManager.instance.LoadOptionData();
         Managers.UI.ClosePopupUI();
     }
 
@@ -61,17 +65,21 @@ public class KeySettingPopup : UI_Base
     
     public void OnClickedPopupCancel()
     {
-        KeyManager.instance.SaveOptionData();
+        KeyManager.instance.LoadOptionData();
         Managers.UI.ClosePopupUI();
     }
 
     public void KeyEvent()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (KeyManager.instance.isKeyChanged)
             {
                 confirmPopup.SetActive(true);
+            }
+            else
+            {
+                Managers.UI.ClosePopupUI();
             }
         }
     }

@@ -41,6 +41,11 @@ public class Managers : MonoBehaviour
         _input.OnUpdate();
     }
 
+    private void Start()
+    {
+        Managers.Game.characterManager = new CharacterManager();
+    }
+
     static void Init()
     {
         if (s_instance == null)

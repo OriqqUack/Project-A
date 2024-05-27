@@ -35,10 +35,9 @@ public class KeyManager : MonoBehaviour
     private static string mFilePath;
 
     private Dictionary<string, KeyCode> mKeyDictionary;
-    private Dictionary<string, KeyCode> beforeChangedKeyDictionary;
 
 
-    public bool isKeyChanged = true;
+    public bool isKeyChanged = false;
 
     void Awake()
     {
@@ -58,13 +57,13 @@ public class KeyManager : MonoBehaviour
         mKeyDictionary = new Dictionary<string, KeyCode>();
         mFilePath = Application.persistentDataPath + mOptionDataFileName;
 
-        ResetOptionData();
-
         LoadOptionData();
     }
 
-    private void LoadOptionData()
+    public void LoadOptionData()
     {
+        mKeyDictionary.Clear();
+
         // ÀúÀåµÈ °ÔÀÓÀÌ ÀÖ´Ù¸é
         if (File.Exists(mFilePath))
         {
@@ -75,7 +74,6 @@ public class KeyManager : MonoBehaviour
             foreach (var data in keyList)
             {
                 mKeyDictionary.Add(data.keyName, data.keyCode);
-                beforeChangedKeyDictionary.Add(data.keyName, data.keyCode);
             }
         }
         // ÀúÀåµÈ °ÔÀÓÀÌ ¾ø´Ù¸é
@@ -108,11 +106,10 @@ public class KeyManager : MonoBehaviour
         mKeyDictionary.Add("ItemQuickSlot3", KeyCode.Alpha3); //¾ÆÀÌÅÛ Äü½½·Ô 3¹ø
         mKeyDictionary.Add("ItemQuickSlot4", KeyCode.Alpha4); //¾ÆÀÌÅÛ Äü½½·Ô 4¹ø
         mKeyDictionary.Add("ItemQuickSlot5", KeyCode.Alpha5); //¾ÆÀÌÅÛ Äü½½·Ô 5¹ø
-        mKeyDictionary.Add("ItemQuickSlot6", KeyCode.Alpha5); //¾ÆÀÌÅÛ Äü½½·Ô 6¹ø
+        mKeyDictionary.Add("ItemQuickSlot6", KeyCode.Alpha6); //¾ÆÀÌÅÛ Äü½½·Ô 6¹ø
 
         Debug.Log(GetType() + " ÃÊ±âÈ­");
 
-        beforeChangedKeyDictionary = mKeyDictionary.ToDictionary(entry => entry.Key, entry => entry.Value);
         SaveOptionData();
     }
 
@@ -125,16 +122,15 @@ public class KeyManager : MonoBehaviour
         //KeyData¸¦ ¿ÀºêÁ§Æ®·Î ´ãÀ» ¸®½ºÆ®
         List<KeyData> keys = new List<KeyData>();
 
-        if(isKeyChanged) //Å°°¡ ¹Ù²î¾úÀ¸¸é mkey, ¾È¹Ù²î¾úÀ¸¸é before¸¦ ¾¸
+        if (isKeyChanged)
         {
-            mKeyDictionary = beforeChangedKeyDictionary.ToDictionary(entry => entry.Key, entry => entry.Value);
+            foreach (KeyValuePair<string, KeyCode> keyName in mKeyDictionary)
+            {
+                keys.Add(new KeyData(keyName.Key, keyName.Value));
+            }
         }
 
-        foreach (KeyValuePair<string, KeyCode> keyName in mKeyDictionary)
-        {
-            keys.Add(new KeyData(keyName.Key, keyName.Value));
-        }
-
+        isKeyChanged = false;
         //List<KeyData>¸¦ SeriaizeObject¸¦ ÇÏ¸é Object type jsonÀÌ ³ª¿Â´Ù.
         string jsonData = JsonConvert.SerializeObject(keys);
 

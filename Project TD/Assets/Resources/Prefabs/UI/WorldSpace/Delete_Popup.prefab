@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8848319886427741186}
   - component: {fileID: 2303853018627619886}
   m_Layer: 5
-  m_Name: Delete
+  m_Name: PopupCancel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC815\uB9D0\uB85C \uC0AD\uC81C \uD558\uC2DC\uACA0\uC2B5\uAE4C?"
+  m_text: "\uC815\uB9D0\uB85C \uC0AD\uC81C \uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 60ad110d15ed106478c6fb2cf9f715a3, type: 2}
   m_sharedMaterial: {fileID: 7243560595444660149, guid: 60ad110d15ed106478c6fb2cf9f715a3,
@@ -349,12 +349,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100.4
+  m_fontSize: 80
   m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 144
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 8496014245243706962}
   - component: {fileID: 3707333916956861950}
   m_Layer: 5
-  m_Name: Cancel
+  m_Name: Save
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

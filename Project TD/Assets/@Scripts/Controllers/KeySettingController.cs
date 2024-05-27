@@ -20,7 +20,12 @@ public class KeySettingController : MonoBehaviour
     private void OnEnable()
     {
         mOriginKeyCode = KeyManager.instance.GetKeyCode(mKeyBindingName);
-        mKeyButtonText.text = ((char)mOriginKeyCode).ToString().ToUpper();
+        string Keycode = mOriginKeyCode.ToString();
+        if (Keycode.Contains("Alpha"))
+        {
+            Keycode = Keycode.Replace("Alpha", "");
+        }
+        mKeyButtonText.text = Keycode;
     }
 
     public void BTN_ModifyKey()

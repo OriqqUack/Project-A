@@ -9,6 +9,7 @@ public class GameManagerEx
     int _gold;
     //Dictionary<int, GameObject> _players = new Dictionary<int, GameObject>();
     HashSet<GameObject> _monsters = new HashSet<GameObject>();
+    public CharacterManager characterManager;
     public GameObject _currentTower { get; set; }
 
     public Action<int> OnSpawnEvent;

@@ -39,6 +39,8 @@ public class UI_StartSceneMenu : UI_Base
 
         GetButton((int)GameObjects.Start).onClick.AddListener(delegate { OnClickedStartBtn(); });
         GetButton((int)GameObjects.Setting).onClick.AddListener(delegate { OnClickedSettingBtn(); });
+        GetButton((int)GameObjects.Quit).onClick.AddListener(delegate { OnClickedQuitBtn(); });
+
     }
 
     public void OnClickedStartBtn()
@@ -65,7 +67,7 @@ public class UI_StartSceneMenu : UI_Base
 
     public void OnClickedQuitBtn()
     {
-
+        Managers.UI.ShowPopupUI<UI_QuitPopup>("QuitPopup");
     }
 
     public void OnClickedCancelBtn()

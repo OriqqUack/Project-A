@@ -55,7 +55,8 @@ public class DataSelec : MonoBehaviour, IGlobalDataPersistence
         DataPersistenceManager.instance.nowSlot = slotNum;
 
         DataPersistenceManager.instance.LoadGame();
-        DataPersistenceManager.instance.SaveGame();
+        DataPersistenceManager.instance.SaveGameData();
+        DataPersistenceManager.instance.SaveGlobalData();
 
         _create.gameObject.SetActive(false);
     }
