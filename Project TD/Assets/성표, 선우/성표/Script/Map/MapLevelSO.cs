@@ -1,4 +1,3 @@
-using KSP;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -30,7 +29,7 @@ public class MapLevelSO : ScriptableObject
             Debug.Log("Null Error : List count must be greater than the maximum map depth.Current count - " + list.Count + ", Max depth - " + Settings.maxMapDepth);
         }
 
-        HelperUtilite.ValidateCheckEnumerableValues(this, nameof(list), list);
+        HelperUtilitie.ValidateCheckEnumerableValues(this, nameof(list), list);
     }
 #endif
     #endregion Validation

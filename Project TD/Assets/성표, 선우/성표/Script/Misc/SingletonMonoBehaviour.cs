@@ -2,31 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KSP
+public abstract class SingletonMonoBehaivour<T> : MonoBehaviour where T : MonoBehaviour
 {
-    public abstract class SingletonMonoBehaivour<T> : MonoBehaviour where T : MonoBehaviour
+    private static T instance;
+
+    public static T Instance
     {
-        private static T instance;
-
-        public static T Instance
+        get
         {
-            get
-            {
-                return instance;
-            }
+            return instance;
         }
+    }
 
-        //singleton designe
-        protected virtual void Awake()
+    //singleton designe
+    protected virtual void Awake()
+    {
+        if (instance == null)
         {
-            if (instance == null)
-            {
-                instance = this as T;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            instance = this as T;
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }

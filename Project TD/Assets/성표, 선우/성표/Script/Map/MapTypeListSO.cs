@@ -1,4 +1,3 @@
-using KSP;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +15,7 @@ public class MapTypeListSO : ScriptableObject
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        HelperUtilite.ValidateCheckEnumerableValues(this, nameof(list), list);
+        HelperUtilitie.ValidateCheckEnumerableValues(this, nameof(list), list);
     }
 #endif
     #endregion Validation

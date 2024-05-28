@@ -20,3 +20,20 @@ public enum MapLevel
     level_2,
     level_3
 }
+
+public enum GameState
+{
+    gameStarted,
+    playingGame,
+    gameWon,
+    gameLost,
+    gamePaused,
+    restartGame
+}
+
+public enum AimDirection
+{
+    front,
+    left,
+    right
+}

@@ -1,4 +1,3 @@
-using KSP;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +29,7 @@ public class MapTypeSO : ScriptableObject
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        HelperUtilite.ValidateCheckEnumerableValues(this, nameof(prefabs), prefabs);
+        HelperUtilitie.ValidateCheckEnumerableValues(this, nameof(prefabs), prefabs);
     }
 #endif
     #endregion Validation

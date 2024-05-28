@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class GameManagerEx
+public class GameManagerEx : SingletonMonoBehaivour<GameManagerEx>
 {
+    #region GameManagerEX
     GameObject _player;
     int _gold;
     //Dictionary<int, GameObject> _players = new Dictionary<int, GameObject>();
@@ -110,4 +112,108 @@ public class GameManagerEx
 
         Managers.Resource.Destroy(go);
     }
+    #endregion GameManagerEX
+
+    [HideInInspector] public GameState gameState;
+    [HideInInspector] public float inGameTimer;
+    private PlayerDetailsSO playerDetails;
+    private Player player;
+    private float tileTimer;
+
+    private int currentTileIndex=0;
+
+    private void Update()
+    {
+        HandleGameState();
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            tileTimer = 0f;
+        }
+
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        
+        playerDetails = GameResources.Instance.currentPlayer.playerDetails;
+
+        InstantiatePlayer();
+
+    }
+
+    private void InstantiatePlayer()
+    {
+        // Instatiate player
+        GameObject playerGameobject = Instantiate(playerDetails.playerPrefab);
+
+        // Initialize player
+        player = playerGameobject.GetComponent<Player>();
+
+        player.Initalize(playerDetails);
+    }
+
+    private void Start()
+    {
+        gameState = GameState.gameStarted;
+    }
+
+    private void HandleGameState()
+    {
+        //Handle game state
+        switch (gameState)
+        {
+            case GameState.gameStarted:
+                PlayInGame();
+                inGameTimer = 0f;
+                gameState = GameState.playingGame;
+                break;
+
+            case GameState.playingGame:
+                OnInGameTimer();
+                InGameTileControl();
+                break;
+        }
+    }
+
+    private void PlayInGame()
+    {
+        bool SucessfulMapGenerate = MapBuilder.Instance.GenerateMap();
+
+        if (!SucessfulMapGenerate)
+        {
+            Debug.Log("error : 맵 생성 오류");
+        }
+
+        player.gameObject.transform.position = Vector3.zero; //Vector3 -> 로켓앞으로 위치 변경 예정
+    }
+
+    private void OnInGameTimer()
+    {
+        inGameTimer += Time.deltaTime;
+    }
+
+    // 이벤트 메서드로 수정예정
+    private void InGameTileControl()
+    {
+        if (currentTileIndex <= Settings.maxMapTileCount)
+        {
+            tileTimer -= Time.deltaTime;
+        }
+
+        if (tileTimer < 0f)
+        {
+            MapBuilder.Instance.tileObjects[currentTileIndex++].SetActive(true);
+
+            tileTimer = UnityEngine.Random.Range(Settings.randomAppearTileTime1, Settings.randomAppearTileTime2);
+        }
+        
+    }
+
+    public Player ReturnPlayer()
+    {
+        return player;
+    }
+
+    
 }
