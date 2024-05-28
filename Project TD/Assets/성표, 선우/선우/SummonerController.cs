@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class SummonerController : MonsterController
 {
 
-    public void SummonEvent() // 애니메이터 이벤트에 넣을 계획
+    public void OnSummonEvent() // 애니메이터 이벤트에 넣을 계획
     {
         GameObject obj = Managers.Game.MonsterSpawn(Define.Monsters.Monster3, "Knight");
 

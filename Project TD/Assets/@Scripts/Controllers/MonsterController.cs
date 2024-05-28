@@ -118,7 +118,7 @@ public class MonsterController : BaseController
     public GameObject FindClosestObject(string[] tags)
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _stat.ScanRange);
-        GameObject closestObject = null;
+        GameObject closestObject = rocket;
         float closestDistance = Mathf.Infinity;
 
         foreach (var collider in colliders)
