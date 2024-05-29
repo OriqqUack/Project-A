@@ -5,6 +5,36 @@ using UnityEngine;
 
 public static class HelperUtilitie
 {
+    #region Raycast Variable
+    public static Camera mainCamera;
+    public static Vector3 mouseWorldPosition;
+    public static LayerMask worldPositionLayerMask;
+    #endregion Raycast Variable
+
+    public static Vector3 GetMouseWorldPosition()
+    {
+        if (mainCamera == null) mainCamera = Camera.main;
+
+        Vector3 mouseScreenPostion = Input.mousePosition;
+        Ray ray = mainCamera.ScreenPointToRay(mouseScreenPostion);
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit, Mathf.Infinity, worldPositionLayerMask))
+        {
+                mouseWorldPosition = hit.point;
+        }
+        return mouseWorldPosition;
+    }
+
+    public static float GetAngleFromVector(Vector3 vector)
+    {
+        float radians = Mathf.Atan2(vector.y, vector.x);
+
+        float degrees = radians * Mathf.Rad2Deg;
+
+        return degrees;
+    }
+
 
     public static bool ValidateCheckEmptySring(Object thisObject, string fieldName, string stringToCheck)
     {

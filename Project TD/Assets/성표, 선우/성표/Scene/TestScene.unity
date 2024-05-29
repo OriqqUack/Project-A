@@ -499,8 +499,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea2dc3ea7abf404a84bf5f69f059e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 0}
-  mapTypeList: {fileID: 0}
+  tilemap: {fileID: 1885579759}
+  mapTypeList: {fileID: 11400000, guid: 27f34828ba9b2ec40bf9fb31b7880d66, type: 2}
   tileObjects: []
 --- !u!4 &1361350894
 Transform:

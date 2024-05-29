@@ -201,10 +201,9 @@ public class GameManagerEx : SingletonMonoBehaivour<GameManagerEx>
             tileTimer -= Time.deltaTime;
         }
 
-        if (tileTimer < 0f)
+        if (tileTimer < 0f && currentTileIndex <= Settings.maxMapTileCount)
         {
             MapBuilder.Instance.tileObjects[currentTileIndex++].SetActive(true);
-
             tileTimer = UnityEngine.Random.Range(Settings.randomAppearTileTime1, Settings.randomAppearTileTime2);
         }
         

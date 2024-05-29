@@ -187,6 +187,7 @@ public class MapBuilder : SingletonMonoBehaivour<MapBuilder>
         }
 
         mapCreateSucessful = true;
+        return;
     }
 
     /// <summary>
