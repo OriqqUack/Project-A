@@ -165,10 +165,14 @@ public class IStatConverter : JsonConverter
                 float healthValue = obj["_healthValue"]?.ToObject<float>() ?? 0;
                 stat = new Health(healthValue);
                 break;
-            case "EXP":
-                int level = obj["_level"]?.ToObject<int>() ?? 0;
-                int nowExp = obj["_nowExp"]?.ToObject<int>() ?? 0;
-                stat = new EXP(level, nowExp);
+            case "Level":
+                Debug.Log(obj["_levelValue"]);
+                float levelValue = obj["_levelValue"]?.ToObject<float>() ?? 0;
+                stat = new Health(levelValue);
+                break;
+            case "StatPoint":
+                int statPoints = obj["_statPoints"]?.ToObject<int>() ?? 0;
+                stat = new StatPoint(statPoints);
                 break;
             case "Speed":
                 float speedValue = obj["_speedValue"]?.ToObject<float>() ?? 0;

@@ -9,9 +9,10 @@ public class Managers : MonoBehaviour
 
 	#region Contents
 	GameManagerEx _game = new GameManagerEx();
+    CharacterManager _character = new CharacterManager();
 
     public static GameManagerEx Game {  get { return Instance._game; } }
-    
+    public static CharacterManager Character { get { return Instance._character; } }
 	#endregion
 
 	#region Core
@@ -43,7 +44,7 @@ public class Managers : MonoBehaviour
 
     private void Start()
     {
-        Managers.Game.characterManager = new CharacterManager();
+
     }
 
     static void Init()

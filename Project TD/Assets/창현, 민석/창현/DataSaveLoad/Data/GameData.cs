@@ -51,7 +51,15 @@ public class GameData
         this._exp = 0;
         this._totalExp = 100;
 
-        Characters = new Dictionary<string, Character>();
+        Characters = new Dictionary<string, Character>()
+        {
+            { "Knight", new Character("Knight") },
+            { "Gunner", new Character("Gunner") },
+            { "Engineer", new Character("Engineer") },
+            { "Normal", new Character("Normal") },
+            { "Miner", new Character("Miner") },
+            { "Researcher", new Character("Researcher") },
+        };
         #endregion
 
         #region µµ°¨

@@ -6,6 +6,11 @@ using UnityEngine;
 public class CharacterManager
 {
     public Dictionary<string, Character> _characters;
+    public int[] _levelUpXpTable = new int[10]
+    {
+        100, 200, 300, 400, 500, 600, 700, 800, 900, 1000
+    };
+
 
     public CharacterManager()
     {
@@ -25,6 +30,19 @@ public class CharacterManager
         if (_characters.ContainsKey(characterName))
         {
             _characters[characterName].IncreaseStat(statName, amount);
+        }
+        else
+        {
+            throw new ArgumentException("Invalid character name");
+        }
+    }
+
+    public void IncreaseCharacterExp(string characterName, float amount)
+    {
+        if (_characters.ContainsKey(characterName))
+        {
+            _characters[characterName].IncreaseExp(amount);
+            IsLevelUp(characterName);
         }
         else
         {
@@ -52,24 +70,46 @@ public class CharacterManager
         }
         else
         {
+            throw new ArgumentException($"Invalid character name : {characterName}");
+        }
+    }
+
+    public float GetCharacterNowExp(string characterName)
+    {
+        if (_characters.ContainsKey(characterName))
+        {
+            return _characters[characterName].GetNowExp();
+        }
+        else
+        {
             throw new ArgumentException("Invalid character name");
+        }
+    }
+
+    public void IsLevelUp(string characterName)
+    {
+        int index = (int)Managers.Character.GetCharacterStatValue(characterName, "Level");
+        bool isLevelUp = GetCharacterNowExp(characterName) >= _levelUpXpTable[index-1];
+        if (isLevelUp)
+        {
+            _characters[characterName].ReemoveExp(_levelUpXpTable[index - 1]);
+            _characters[characterName].IncreaseStat("Level", 1);
+            _characters[characterName].IncreaseStat("StatPoint", 1);
         }
     }
 
     public void LoadData(GameData data)
     {
-        Managers.Game.characterManager = new CharacterManager();
         if (data == null)
         {
             Debug.Log("Data is null");
             return;
-
         }
-        Managers.Game.characterManager._characters = data.Characters;
+        Managers.Character._characters = data.Characters;
     }
 
     public void SaveData(ref GameData data)
     {
-        data.Characters = Managers.Game.characterManager._characters;
+        data.Characters = Managers.Character._characters;
     }
 }

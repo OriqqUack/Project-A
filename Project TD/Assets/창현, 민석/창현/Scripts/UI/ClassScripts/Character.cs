@@ -9,23 +9,23 @@ public class Character
 {
     [JsonProperty]
     private Dictionary<string, IStat> _stats;
-    [JsonProperty]  
-    public string ClassName { get; private set; }
+    [JsonProperty]
+    private float _nowExp = 0;
 
     public Character(string className)
     {
-        ClassName = className;
         //TODO : 클래스별로 switch로 나누어야함
         _stats = new Dictionary<string, IStat>
         {
-            { "EXP", new EXP(1,0) },
-            { "Health", new Health(10) },
-            { "Speed", new Speed(10) },
-            { "Attack", new AttackStat(10) },
-            { "AttackSpeed", new AttackSpeed(10) },
-            { "Defense", new Defense(10) },
-            { "CriticalPer", new CriticalPer(10) },
-            { "CriticalAtk", new CriticalAtk(10) }
+            { "Level", new Level(1)},
+            { "StatPoint", new StatPoint(0) },
+            { "Health", new Health(0) },
+            { "Speed", new Speed(0) },
+            { "Attack", new AttackStat(0) },
+            { "AttackSpeed", new AttackSpeed(0) },
+            { "Defense", new Defense(0) },
+            { "CriticalPer", new CriticalPer(0) },
+            { "CriticalAtk", new CriticalAtk(0) }
         };
     }
 
@@ -39,6 +39,16 @@ public class Character
         {
             throw new ArgumentException("Invalid stat name");
         }
+    }
+
+    public void IncreaseExp(float amount)
+    {
+        _nowExp += amount;
+    }
+
+    public void ReemoveExp(float amount)
+    {
+        _nowExp -= amount;
     }
 
     public void RemoveStat(string statName, float amount)
@@ -64,4 +74,10 @@ public class Character
             throw new ArgumentException("Invalid stat name");
         }
     }
+
+    public float GetNowExp()
+    {
+        return _nowExp;
+    }
+
 }

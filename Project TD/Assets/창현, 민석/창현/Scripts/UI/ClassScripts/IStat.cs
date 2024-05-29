@@ -9,52 +9,59 @@ public interface IStat
 }
 
 [JsonObject(MemberSerialization.OptIn)]
-public class EXP : IStat
+public class Level : IStat
 {
     [JsonProperty]
-    public int _level;
+    public int _levelValue;
 
-    [JsonProperty]
-    public int _nowExp;
-
-    public int NowExp { get { return _nowExp; } private set { } }
-
-    public EXP(int level, int nowExp) 
+    public Level(int level)
     {
-        this._level = level;
-        this._nowExp = nowExp;  
-    }
-
-    private int[] _xpTable = new int[10]
-    {
-        100, 200, 300, 400, 500, 600, 700, 800 ,900, 1000
-    };
-
-    public void AddExp(int amount)
-    {
-        _nowExp += amount;
-    }
-
-    public int GetRequiredExp()
-    {
-        return _xpTable[_level];
-    }
-
-    public float GetValue()
-    {
-        return _level;
+        this._levelValue = level;
     }
 
     public void Increase(float amount)
     {
-        _level++;
+        _levelValue++;
     }
 
     public void Remove(float amount)
     {
-        _level--;
+        _levelValue--;
+    }
+
+    public float GetValue()
+    {
+        return _levelValue;
     }
 }
+
+[JsonObject(MemberSerialization.OptIn)]
+public class StatPoint : IStat
+{
+    [JsonProperty]
+    public int _statPoints;
+
+    public StatPoint(int statPoint) 
+    {
+        this._statPoints = statPoint;
+    }
+
+    public void Increase(float amount)
+    {
+        _statPoints++;
+    }
+
+    public void Remove(float amount)
+    {
+        _statPoints--;
+    }
+
+    public float GetValue()
+    {
+        return _statPoints;
+    }
+}
+
 
 [JsonObject(MemberSerialization.OptIn)]
 public class Health : IStat

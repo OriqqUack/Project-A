@@ -85,9 +85,7 @@ public class DataPersistenceManager : MonoBehaviour
         fileName = Path.Combine($"save{nowSlot}");
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.gameDataPersistenceObjects = FindAllGameDataPersistenceObejcts();
-
         this.gameData = dataHandler.DataLoad<GameData>();
-        Managers.Game.characterManager.LoadData(gameData);
 
         if (this.gameData == null)
         {
@@ -95,6 +93,8 @@ public class DataPersistenceManager : MonoBehaviour
             NewGame();
             return;
         }
+
+        Managers.Character.LoadData(gameData);
 
         foreach (IGameDataPersistence dataPersistenceObj in gameDataPersistenceObjects)
         {
@@ -128,7 +128,7 @@ public class DataPersistenceManager : MonoBehaviour
             }
             Debug.Log(gameData == null);
 
-            Managers.Game.characterManager.SaveData(ref gameData);
+            Managers.Character.SaveData(ref gameData);
         }
 
         dataHandler.Save(gameData);
