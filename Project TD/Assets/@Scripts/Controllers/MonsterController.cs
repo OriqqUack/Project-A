@@ -17,7 +17,12 @@ public class MonsterController : BaseController
     GameObject rocket;
 
     private Coroutine _aggroCoroutine; // 어그로 해제 코루틴
+    private float _aggroDuration = 3.0f; // 어그로 지속 시간
     private bool _isAggroTimeoutActive = false; // 어그로 타임아웃 활성화 여부
+
+    private bool _isStunned = false; // 경직 상태 여부
+    private float _stunDuration = 3.0f; // 경직 지속 시간
+    private Coroutine _stunCoroutine; // 경직 상태 코루틴
 
     public override void Init()
     {
@@ -54,6 +59,10 @@ public class MonsterController : BaseController
 
     protected override void UpdateMoving()
     {
+        // 경직 상태일 때 이동하지 않음
+        if (_isStunned)
+            return;
+
         // 플레이어가 내 사정거리보다 가까우면 공격
         if (_lockTarget != null)
         {
@@ -106,6 +115,10 @@ public class MonsterController : BaseController
 
     protected override void UpdateSkill()
     {
+        // 경직 상태일 때 스킬 사용하지 않음
+        if (_isStunned)
+            return;
+
         if (_lockTarget != null)
         {
             Vector3 dir = _lockTarget.transform.position - transform.position;
@@ -141,16 +154,23 @@ public class MonsterController : BaseController
     private IEnumerator AggroTimeout()
     {
         _isAggroTimeoutActive = true;
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(_aggroDuration);
         _lockTarget = rocket;
         _isAggroTimeoutActive = false;
     }
 
+    // 경직 상태 코루틴(한번만 걸리면 true로 바뀌어서 안걸림)
+    private IEnumerator Stun()
+    {
+        _isStunned = true;
+        yield return new WaitForSeconds(_stunDuration);
+    }
+
+    // HitEvent를 통해 경직 상태를 체크하고 적용
     void OnHitEvent()
     {
         if (_lockTarget != null)
         {
-           
             // 체력
             Stat targetStat = _lockTarget.GetComponent<Stat>();
             targetStat.OnAttacked(_stat);
@@ -162,6 +182,14 @@ public class MonsterController : BaseController
                     State = Define.State.Skill;
                 else
                     State = Define.State.Moving;
+
+                // 경직 상태 체크 및 적용
+                if (_stat.Hp <= _stat.MaxHp / 3 && !_isStunned)
+                {
+                    if (_stunCoroutine != null)
+                        StopCoroutine(_stunCoroutine);
+                    _stunCoroutine = StartCoroutine(Stun());
+                }
             }
             else
             {
