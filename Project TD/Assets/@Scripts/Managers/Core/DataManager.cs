@@ -11,17 +11,21 @@ public interface ILoader<Key, Value>
 public class DataManager
 {
     public Dictionary<int, Data.Stat> StatDict { get; private set; } = new Dictionary<int, Data.Stat>();
-    public Dictionary<int, Data.JsonItem> ShopItemData { get; private set; } = new Dictionary<int, Data.JsonItem>();
-    public Dictionary<int, Data.JsonWeapon> ShopWeaponData { get; private set; } = new Dictionary<int, Data.JsonWeapon>();
-    public Dictionary<int, Data.JsonShopWeaponGradePercentage> ShopWeaponPer { get; private set; } = new Dictionary<int, Data.JsonShopWeaponGradePercentage>();
+    //public Dictionary<int, Data.CollectionEntry> CollectionDict { get; private set; } = new Dictionary<int, Data.CollectionEntry>();
+    //public Dictionary<int, Data.JsonItem> ShopItemData { get; private set; } = new Dictionary<int, Data.JsonItem>();
+    //public Dictionary<int, Data.JsonWeapon> ShopWeaponData { get; private set; } = new Dictionary<int, Data.JsonWeapon>();
+    //public Dictionary<int, Data.JsonShopWeaponGradePercentage> ShopWeaponPer { get; private set; } = new Dictionary<int, Data.JsonShopWeaponGradePercentage>();
+    //public Dictionary<string, Data.MonsterStat> MonsterDict { get; private set; } = new Dictionary<string, Data.MonsterStat>();
 
 
     public void Init()
     {
         StatDict = LoadJson<Data.StatData, int, Data.Stat>("StatData").MakeDict();
-        ShopItemData = LoadJson<Data.ShopItemData, int, Data.JsonItem>("item_weapon").MakeDict();
-        ShopWeaponData = LoadJson<Data.ShopWeaponData, int, Data.JsonWeapon>("item_weapon").MakeDict();
-        ShopWeaponPer = LoadJson<Data.WeaponPerData, int, Data.JsonShopWeaponGradePercentage>("shop_weapon_grade_percentage").MakeDict();
+        //ShopItemData = LoadJson<Data.ShopItemData, int, Data.JsonItem>("item_weapon").MakeDict();
+        //ShopWeaponData = LoadJson<Data.ShopWeaponData, int, Data.JsonWeapon>("item_weapon").MakeDict();
+        //ShopWeaponPer = LoadJson<Data.WeaponPerData, int, Data.JsonShopWeaponGradePercentage>("shop_weapon_grade_percentage").MakeDict();
+        //CollectionDict = LoadJson<Data.CollectionData, int, Data.CollectionEntry>("CollectionData").MakeDict();
+        //MonsterDict = LoadJson<Data.MonsterData, string, Data.MonsterStat>("MonsterData").MakeDict();
     }
 
     Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>
@@ -37,4 +41,5 @@ public class DataManager
             return default(Loader);
         }
     }
+
 }

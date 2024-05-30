@@ -29,6 +29,6 @@ public static class Direction
         new Vector3Int(-1,0,0),//W
     }; //Â¦¼ö
 
-    public static List<Vector3Int> GetDirectionList(int z)
-            => z % 2 == 0 ? directionsOffsetEven : directionsOffsetOdd;
+   /* public static List<Vector3Int> GetDirectionList(int z)
+            => z % 2 == 0 ? directionsOffsetEven : directionsOffsetOdd;*/
 }

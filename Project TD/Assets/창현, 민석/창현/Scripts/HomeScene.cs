@@ -12,7 +12,7 @@ public class HomeScene : BaseScene
         SceneType = Define.Scene.Home;
         //Managers.UI.ShowSceneUI<UI_Inven>();
         //Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
-        gameObject.GetOrAddComponent<CursorController>();
+        //gameObject.GetOrAddComponent<CursorController>();
 
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "UnityChan");
         Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);

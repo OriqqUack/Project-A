@@ -13,7 +13,7 @@ public class GameScene : BaseScene
         SceneType = Define.Scene.Game;
 
         Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
-        gameObject.GetOrAddComponent<CursorController>();
+        //gameObject.GetOrAddComponent<CursorController>();
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "UnityChan");
         for (int i = 0; i < 3; i++)
         {
@@ -22,7 +22,7 @@ public class GameScene : BaseScene
         GameObject box = Managers.Game.Spawn(Define.WorldObject.Box, $"Box/Box");
         Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);
 
-        //Managers.Game.Spawn(Define.WorldObject.Monster, "Knight");
+        Managers.Game.Spawn(Define.WorldObject.Monster, "Knight");
         GameObject go = new GameObject { name = "SpawningPool" };
         SpawningPool pool = go.GetOrAddComponent<SpawningPool>();
         pool.SetKeepMonsterCount(0);

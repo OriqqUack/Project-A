@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Stat : MonoBehaviour
 {
@@ -22,20 +23,70 @@ public class Stat : MonoBehaviour
     protected float _dashingTime;
     [SerializeField]
     protected float _dashingCooldown;
+    [SerializeField]
+    protected float _attackDistance;
 
-    public int Level { get { return _level; } set { _level = value; } }
-    public int Hp { get { return _hp; } set { _hp = value; } }
-    public int MaxHp { get { return _maxHp; } set { _maxHp = value; } }
-    public int Attack { get { return _attack; } set { _attack = value; } }
+    public Action<int> OnLevelChanged;
+    public Action<int> OnHpChanged;
+    public Action<int> OnMaxHpChanged;
+    public Action<float> OnMoveSpeedChanged;
+    public Action<int> OnAttackChanged;
+
+    public int Level 
+    {
+        get { return _level; } 
+        set 
+        { 
+            _level = value;
+            OnLevelChanged?.Invoke(_level);
+        } 
+    }
+    public int Hp 
+    { 
+        get { return _hp; } 
+        set 
+        { 
+            _hp = value;
+            OnHpChanged?.Invoke(_hp);
+        } 
+    }
+    public int MaxHp 
+    {   
+        get { return _maxHp; } 
+        set
+        { 
+            _maxHp = value;
+            OnMaxHpChanged?.Invoke(_maxHp);
+        } 
+    }
+    public int Attack 
+    { 
+        get { return _attack; } 
+        set 
+        { 
+            _attack = value;
+            OnAttackChanged?.Invoke(_attack);
+        } 
+    }
     public int Defense { get { return _defense; } set { _defense = value; } }
-    public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
+    public float MoveSpeed 
+    { 
+        get { return _moveSpeed; } 
+        set 
+        { 
+            _moveSpeed = value;
+            OnMoveSpeedChanged?.Invoke(_moveSpeed);
+        } 
+    }
     public float DashingSpeed { get { return _dashingPower; } set { _dashingPower = value; } }
     public float DashingTime { get { return _dashingTime; } set { _dashingTime = value; } }
     public float DashingCooldown { get { return _dashingCooldown; } set { _dashingCooldown = value; } }
+    public float AttackDistance { get { return _attackDistance; } set { _attackDistance = value; } }
 
     private void Start()
     {
-        _level = 1;
+        _moveSpeed = 5.0f;
+        /*_level = 1;
         _hp = 100;
         _maxHp = 100;
         _attack = 10;
@@ -43,7 +94,7 @@ public class Stat : MonoBehaviour
         _moveSpeed = 5.0f;
         _dashingPower = 10.0f;
         _dashingTime = 0.2f;
-        _dashingCooldown = 0.1f;
+        _dashingCooldown = 0.1f;*/
     }
 
     public virtual void OnAttacked(Stat attacker)
@@ -65,6 +116,6 @@ public class Stat : MonoBehaviour
             playerStat.Exp += 15;
         }
 
-        Managers.Game.Despawn(gameObject);
+        //Managers.Game.Despawn(gameObject);
     }
 }

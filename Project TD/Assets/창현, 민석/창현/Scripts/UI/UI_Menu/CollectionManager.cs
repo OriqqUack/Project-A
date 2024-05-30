@@ -13,7 +13,7 @@ public class CollectionManager : MonoBehaviour, IDataPersistence
     public List<Transform> collectionContent;
     public Sprite unkownSprite;
 
-    private Data.CollectionEntry[] collectionEntries;
+    //private Data.CollectionEntry[] collectionEntries;
     private bool[] discovered;
 
     private void Awake()
@@ -31,13 +31,13 @@ public class CollectionManager : MonoBehaviour, IDataPersistence
     }
     private void Start()
     {
-        InitializeCollection();
+        //InitializeCollection();
     }
 
     void InitializeCollection()
     {
-        LoadCollectionEntries();
-        for(int i = 0; i < collectionEntries.Length; i++)
+        /*LoadCollectionEntries();
+        for (int i = 0; i < collectionEntries.Length; i++)
         {
             GameObject collectionEntryObj = Instantiate(collectionEntryPrefab, collectionContent[i]);
             Button button = collectionEntryObj.GetComponent<Button>();
@@ -49,7 +49,7 @@ public class CollectionManager : MonoBehaviour, IDataPersistence
                 image.sprite = Managers.Resource.Load<Sprite>(collectionEntries[i].imagePath);
             else
                 image.sprite = unkownSprite;
-        }
+        }*/
     }
 
     void LoadCollectionEntries()
@@ -78,7 +78,7 @@ public class CollectionManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        if (collectionEntries == null)
+        /*if (collectionEntries == null)
         {
             collectionEntries = Managers.Data.CollectionDict.Values.ToArray();
             discovered = new bool[Managers.Data.CollectionDict.Count];
@@ -89,13 +89,13 @@ public class CollectionManager : MonoBehaviour, IDataPersistence
             Array.Copy(data.collectionEntries, collectionEntries, data.collectionEntries.Length);
             discovered = new bool[data.collectionDiscovered.Length];
             Array.Copy(data.collectionDiscovered, discovered, data.collectionDiscovered.Length);
-        }
+        }*/
     }
 
     public void SaveData(ref GameData data)
     {
-        data.collectionEntries = collectionEntries;
-        data.collectionDiscovered = discovered;
+        /*data.collectionEntries = collectionEntries;
+        data.collectionDiscovered = discovered;*/
     }
 }
 

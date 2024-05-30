@@ -22,7 +22,7 @@ public class GameData
     #endregion
 
     #region µµ°¨
-    public Data.CollectionEntry[] collectionEntries;
+    //public Data.CollectionEntry[] collectionEntries;
     public bool[] collectionDiscovered;
     #endregion
 

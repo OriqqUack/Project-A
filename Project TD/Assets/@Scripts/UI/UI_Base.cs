@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public abstract class UI_Base : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public abstract class UI_Base : MonoBehaviour
 	protected Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
 	public abstract void Init();
 
-	private void Start()
+	private void Awake()
 	{
 		Init();
 	}
@@ -52,7 +53,7 @@ public abstract class UI_Base : MonoBehaviour
 	}
 
 	protected GameObject GetObject(int idx) { return Get<GameObject>(idx); }
-	public Text GetText(int idx) { return Get<Text>(idx); }
+	public TextMeshProUGUI GetText(int idx) { return Get<TextMeshProUGUI>(idx); }
 	protected Button GetButton(int idx) { return Get<Button>(idx); }
 	protected Image GetImage(int idx) { return Get<Image>(idx); }
 

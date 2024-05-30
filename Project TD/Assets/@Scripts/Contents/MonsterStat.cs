@@ -50,7 +50,7 @@ public class MonsterStat : Stat
     {
 
         SetGameObjectTag(gameObject);
-        SetStat(objectTag);
+        //SetStat(objectTag);
     }
 
 
@@ -69,7 +69,7 @@ public class MonsterStat : Stat
 
     public void SetStat(string monsterName)
     {
-        Dictionary<string, Data.MonsterStat> dict = Managers.Data.MonsterDict;
+        /*Dictionary<string, Data.MonsterStat> dict = Managers.Data.MonsterDict;
         Data.MonsterStat monsterStat = dict[monsterName];
         _monsterName = monsterStat.monsterName;
         _hp = monsterStat.maxHp;
@@ -78,6 +78,6 @@ public class MonsterStat : Stat
         _moveSpeed = monsterStat.moveSpeed;
         _attackSpeed = monsterStat.attackSpeed;
         _scanRange = monsterStat.scanRange;
-        _attackRange = monsterStat.attackRange;
+        _attackRange = monsterStat.attackRange;*/
     }
 }

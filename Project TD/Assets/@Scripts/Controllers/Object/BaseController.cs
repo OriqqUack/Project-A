@@ -70,4 +70,5 @@ public abstract class BaseController : MonoBehaviour
 	protected virtual void UpdateMoving() { }
 	protected virtual void UpdateIdle() { }
 	protected virtual void UpdateSkill() { }
+	protected virtual void UpdateFallDown() { }
 }

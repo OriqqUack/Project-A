@@ -6,15 +6,15 @@ using UnityEngine;
     {
         private void Start()
         {
-            foreach (Hex hex in FindObjectsOfType<Hex>())
+            /*foreach (Hex hex in FindObjectsOfType<Hex>())
             {
-                Managers.Build.hexTileDict[hex.HexCoords] = hex;
-            }
+                //Managers.Build.hexTileDict[hex.HexCoords] = hex;
+            }*/
         }
 
     }
 
-    public static class Direction
+    /*public static class Direction
     {
         public static List<Vector3Int> directionsOffsetOdd = new List<Vector3Int>
     {
@@ -36,8 +36,8 @@ using UnityEngine;
         new Vector3Int(-1,0,0),//W
     }; //Â¦¼ö
 
-        public static List<Vector3Int> GetDirectionList(int z)
-                => z % 2 == 0 ? directionsOffsetEven : directionsOffsetOdd;
-    }
+       *//* public static List<Vector3Int> GetDirectionList(int z)
+                => z % 2 == 0 ? directionsOffsetEven : directionsOffsetOdd;*//*
+    }*/
 
 

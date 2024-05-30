@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Data
 { 
-#region Stat
+    #region Stat
 	[Serializable]
 	public class Stat
 	{
@@ -28,9 +28,36 @@ namespace Data
 			return dict;
 		}
 	}
+
+    [Serializable]
+    public class MonsterStat
+    {
+        public string monsterName;
+        public int level;
+        public int maxHp;
+        public int attack;
+        public float moveSpeed;
+        public float attackSpeed;
+        public float scanRange;
+        public float attackRange;
+    }
+
+    [Serializable]
+    public class MonsterData : ILoader<string, MonsterStat>
+    {
+        public List<MonsterStat> monsters = new List<MonsterStat>();
+
+        public Dictionary<string, MonsterStat> MakeDict()
+        {
+            Dictionary<string, MonsterStat> dict = new Dictionary<string, MonsterStat>();
+            foreach (MonsterStat monsterStat in monsters)
+                dict.Add(monsterStat.monsterName, monsterStat);
+            return dict;
+        }
+    }
     #endregion
 
-    #region shop
+    #region Shop
     [Serializable]
     public class JsonItem
     {
@@ -107,6 +134,33 @@ namespace Data
             Dictionary<int, JsonShopWeaponGradePercentage> dict = new Dictionary<int, JsonShopWeaponGradePercentage>();
             foreach (JsonShopWeaponGradePercentage stat in weaponPercentage)
                 dict.Add(stat.raw, stat);
+            return dict;
+        }
+    }
+    #endregion
+
+    #region 도감
+    [Serializable]
+    public class CollectionEntry
+    {
+        public int itemNumber;
+        public string name;
+        public string description;
+        public string imagePath;
+    }
+
+    [Serializable]
+    public class CollectionData : ILoader<int, CollectionEntry>
+    {
+        public List<CollectionEntry> collections = new List<CollectionEntry>();
+
+        public Dictionary<int, CollectionEntry> MakeDict()
+        {
+            Dictionary<int, CollectionEntry> dict = new Dictionary<int, CollectionEntry>();
+            foreach (CollectionEntry c in collections)
+            {
+                dict.Add(c.itemNumber, c);
+            }
             return dict;
         }
     }

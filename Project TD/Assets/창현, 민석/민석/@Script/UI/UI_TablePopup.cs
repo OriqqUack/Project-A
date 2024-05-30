@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Rito;
 public class UI_TablePopup : UI_Base
 {
+
     public void Setting()
     {
         Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Tablet");

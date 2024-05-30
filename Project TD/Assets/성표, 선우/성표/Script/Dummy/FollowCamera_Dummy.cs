@@ -43,6 +43,7 @@ public class FollowCamera_Dummy : MonoBehaviour
     void FollowCamera()
     {
         transform.position =target.position + offset;
+        transform.LookAt(target);
     }
 
     void ZoomController()

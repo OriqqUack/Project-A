@@ -35,9 +35,9 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         startPosition = transform.position;
         startParent = transform.parent;
 
-        Inventory.Singleton.OnClickedItem.Invoke(myItem);
+        Inventory1.Singleton.OnClickedItem.Invoke(myItem);
 
-        Inventory.Singleton.SetCarriedItem(this);
+        Inventory1.Singleton.SetCarriedItem(this);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -49,7 +49,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
 
         canvasGroup.blocksRaycasts = true;
-        if(transform.parent == Inventory.Singleton.draggablesTransform)
+        if(transform.parent == Inventory1.Singleton.draggablesTransform)
         {
             transform.position = startPosition;
             transform.SetParent(startParent);

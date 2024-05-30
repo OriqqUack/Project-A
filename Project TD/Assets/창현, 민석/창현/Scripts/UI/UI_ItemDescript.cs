@@ -14,8 +14,8 @@ public class UI_ItemDescript : UI_Base
     {
         Bind<TextMeshProUGUI>(typeof(GameObjects));
 
-        Inventory.Singleton.OnClickedItem -= OnChangedText;
-        Inventory.Singleton.OnClickedItem += OnChangedText;
+        Inventory1.Singleton.OnClickedItem -= OnChangedText;
+        Inventory1.Singleton.OnClickedItem += OnChangedText;
     }
 
     private void OnChangedText(Item item)

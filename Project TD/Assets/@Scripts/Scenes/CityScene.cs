@@ -16,7 +16,7 @@ public class CityScene : BaseScene
         GameObject go2 = GameObject.Find("@TP Point");
 
         Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
-        gameObject.GetOrAddComponent<CursorController>();
+        //gameObject.GetOrAddComponent<CursorController>();
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "MainCharacter/character");
 
         if (go == null)

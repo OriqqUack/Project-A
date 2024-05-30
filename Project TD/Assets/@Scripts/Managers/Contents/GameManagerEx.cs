@@ -13,6 +13,8 @@ public class GameManagerEx
 
     public Action<int> OnSpawnEvent;
 
+    public Action wasChangedHP;
+
     public GameObject GetPlayer() { return _player; }
     public GameObject GetTower() { return _currentTower; }
 
@@ -31,6 +33,11 @@ public class GameManagerEx
             return;
         }
         _gold -= gold;
+    }
+
+    public void SetPlayer(GameObject player)
+    {
+        _player = player;
     }
 
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)

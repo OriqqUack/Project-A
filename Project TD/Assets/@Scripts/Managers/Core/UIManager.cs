@@ -9,6 +9,14 @@ public class UIManager
     Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
     UI_Scene _sceneUI = null;
 
+    Stack<Transform> _popupUIStack = new Stack<Transform>();
+
+    public Stack<UI_Popup> PopupStack
+    {
+        get { return _popupStack; }
+        set { _popupStack = value; }
+    }
+
     public GameObject Root
     {
         get
@@ -19,6 +27,34 @@ public class UIManager
             return root;
 		}
     }
+
+    #region TurnOn/Off
+    public void ShowUI(string name)
+    {
+        Transform ui = Root.transform.Find(name);
+
+        if (ui.gameObject.activeSelf)
+        {
+            CloseUI();
+            return;
+        }
+
+        _popupUIStack.Push(ui);
+        ui.gameObject.SetActive(true);
+    }
+
+    public void CloseUI()
+    {
+        Transform ui = _popupUIStack.Pop();
+        ui.gameObject.SetActive(false);
+    }
+
+    public void CloseAllUI()
+    {
+        while (_popupUIStack.Count > 0)
+            CloseUI();
+    }
+    #endregion
 
     public void SetCanvas(GameObject go, bool sort = true)
     {
@@ -79,12 +115,22 @@ public class UIManager
 		return sceneUI;
 	}
 
-	public T ShowPopupUI<T>(string name = null) where T : UI_Popup
+    public T ShowPopupUI<T>(string name = null) where T : UI_Popup
     {
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
         GameObject go = Managers.Resource.Instantiate($"UI/Popup/{name}");
+        T popup = Util.GetOrAddComponent<T>(go);
+        _popupStack.Push(popup);
+
+        go.transform.SetParent(Root.transform);
+
+        return popup;
+    }
+
+    public T ShowPopupUI<T>(GameObject go) where T : UI_Popup
+    {
         T popup = Util.GetOrAddComponent<T>(go);
         _popupStack.Push(popup);
 
