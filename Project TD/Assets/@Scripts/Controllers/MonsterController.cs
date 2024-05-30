@@ -16,8 +16,9 @@ public class MonsterController : BaseController
     GameObject player;
     GameObject rocket;
 
-    private float aggroLossDelay = 3f;
-    private Coroutine _aggroCoroutine;
+    private Coroutine _aggroCoroutine; // 어그로 해제 코루틴
+    private bool _isAggroTimeoutActive = false; // 어그로 타임아웃 활성화 여부
+
     public override void Init()
     {
         MonsterType = Define.Monsters.Unknown; // 고쳐야함
@@ -58,8 +59,18 @@ public class MonsterController : BaseController
         {
             // player태그와 tower태그를 감지
             string[] tags = { "Player", "Tower" };
-            // 스캔 범위에 들어오는 오브젝트의 태그를 확인해 lockTarget변경
-            _lockTarget = FindClosestObject(tags);
+            // 스캔 범위에 들어오는 오브젝트의 태그를 확인해 lockTarget 변경
+            GameObject closestObject = FindClosestObject(tags);
+
+            if (closestObject != rocket && closestObject != _lockTarget)
+            {
+                _lockTarget = closestObject;
+                if (_aggroCoroutine != null)
+                {
+                    StopCoroutine(_aggroCoroutine);
+                    _isAggroTimeoutActive = false;
+                }
+            }
 
             _destPos = _lockTarget.transform.position;
             float distanceAttack = (_destPos - transform.position).magnitude;
@@ -70,29 +81,18 @@ public class MonsterController : BaseController
                 State = Define.State.Skill;
                 return;
             }
+            else if (closestObject == rocket && !_isAggroTimeoutActive)
+            {
+                // 타겟이 사정거리 밖으로 나갔을 때 어그로 해제 타이머 작동
+                _aggroCoroutine = StartCoroutine(AggroTimeout());
+            }
         }
 
         // 이동
         Vector3 dir = _destPos - transform.position;
 
         // 코루틴을 사용하여 딜레이를 줌
-        if (_lockTarget != rocket)
-        {
-            
-            if (dir.magnitude > _stat.ScanRange)
-            {
-                if (_aggroCoroutine != null)
-                {
-                    StopCoroutine(_aggroCoroutine);
-                    _aggroCoroutine = null;
-                }
-                else
-                {
-                    _aggroCoroutine = StartCoroutine(AggroLossDelay());
-                }
-            }
-
-        }
+        
 
         if (_lockTarget != null)
         {
@@ -128,8 +128,8 @@ public class MonsterController : BaseController
                 float distance = Vector3.Distance(transform.position, collider.transform.position);
                 if (distance < closestDistance)
                 {
-                    closestObject = collider.gameObject;
                     closestDistance = distance;
+                    closestObject = collider.gameObject;
                 }
             }
         }
@@ -137,17 +137,20 @@ public class MonsterController : BaseController
         return closestObject;
     }
 
-    // 어그로 타임 3초 코루틴
-    IEnumerator AggroLossDelay()
+    // 어그로 타이머 코루틴
+    private IEnumerator AggroTimeout()
     {
-        yield return new WaitForSeconds(aggroLossDelay);
+        _isAggroTimeoutActive = true;
+        yield return new WaitForSeconds(3.0f);
         _lockTarget = rocket;
+        _isAggroTimeoutActive = false;
     }
 
     void OnHitEvent()
     {
         if (_lockTarget != null)
         {
+           
             // 체력
             Stat targetStat = _lockTarget.GetComponent<Stat>();
             targetStat.OnAttacked(_stat);
