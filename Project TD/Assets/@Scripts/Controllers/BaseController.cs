@@ -39,6 +39,10 @@ public abstract class BaseController : MonoBehaviour
                 case Define.State.Skill:
                     anim.CrossFade("ATTACK", 0.1f, -1, 0);
                     break;
+                case Define.State.Stun:
+                    anim.CrossFade("STUN", 0.1f);
+                    break;
+
             }
         }
     }
@@ -64,6 +68,9 @@ public abstract class BaseController : MonoBehaviour
             case Define.State.Skill:
                 UpdateSkill();
                 break;
+            case Define.State.Stun:
+                UpdateStun();
+                break;
         }
 
         UpdateTimers();
@@ -80,4 +87,5 @@ public abstract class BaseController : MonoBehaviour
     protected virtual void UpdateMoving() { }
     protected virtual void UpdateIdle() { }
     protected virtual void UpdateSkill() { }
+    protected virtual void UpdateStun() { }
 }

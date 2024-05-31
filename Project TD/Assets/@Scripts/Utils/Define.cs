@@ -45,6 +45,7 @@ public class Define
 		Moving,
 		Idle,
 		Skill,
+        Stun,
 	}
 
     public enum Layer
