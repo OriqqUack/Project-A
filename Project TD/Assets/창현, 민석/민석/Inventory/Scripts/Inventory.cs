@@ -74,11 +74,11 @@ namespace Rito.InventorySystem
 
         // 초기 수용 한도
         [SerializeField, Range(8, 64)]
-        private int _initalCapacity = 32;
+        private int _initalCapacity;
 
         // 최대 수용 한도(아이템 배열 크기)
         [SerializeField, Range(8, 64)]
-        private int _maxCapacity = 64;
+        private int _maxCapacity;
 
         [SerializeField]
         private InventoryUI _inventoryUI; // 연결된 인벤토리 UI

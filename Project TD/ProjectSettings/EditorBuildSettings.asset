@@ -11,4 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/\uCC3D\uD604, \uBBFC\uC11D/\uCC3D\uD604/GridTestScene.unity"
     guid: 99c9720ab356a0642a771bea13969a05
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 364a514af045e6840a3f370f1c680c30,
+      type: 2}

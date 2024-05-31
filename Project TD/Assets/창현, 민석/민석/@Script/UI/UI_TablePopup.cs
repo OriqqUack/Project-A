@@ -4,7 +4,6 @@ using UnityEngine;
 using Rito;
 public class UI_TablePopup : UI_Base
 {
-
     public void Setting()
     {
         Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Tablet");
@@ -22,13 +21,11 @@ public class UI_TablePopup : UI_Base
     public void Inventory()
     {
         Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Tablet");
-        Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Inventory");
-
+        Define._InvenActive = true;
     }
-
 
     public override void Init()
     {
-        
+
     }
 }

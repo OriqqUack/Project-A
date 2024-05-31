@@ -6,7 +6,7 @@ using UnityEngine;
 public class Define
 {
     public static bool _hasEnerge = false;
-
+    public static bool _InvenActive = false;
     public enum WorldObject
     {
         Unknown,
