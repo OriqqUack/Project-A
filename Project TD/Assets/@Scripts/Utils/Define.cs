@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Define
 {
+    public static bool _hasEnerge = false;
+    public static bool _InvenActive = false;
+
+
     public enum WorldObject
     {
         Unknown,
@@ -69,19 +73,21 @@ public class Define
     public enum Scene
     {
         Unknown,
+        Loading,
         Start,
         Main,
         Login,
         City,
         Lobby,
         Game,
-        Home
+        Home,
+        GridTestScene //삭제 해야함
     }
 
     public enum Sound
     {
-        Bgm,
-        Effect,
+        BGM,
+        SFX,
         MaxCount,
     }
 
@@ -90,6 +96,12 @@ public class Define
         Click,
         DoubleClick,
         Drag,
+    }
+
+    public enum UIText
+    {
+        Energe_Text,
+        Timer_Text
     }
 
     public enum MouseEvent

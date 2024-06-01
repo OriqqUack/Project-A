@@ -9,13 +9,14 @@ public class InGameScene : BaseScene
         base.Init();
 
         Managers.UI.Root.transform.Find("Menu").gameObject.SetActive(false);
-        Managers.Game.Spawn(Define.WorldObject.Monster, "Knight");
+        DataPersistenceManager.instance.LoadGame();
+
         /*base.Init();
 
         SceneType = Define.Scene.Game;
 
         Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
-        gameObject.GetOrAddComponent<CursorController>();
+        
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "UnityChan");
         for (int i = 0; i < 3; i++)
         {

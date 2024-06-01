@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CollectionManager : MonoBehaviour, IDataPersistence
+public class CollectionManager : MonoBehaviour, IGameDataPersistence
 {
     public GameObject collectionEntryPrefab;
     public List<Transform> collectionContent;
@@ -80,8 +80,8 @@ public class CollectionManager : MonoBehaviour, IDataPersistence
     {
         if (collectionEntries == null)
         {
-            collectionEntries = Managers.Data.CollectionDict.Values.ToArray();
-            discovered = new bool[Managers.Data.CollectionDict.Count];
+            /*collectionEntries = Managers.Data.CollectionDict.Values.ToArray();
+            discovered = new bool[Managers.Data.CollectionDict.Count];*/
         }
         else
         {

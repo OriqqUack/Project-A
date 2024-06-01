@@ -9,11 +9,16 @@ public class StartScene : BaseScene
         base.Init();
 
         SceneType = Define.Scene.Start;
+
+    }
+
+    private void Start()
+    {
+        Managers.Sound.Play("StartSceneBGM",Define.Sound.BGM);
     }
 
     public override void Clear()
     {
-        throw new System.NotImplementedException();
     }
 
     

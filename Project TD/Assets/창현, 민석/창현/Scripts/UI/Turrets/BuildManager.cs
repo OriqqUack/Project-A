@@ -95,13 +95,13 @@ public class BuildManager : MonoBehaviour
 
 		hexTileNeighboursDict.Add(hexCoordinates, new List<Vector3Int>());
 
-		foreach (Vector3Int direction in Direction.GetDirectionList(hexCoordinates.z))
+		/*foreach (Vector3Int direction in Direction.GetDirectionList(hexCoordinates.z))
 		{
 			if (hexTileDict.ContainsKey(hexCoordinates + direction))
 			{
 				hexTileNeighboursDict[hexCoordinates].Add(hexCoordinates + direction);
 			}
-		}
+		}*/
 		return hexTileNeighboursDict[hexCoordinates];
 	}
 

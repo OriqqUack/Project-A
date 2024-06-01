@@ -1,0 +1,115 @@
+{
+  "monsters": [
+    {
+      "monsterName": "Monster1",
+      "level": "1",
+      "maxHp": "100",
+      "attack": "10",
+      "moveSpeed": "2.0f",
+      "attackSpeed": "1.0f",
+      "scanRange": "10.0f",
+      "attackRange": "1.0f"
+
+    },
+    {
+      "monsterName": "Monster2",
+      "level": "1",
+      "maxHp": "200",
+      "attack": "20",
+      "moveSpeed": "1.0f",
+      "attackSpeed": "0.8f",
+      "scanRange": "10.0f",
+      "attackRange": "1.5f"
+    },
+    {
+      "monsterName": "Monster3",
+      "level": "1",
+      "maxHp": "200",
+      "attack": "20",
+      "moveSpeed": "1.0f",
+      "attackSpeed": "0.8f",
+      "scanRange": "10.0f",
+      "attackRange": "1.5f"
+    },
+    {
+      "monsterName": "Monster4",
+      "level": "1",
+      "maxHp": "200",
+      "attack": "20",
+      "moveSpeed": "1.0f",
+      "attackSpeed": "0.8f",
+      "scanRange": "10.0f",
+      "attackRange": "1.5f"
+    },
+    {
+      "monsterName": "Monster5",
+      "level": "1",
+      "maxHp": "200",
+      "attack": "20",
+      "moveSpeed": "1.0f",
+      "attackSpeed": "0.8f",
+      "scanRange": "10.0f",
+      "attackRange": "1.5f"
+    },
+    {
+      "monsterName": "Monster6",
+      "level": "1",
+      "maxHp": "200",
+      "attack": "20",
+      "moveSpeed": "1.0f",
+      "attackSpeed": "0.8f",
+      "scanRange": "10.0f",
+      "attackRange": "1.5f"
+    },
+    {
+      "monsterName": "Monster7",
+      "level": "1",
+      "maxHp": "200",
+      "attack": "20",
+      "moveSpeed": "1.0f",
+      "attackSpeed": "0.8f",
+      "scanRange": "10.0f",
+      "attackRange": "1.5f"
+    },
+    {
+      "monsterName": "Monster8",
+      "level": "1",
+      "maxHp": "200",
+      "attack": "20",
+      "moveSpeed": "1.0f",
+      "attackSpeed": "0.8f",
+      "scanRange": "10.0f",
+      "attackRange": "1.5f"
+    },
+    {
+      "monsterName": "Monster9",
+      "level": "1",
+      "maxHp": "200",
+      "attack": "20",
+      "moveSpeed": "1.0f",
+      "attackSpeed": "0.8f",
+      "scanRange": "10.0f",
+      "attackRange": "1.5f"
+    },
+    {
+      "monsterName": "Monster10",
+      "level": "1",
+      "maxHp": "200",
+      "attack": "20",
+      "moveSpeed": "1.0f",
+      "attackSpeed": "0.8f",
+      "scanRange": "10.0f",
+      "attackRange": "1.5f"
+    },
+    {
+      "monsterName": "Monster11",
+      "level": "1",
+      "maxHp": "200",
+      "attack": "20",
+      "moveSpeed": "1.0f",
+      "attackSpeed": "0.8f",
+      "scanRange": "10.0f",
+      "attackRange": "1.5f"
+    }
+  ]
+}

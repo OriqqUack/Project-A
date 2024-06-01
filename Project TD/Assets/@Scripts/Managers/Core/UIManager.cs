@@ -17,48 +17,44 @@ public class UIManager
         set { _popupStack = value; }
     }
 
+    public Stack<Transform> PopupUIStack
+    {
+        get { return _popupUIStack; }
+        set { }
+    }
+
     public GameObject Root
     {
         get
         {
 			GameObject root = GameObject.Find("@UI_Root");
 			if (root == null)
-				root = new GameObject { name = "@UI_Root" };
+            {
+                root = new GameObject { name = "@UI_Root" };
+            }
             return root;
 		}
     }
 
-    #region TurnOn/Off
-    public void ShowUI(string name)
-    {
-        Transform ui = Root.transform.Find(name);
-
-        if (ui.gameObject.activeSelf)
-        {
-            CloseUI();
-            return;
-        }
-
-        _popupUIStack.Push(ui);
-        ui.gameObject.SetActive(true);
-    }
-
-    public void CloseUI()
-    {
-        Transform ui = _popupUIStack.Pop();
-        ui.gameObject.SetActive(false);
-    }
-
-    public void CloseAllUI()
-    {
-        while (_popupUIStack.Count > 0)
-            CloseUI();
-    }
-    #endregion
-
     public void SetCanvas(GameObject go, bool sort = true)
     {
-        Canvas canvas = Util.GetOrAddComponent<Canvas>(go);
+        Canvas canvas;
+        canvas = go.GetComponent<Canvas>();
+        if (canvas != null)
+        {
+            if (sort)
+            {
+                canvas.sortingOrder = _order;
+                _order++;
+            }
+            else
+            {
+                canvas.sortingOrder = 0;
+            }
+            return;
+        }
+        
+        canvas = Util.GetOrAddComponent<Canvas>(go);
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.overrideSorting = true;
 
@@ -159,8 +155,7 @@ public class UIManager
             return;
 
         UI_Popup popup = _popupStack.Pop();
-        //Managers.Resource.Destroy(popup.gameObject);
-        popup.gameObject.SetActive(false);
+        Managers.Resource.Destroy(popup.gameObject);
         popup = null;
         _order--;
     }
