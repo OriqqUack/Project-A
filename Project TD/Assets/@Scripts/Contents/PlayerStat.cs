@@ -12,7 +12,7 @@ public class PlayerStat : Stat, IGameDataPersistence
 	[SerializeField]
 	protected int _totalExp;
 	[SerializeField]
-	protected int _gold;
+	protected int _energe;
 	[SerializeField]
 	protected int _luck;
 
@@ -30,9 +30,6 @@ public class PlayerStat : Stat, IGameDataPersistence
 
 			while (true)
 			{
-				Data.Stat stat;
-				if (Managers.Data.StatDict.TryGetValue(_level, out stat) == false)
-					break;
 				if (_exp < _totalExp)
 					break;
 				Level++;
@@ -43,7 +40,7 @@ public class PlayerStat : Stat, IGameDataPersistence
 		}
 	}
 
-	public int Gold { get { return _gold; } set { _gold = value; } }
+	public int Energe { get { return _energe; } set { _energe = value; } }
 
 	public int TotalExp { get { return _totalExp; } set { _totalExp = value; } }
 
@@ -65,12 +62,10 @@ public class PlayerStat : Stat, IGameDataPersistence
 
     public void SetStat(int level)
 	{
-		Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
-		Data.Stat stat = dict[level];
-		Hp = stat.maxHp;
+		/*Hp = stat.maxHp;
 		MaxHp = stat.maxHp;
 		Attack = stat.attack;
-		TotalExp = stat.totalExp;
+		TotalExp = stat.totalExp;*/
 	}
 
 	protected override void OnDead(Stat attacker)
@@ -92,7 +87,7 @@ public class PlayerStat : Stat, IGameDataPersistence
 		Debug.Log($"EXP : { data._exp}");
 		Debug.Log($"TotalEXP : { data._totalExp}");
 
-		this.Gold = data._gold;
+		this._energe = data._energe;
 		this.Luck = data._luck;
 
 		this.Defense = data._defense;
@@ -112,7 +107,7 @@ public class PlayerStat : Stat, IGameDataPersistence
 		data._attack = this._attack;
 		data._exp = this._exp;
 		data._totalExp = this._totalExp;
-		data._gold = this._gold;
+		data._energe = this._energe;
 		data._luck = this._luck;
 
 		data._defense = this._defense;

@@ -6,6 +6,8 @@ using UnityEngine;
 public class CharacterManager
 {
     public Dictionary<string, Character> _characters;
+    public RocketStat _rocketStat;
+
     public int[] _levelUpXpTable = new int[10]
     {
         100, 200, 300, 400, 500, 600, 700, 800, 900, 1000
@@ -23,8 +25,10 @@ public class CharacterManager
             { "Miner", new Character("Miner") },
             { "Researcher", new Character("Researcher") },
         };
-    }
 
+        _rocketStat = new RocketStat();
+    }
+    #region CharacterStat
     public void IncreaseCharacterStat(string characterName, string statName, float amount)
     {
         if (_characters.ContainsKey(characterName))
@@ -37,12 +41,12 @@ public class CharacterManager
         }
     }
 
-    public void IncreaseCharacterExp(string characterName, float amount)
+    public void IncreaseCharacterExp(string characterName, float amount) // NowExp
     {
         if (_characters.ContainsKey(characterName))
         {
             _characters[characterName].IncreaseExp(amount);
-            IsLevelUp(characterName);
+            IsCharacterLevelUp(characterName);
         }
         else
         {
@@ -86,7 +90,7 @@ public class CharacterManager
         }
     }
 
-    public void IsLevelUp(string characterName)
+    public void IsCharacterLevelUp(string characterName)
     {
         int index = (int)Managers.Character.GetCharacterStatValue(characterName, "Level");
         bool isLevelUp = GetCharacterNowExp(characterName) >= _levelUpXpTable[index-1];
@@ -97,6 +101,37 @@ public class CharacterManager
             _characters[characterName].IncreaseStat("StatPoint", 1);
         }
     }
+    #endregion
+
+    #region RocketStat
+    public void IncreaseRocketStat(string statName, float amount)
+    {
+        _rocketStat.IncreaseStat(statName, amount);
+        IsRocketLevelUp();
+    }
+
+    public void RemoveRocketStat(string statName, float amount)
+    {
+        _rocketStat.RemoveStat(statName, amount);
+    }
+
+    public float GetRocketStat(string statName)
+    {
+        return _rocketStat.GetStatValue(statName);
+    }
+
+    public void IsRocketLevelUp()
+    {
+        int index = (int)Managers.Character.GetRocketStat("Level");
+        bool isLevelUp = GetRocketStat("EXP") >= _levelUpXpTable[index - 1];
+        if (isLevelUp)
+        {
+            _rocketStat.RemoveStat("EXP",_levelUpXpTable[index - 1]);
+            _rocketStat.IncreaseStat("Level", 1);
+            _rocketStat.IncreaseStat("StatPoint", 1);
+        }
+    }
+    #endregion
 
     public void LoadData(GameData data)
     {
@@ -105,11 +140,13 @@ public class CharacterManager
             Debug.Log("Data is null");
             return;
         }
+        Managers.Character._rocketStat = data.RocketStat;
         Managers.Character._characters = data.Characters;
     }
 
     public void SaveData(ref GameData data)
     {
         data.Characters = Managers.Character._characters;
+        data.RocketStat = Managers.Character._rocketStat;
     }
 }

@@ -80,8 +80,8 @@ public class CollectionManager : MonoBehaviour, IGameDataPersistence
     {
         if (collectionEntries == null)
         {
-            collectionEntries = Managers.Data.CollectionDict.Values.ToArray();
-            discovered = new bool[Managers.Data.CollectionDict.Count];
+            /*collectionEntries = Managers.Data.CollectionDict.Values.ToArray();
+            discovered = new bool[Managers.Data.CollectionDict.Count];*/
         }
         else
         {

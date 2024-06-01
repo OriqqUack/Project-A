@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Define
 {
+    public static bool _hasEnerge = false;
+    public static bool _InvenActive = false;
+
+
     public enum WorldObject
     {
         Unknown,
@@ -92,6 +96,12 @@ public class Define
         Click,
         DoubleClick,
         Drag,
+    }
+
+    public enum UIText
+    {
+        Energe_Text,
+        Timer_Text
     }
 
     public enum MouseEvent

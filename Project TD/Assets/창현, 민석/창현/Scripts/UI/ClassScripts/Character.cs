@@ -19,7 +19,7 @@ public class Character
         {
             { "Level", new Level(1)},
             { "StatPoint", new StatPoint(0) },
-            { "Health", new Health(0) },
+            { "Health", new ClassHealth(0) },
             { "Speed", new Speed(0) },
             { "Attack", new AttackStat(0) },
             { "AttackSpeed", new AttackSpeed(0) },

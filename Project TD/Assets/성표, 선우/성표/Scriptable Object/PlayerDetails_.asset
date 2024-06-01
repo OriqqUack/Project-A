@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fa59cd22c28d7f4e89630af6ea8b70e, type: 3}
+  m_Name: PlayerDetails_
+  m_EditorClassIdentifier: 
+  playerCharacterName: 1
+  playerPrefab: {fileID: 7041573327769232310, guid: 536d3f532501ea64fade168a9945406c,
+    type: 3}
+  runtimeAnimatorController: {fileID: 22100000, guid: 7b3b034a6e099a642990097e756d2555,
+    type: 2}
+  playerHealthAmount: 100

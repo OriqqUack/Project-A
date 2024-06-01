@@ -44,6 +44,7 @@ public class UI_StatControl : UI_Base
     {
         NeedResValue,
         HadPointsValue,
+        HadResourceValue,
         NowResValue,
         LevelTxt
     }

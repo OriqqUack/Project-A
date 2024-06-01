@@ -9,7 +9,7 @@ public class GameData
     public string _job;
     public int _level;
     public int _hp;
-    public int _gold;
+    public int _energe;
     public int _luck;
 
     public int _exp;
@@ -28,6 +28,7 @@ public class GameData
     public float _dashingCooldown;
 
     public Dictionary<string, Character> Characters { get; set; }
+    public RocketStat RocketStat { get; set; }
     #endregion
 
     #region 도감
@@ -41,7 +42,7 @@ public class GameData
         this._name = "";
         this._job = "Normal";
         this._level = 1;
-        this._gold = 0;
+        this._energe = 0;
 
         this._moveSpeed = 5.0f;
         this._dashingPower = 10.0f;
@@ -60,6 +61,8 @@ public class GameData
             { "Miner", new Character("Miner") },
             { "Researcher", new Character("Researcher") },
         };
+
+        RocketStat = new RocketStat();
         #endregion
 
         #region 도감

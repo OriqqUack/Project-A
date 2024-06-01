@@ -88,15 +88,5 @@ public class MyAction : MonoBehaviour
 
     void OnKeyboard()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            Managers.UI.ShowUI("Menu");
-            Managers.Input.lastKey = "I";
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            Managers.UI.ShowUI("Menu");
-            Managers.Input.lastKey = "B";
-        }
     }
 }

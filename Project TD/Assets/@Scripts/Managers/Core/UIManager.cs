@@ -36,34 +36,6 @@ public class UIManager
 		}
     }
 
-    #region TurnOn/Off
-    public void ShowUI(string name)
-    {
-        Transform ui = Root.transform.Find(name);
-
-        if (ui.gameObject.activeSelf)
-        {
-            CloseUI();
-            return;
-        }
-
-        _popupUIStack.Push(ui);
-        ui.gameObject.SetActive(true);
-    }
-
-    public void CloseUI()
-    {
-        Transform ui = _popupUIStack.Pop();
-        ui.gameObject.SetActive(false);
-    }
-
-    public void CloseAllUI()
-    {
-        while (_popupUIStack.Count > 0)
-            CloseUI();
-    }
-    #endregion
-
     public void SetCanvas(GameObject go, bool sort = true)
     {
         Canvas canvas;

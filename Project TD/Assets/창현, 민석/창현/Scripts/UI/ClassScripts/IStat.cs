@@ -4,7 +4,6 @@ public interface IStat
 {
     void Increase(float amount);
     void Remove(float amount);
-
     float GetValue();
 }
 
@@ -64,12 +63,12 @@ public class StatPoint : IStat
 
 
 [JsonObject(MemberSerialization.OptIn)]
-public class Health : IStat
+public class ClassHealth : IStat
 {
     [JsonProperty]
     private float _healthValue;
 
-    public Health(float value)
+    public ClassHealth(float value)
     {
         this._healthValue = value;
     }
