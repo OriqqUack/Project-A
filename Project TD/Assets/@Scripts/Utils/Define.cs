@@ -9,34 +9,7 @@ public class Define
         Unknown,
         Player,
         Monster,
-    }
-
-    public enum Players
-    {
-        Unknown,
-        Normal,
-        Knight,
-        Gunner,
-        Miner,
-        Engineer,
-        Researcher,
-        Medic
-    }
-
-    public enum Monsters
-    {
-        Unknown,
-        Monster1,
-        Monster2,
-        Monster3,
-        Monster4,
-        Monster5,
-        Monster6,
-        Monster7,
-        Monster8,
-        Monster9,
-        Monster10
-
+        Tower,
     }
 
     public enum State

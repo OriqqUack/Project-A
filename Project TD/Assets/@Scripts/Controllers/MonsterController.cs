@@ -11,8 +11,6 @@ public class MonsterController : BaseController
     [SerializeField]
     protected MonsterStat _stat;
 
-    public Define.Monsters MonsterType { get; protected set; } = Define.Monsters.Unknown; // Despawn 하기위해
-
     GameObject player;
     GameObject rocket;
 
@@ -29,7 +27,7 @@ public class MonsterController : BaseController
 
     public override void Init()
     {
-        MonsterType = Define.Monsters.Unknown; // 고쳐야함
+        WorldObjectType = Define.WorldObject.Monster;
 
         rocket = GameObject.Find("rocket");
         _stat = gameObject.GetComponent<MonsterStat>();

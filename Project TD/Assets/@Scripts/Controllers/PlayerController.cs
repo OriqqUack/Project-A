@@ -14,11 +14,10 @@ public class PlayerController : BaseController
 	PlayerStat _stat;
 	bool _stopSkill = false;
 
-    public Define.Players PlayerType { get; protected set; } = Define.Players.Unknown; // Despawn 하기위해
 
     public override void Init()
     {
-        PlayerType = Define.Players.Normal; // 고처야함
+        WorldObjectType = Define.WorldObject.Player;
 		_stat = gameObject.GetComponent<PlayerStat>();
 		Managers.Input.KeyAction -= OnKeyboard;
 		Managers.Input.KeyAction += OnKeyboard;

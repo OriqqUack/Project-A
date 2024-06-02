@@ -12,13 +12,12 @@ public class GameScene : BaseScene
         //Managers.UI.ShowSceneUI<UI_Inven>();
         Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
         Dictionary<string, Data.MonsterStat> dict2 = Managers.Data.MonsterDict;
-
         gameObject.GetOrAddComponent<CursorController>();
 
-        GameObject player = Managers.Game.PlayerSpawn(Define.Players.Normal, "character");
+        GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "character");
         Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);
 
-        Managers.Game.MonsterSpawn(Define.Monsters.Monster1, "Knight");
+        Managers.Game.Spawn(Define.WorldObject.Monster, "Monsters/Knight");
         GameObject go = new GameObject { name = "SpawningPool" };
         SpawningPool pool = go.GetOrAddComponent<SpawningPool>();
         pool.SetKeepMonsterCount(2);

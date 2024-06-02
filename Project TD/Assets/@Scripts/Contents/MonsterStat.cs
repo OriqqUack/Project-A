@@ -5,13 +5,6 @@ using UnityEngine;
 
 public class MonsterStat : Stat
 {
-    private string objectTag;
-
-    public void SetGameObjectTag(GameObject go)
-    {
-        objectTag = go.tag;
-    }
-
     [SerializeField]
     protected string _monsterName;
     //[SerializeField]
@@ -48,9 +41,7 @@ public class MonsterStat : Stat
 
     void Start()
     {
-
-        SetGameObjectTag(gameObject);
-        SetStat(objectTag);
+        SetStat(MonsterName);
     }
 
 

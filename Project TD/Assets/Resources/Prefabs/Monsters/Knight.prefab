@@ -337,7 +337,7 @@ MonoBehaviour:
   _attack: 0
   _defense: 0
   _moveSpeed: 0
-  _monsterName: 
+  _monsterName: Monster3
   _attackSpeed: 0
   _scanRange: 0
   _attackRange: 0

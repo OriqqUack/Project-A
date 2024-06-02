@@ -8,7 +8,7 @@ public class SummonerController : MonsterController
 
     public void OnSummonEvent() // 애니메이터 이벤트에 넣을 계획
     {
-        GameObject obj = Managers.Game.MonsterSpawn(Define.Monsters.Monster3, "Knight");
+        GameObject obj = Managers.Game.Spawn(Define.WorldObject.Monster, "Knight");
 
         Transform spawnPoint = gameObject.transform;
 
