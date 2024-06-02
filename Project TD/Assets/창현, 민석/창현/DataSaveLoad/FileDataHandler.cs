@@ -160,7 +160,7 @@ public class IStatConverter : JsonConverter
         type = type.Replace(", Assembly-CSharp","");
         switch (type)
         {
-            case "Health":
+            case "ClassHealth":
                 Debug.Log(obj["_healthValue"]);
                 float healthValue = obj["_healthValue"]?.ToObject<float>() ?? 0;
                 stat = new ClassHealth(healthValue);

@@ -578,6 +578,10 @@ namespace Rito.InventorySystem
             _inventoryUI.UpdateAllSlotFilters(); // 필터 상태 업데이트
         }
 
+        public int ItemCount(ItemData item)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }
