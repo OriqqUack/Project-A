@@ -175,8 +175,8 @@ namespace Rito.InventorySystem
             _slotUiPrefab.SetActive(false);
 
             // --
-            Vector2 beginPos = new Vector2(_contentAreaPadding, -_contentAreaPadding);
-            Vector2 curPos = beginPos;
+            //Vector2 beginPos = new Vector2(_contentAreaPadding, -_contentAreaPadding);
+            //Vector2 curPos = beginPos;
 
             _slotUIList = new List<ItemSlotUI>(_verticalSlotCount * _horizontalSlotCount);
 
@@ -188,8 +188,8 @@ namespace Rito.InventorySystem
                     int slotIndex = (_horizontalSlotCount * j) + i;
 
                     var slotRT = CloneSlot();
-                    slotRT.pivot = new Vector2(0f, 1f); // Left Top
-                    slotRT.anchoredPosition = curPos;
+                    //slotRT.pivot = new Vector2(0f, 1f); // Left Top
+                    //slotRT.anchoredPosition = curPos;
                     slotRT.gameObject.SetActive(true);
                     slotRT.gameObject.name = $"Item Slot [{slotIndex}]";
 
@@ -198,12 +198,12 @@ namespace Rito.InventorySystem
                     _slotUIList.Add(slotUI);
 
                     // Next X
-                    curPos.x += (_slotMargin + _slotSize);
+                    //curPos.x += (_slotMargin + _slotSize);
                 }
 
                 // Next Line
-                curPos.x = beginPos.x;
-                curPos.y -= (_slotMargin + _slotSize);
+                //curPos.x = beginPos.x;
+                //curPos.y -= (_slotMargin + _slotSize);
             }
 
             // 슬롯 프리팹 - 프리팹이 아닌 경우 파괴
