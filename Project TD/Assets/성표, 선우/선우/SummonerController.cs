@@ -5,18 +5,36 @@ using UnityEngine.AI;
 
 public class SummonerController : MonsterController
 {
+    [SerializeField]
+    private GameObject suicideBomberPrefab; // 자폭병 프리팹을 넣어야함
+    private List<GameObject> summonedBombers = new List<GameObject>();
+    private int maxBombers = 3;
 
-    public void OnSummonEvent() // 애니메이터 이벤트에 넣을 계획
+    public override void Init()
     {
-        GameObject obj = Managers.Game.Spawn(Define.WorldObject.Monster, "Knight");
+        base.Init();
+        // 추가 초기화 코드가 필요하면 여기에 작성
+    }
 
-        Transform spawnPoint = gameObject.transform;
+    protected override void UpdateSkill()
+    {
+        base.UpdateSkill();
+        // 스킬 사용 중일 때 자폭병 소환 로직
+        if (summonedBombers.Count < maxBombers)
+        {
+            StartCoroutine(SummonBomber());
+        }
+    }
 
-        Vector3 randomOffset = Random.insideUnitSphere * Random.Range(0, _stat.AttackRange);
-        randomOffset.y = 0f;
+    private IEnumerator SummonBomber()
+    {
+        // 자폭병 소환
+        GameObject bomber = Instantiate(suicideBomberPrefab, transform.position + transform.forward * 2, Quaternion.identity);
+        summonedBombers.Add(bomber);
 
-        Vector3 spawnPosition = spawnPoint.position + randomOffset;
+        // 자폭병이 소멸될 때 리스트에서 제거
+        bomber.GetComponent<SuicideBomberController>().OnDespawn += () => summonedBombers.Remove(bomber);
 
-        obj.transform.position = spawnPosition;
+        yield return null;
     }
 }

@@ -24,6 +24,9 @@ public class MonsterController : BaseController
     protected float _stunDuration = 3.0f; // 경직 지속 시간
     protected Coroutine _stunCoroutine; // 경직 상태 코루틴
 
+    [SerializeField]
+    private LayerMask targetLayerMask; // 감지할 타깃 레이어 마스크 (직접 설정해서 해야함, 레이어마스크 아직 미설정)
+
     protected NavMeshAgent _navMeshAgent;
 
     public override void Init()
@@ -147,20 +150,17 @@ public class MonsterController : BaseController
     // ScanRange안에 있는 애들을 감지하는 메서드
     public GameObject FindClosestObject(string[] tags)
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _stat.ScanRange);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _stat.ScanRange, targetLayerMask);
         GameObject closestObject = rocket;
         float closestDistance = Mathf.Infinity;
 
         foreach (var collider in colliders)
         {
-            if (Array.Exists(tags, tag => collider.CompareTag(tag)))
+            float distance = Vector3.Distance(transform.position, collider.transform.position);
+            if (distance < closestDistance)
             {
-                float distance = Vector3.Distance(transform.position, collider.transform.position);
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    closestObject = collider.gameObject;
-                }
+                closestDistance = distance;
+                closestObject = collider.gameObject;
             }
         }
 
