@@ -14,16 +14,17 @@ public class MonsterController : BaseController
     GameObject player;
     GameObject rocket;
 
-    private Coroutine _aggroCoroutine; // 어그로 해제 코루틴
-    private float _aggroDuration = 3.0f; // 어그로 지속 시간
-    private bool _isAggroTimeoutActive = false; // 어그로 타임아웃 활성화 여부
+    protected Coroutine _aggroCoroutine; // 어그로 해제 코루틴
+    protected float _aggroDuration = 3.0f; // 어그로 지속 시간
+    protected bool _isAggroTimeoutActive = false; // 어그로 타임아웃 활성화 여부
 
-    private bool _isStunning = false; // 경직 상태걸렸었는지 여부
-    private bool _isStunned = false; // 경직중인지 여부
-    private float _stunDuration = 3.0f; // 경직 지속 시간
-    private Coroutine _stunCoroutine; // 경직 상태 코루틴
+    protected int stunCount = 0; // 경직 횟수를 축적
+    protected int maxStunCount = 1; // 최대 경직 횟수
+    protected bool _isStunning = false; // 경직중인지 여부
+    protected float _stunDuration = 3.0f; // 경직 지속 시간
+    protected Coroutine _stunCoroutine; // 경직 상태 코루틴
 
-    private NavMeshAgent _navMeshAgent;
+    protected NavMeshAgent _navMeshAgent;
 
     public override void Init()
     {
@@ -177,16 +178,16 @@ public class MonsterController : BaseController
 
     // 경직 상태 코루틴(한번만 걸리면 true로 바뀌어서 안걸림)
     // 스턴중일때 false였다가 코루틴이 끝나면 true로 바뀌는 변수가 필요 = _isStunning.
-    private IEnumerator Stun()
+    protected virtual IEnumerator Stun()
     {
+        stunCount++; // 경직 횟수 증가
         _isStunning = true;
-        _isStunned = true;
         yield return new WaitForSeconds(_stunDuration);
         _isStunning = false;
     }
 
     // HitEvent를 통해 경직 상태를 체크하고 적용
-    void OnHitEvent()
+    protected virtual void OnHitEvent()
     {
         if (_lockTarget != null)
         {
@@ -203,7 +204,7 @@ public class MonsterController : BaseController
                     State = Define.State.Moving;
 
                 // 경직 상태 체크 및 적용
-                if (_stat.Hp <= _stat.MaxHp / 3 && !_isStunned)
+                if (_stat.Hp <= _stat.MaxHp / 3 && stunCount < maxStunCount && !_isStunning)
                 {
                     if (_stunCoroutine != null)
                         StopCoroutine(_stunCoroutine);
