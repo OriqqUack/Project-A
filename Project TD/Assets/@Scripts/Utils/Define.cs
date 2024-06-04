@@ -4,22 +4,63 @@ using UnityEngine;
 
 public class Define
 {
+    public static bool _hasEnerge = false;
+    public static bool _InvenActive = false;
+
+
     public enum WorldObject
     {
         Unknown,
         Player,
         Monster,
         Tower,
+        TP,
         Box,
+        Roket,
         Npc
     }
+    public enum ObjectNumber
+    {
+        Box = 1,
+        Npc = 5,
+        TP = 3,
+    }
+    public enum Players
+    {
+        Unknown,
+        Normal,
+        Knight,
+        Gunner,
+        Miner,
+        Engineer,
+        Researcher,
+        Medic
+    }
 
-	public enum State
+    public enum Monsters
+    {
+        Unknown,
+        Monster1,
+        Monster2,
+        Monster3,
+        Monster4,
+        Monster5,
+        Monster6,
+        Monster7,
+        Monster8,
+        Monster9,
+        Monster10
+    }
+
+    public enum State
 	{
 		Die,
 		Moving,
 		Idle,
-		Skill,
+        Jump,
+        FallDown,
+		Attack,
+        Skill,
 	}
 
     public enum Layer
@@ -32,18 +73,21 @@ public class Define
     public enum Scene
     {
         Unknown,
+        Loading,
         Start,
         Main,
         Login,
+        City,
         Lobby,
         Game,
-        Home
+        Home,
+        GridTestScene //삭제 해야함
     }
 
     public enum Sound
     {
-        Bgm,
-        Effect,
+        BGM,
+        SFX,
         MaxCount,
     }
 
@@ -52,6 +96,12 @@ public class Define
         Click,
         DoubleClick,
         Drag,
+    }
+
+    public enum UIText
+    {
+        Energe_Text,
+        Timer_Text
     }
 
     public enum MouseEvent
@@ -82,5 +132,11 @@ public class Define
         MovePress,
         MoveDown,
         MoveUp,
+    }
+
+    public enum Tile
+    {
+        Ground,
+        HexTile
     }
 }

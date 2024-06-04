@@ -12,18 +12,19 @@ public class Shop : MonoBehaviour {
 
     private void Start()
     {
-		Managers.Build.SetWall(wall);
+		BuildManager.Instance.SetWall(wall);
     }
 
     public void SelectStandardTurret ()
 	{
-		Managers.Build.SelectTurretToBuild(standardTurret);
-		//Managers.Build._currentHex.BuildTurret(standardTurret);
+		BuildManager.Instance.canBuild = true;
+		BuildManager.Instance.SelectTurretToBuild(standardTurret);
+		//BuildManager.Instance._currentHex.BuildTurret(standardTurret);
 		toolTip.SetupTooltip(standardTurret.prefab.name, standardTurret.description);
 
-		/*foreach (Vector3Int neighbour in Managers.Build._currentHex.neighbours)
+		/*foreach (Vector3Int neighbour in BuildManager.Instance._currentHex.neighbours)
 		{
-			Managers.Build.GetTileAt(neighbour).BuildWall(wall);
+			BuildManager.Instance.GetTileAt(neighbour).BuildWall(wall);
 		}*/
 	}
 

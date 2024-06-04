@@ -1,22 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class MonsterController : BaseController
 {
-	Stat _stat;
-
 	[SerializeField]
-	float _scanRange = 10;
+	protected MonsterStat _stat;
 
-	[SerializeField]
-	float _attackRange = 2;
+	public Define.Monsters MonsterType { get; protected set; } = Define.Monsters.Unknown; // Despawn 하기위해
 
-    public override void Init()
-    {
-		WorldObjectType = Define.WorldObject.Monster;
-		_stat = gameObject.GetComponent<Stat>();
+	public override void Init()
+	{
+		MonsterType = Define.Monsters.Unknown; // 고쳐야함
+
+		_stat = gameObject.GetComponent<MonsterStat>();
 
 		if (gameObject.GetComponentInChildren<UI_HPBar>() == null)
 			Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform);
@@ -29,7 +28,7 @@ public class MonsterController : BaseController
 			return;
 
 		float distance = (player.transform.position - transform.position).magnitude;
-		if (distance <= _scanRange)
+		if (distance <= _stat.ScanRange)
 		{
 			_lockTarget = player;
 			State = Define.State.Moving;
@@ -44,7 +43,7 @@ public class MonsterController : BaseController
 		{
 			_destPos = _lockTarget.transform.position;
 			float distance = (_destPos - transform.position).magnitude;
-			if (distance <= _attackRange)
+			if (distance <= _stat.AttackRange)
 			{
 				NavMeshAgent nma = gameObject.GetOrAddComponent<NavMeshAgent>();
 				nma.SetDestination(transform.position);
@@ -55,8 +54,13 @@ public class MonsterController : BaseController
 
 		// 이동
 		Vector3 dir = _destPos - transform.position;
-		if (dir.magnitude < 0.1f)
+		// 목표물과의 거리가 스캔범위보다 멀어지면 Idle로 상태 변환
+		/* 내비메시의 speed값이 그대로 남아 계속 질질 끌고 오는 버그가 있어 
+		 내비메시의 speed값을 0으로 조정해줌 다른 방법이 있을듯 보임....*/
+		if (dir.magnitude > _stat.ScanRange)
 		{
+			NavMeshAgent nma = gameObject.GetOrAddComponent<NavMeshAgent>();
+			nma.speed = 0f;
 			State = Define.State.Idle;
 		}
 		else
@@ -84,13 +88,13 @@ public class MonsterController : BaseController
 		if (_lockTarget != null)
 		{
 			// 체력
-			Stat targetStat = _lockTarget.GetComponent<Stat>();
+			PlayerStat targetStat = _lockTarget.GetComponent<PlayerStat>();
 			targetStat.OnAttacked(_stat);
 
 			if (targetStat.Hp > 0)
 			{
 				float distance = (_lockTarget.transform.position - transform.position).magnitude;
-				if (distance <= _attackRange)
+				if (distance <= _stat.AttackRange)
 					State = Define.State.Skill;
 				else
 					State = Define.State.Moving;

@@ -21,7 +21,26 @@ public class QuestSystem : MonoBehaviour
     public delegate void QuestCanceledHandler(Quest quest);
     #endregion
 
-    //private static bool isApplicationQuitting;
+    private static QuestSystem instance;
+    private static bool isApplicationQuitting;
+
+    public static QuestSystem Instance
+    {
+        get
+        {
+            if (!isApplicationQuitting && instance == null)
+            {
+                instance = FindObjectOfType<QuestSystem>();
+                if (instance == null)
+                {
+                    instance = new GameObject("Quest System").AddComponent<QuestSystem>();
+                    DontDestroyOnLoad(instance.gameObject);
+                }
+            }
+            return instance;
+        }
+    }
+
 
     private List<Quest> activeQuests = new List<Quest>();
     private List<Quest> completedQuests = new List<Quest>();
@@ -58,9 +77,7 @@ public class QuestSystem : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        Debug.Log("종료");
-        //isApplicationQuitting = true;
-        Save();
+        isApplicationQuitting = true;
     } // 오류나 버그에 의하면 저장이 안됨.
 
     public Quest Register(Quest quest)

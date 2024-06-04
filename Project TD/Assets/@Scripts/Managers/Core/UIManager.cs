@@ -9,20 +9,52 @@ public class UIManager
     Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
     UI_Scene _sceneUI = null;
 
+    Stack<Transform> _popupUIStack = new Stack<Transform>();
+
+    public Stack<UI_Popup> PopupStack
+    {
+        get { return _popupStack; }
+        set { _popupStack = value; }
+    }
+
+    public Stack<Transform> PopupUIStack
+    {
+        get { return _popupUIStack; }
+        set { }
+    }
+
     public GameObject Root
     {
         get
         {
 			GameObject root = GameObject.Find("@UI_Root");
 			if (root == null)
-				root = new GameObject { name = "@UI_Root" };
+            {
+                root = new GameObject { name = "@UI_Root" };
+            }
             return root;
 		}
     }
 
     public void SetCanvas(GameObject go, bool sort = true)
     {
-        Canvas canvas = Util.GetOrAddComponent<Canvas>(go);
+        Canvas canvas;
+        canvas = go.GetComponent<Canvas>();
+        if (canvas != null)
+        {
+            if (sort)
+            {
+                canvas.sortingOrder = _order;
+                _order++;
+            }
+            else
+            {
+                canvas.sortingOrder = 0;
+            }
+            return;
+        }
+        
+        canvas = Util.GetOrAddComponent<Canvas>(go);
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.overrideSorting = true;
 
@@ -79,12 +111,22 @@ public class UIManager
 		return sceneUI;
 	}
 
-	public T ShowPopupUI<T>(string name = null) where T : UI_Popup
+    public T ShowPopupUI<T>(string name = null) where T : UI_Popup
     {
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
         GameObject go = Managers.Resource.Instantiate($"UI/Popup/{name}");
+        T popup = Util.GetOrAddComponent<T>(go);
+        _popupStack.Push(popup);
+
+        go.transform.SetParent(Root.transform);
+
+        return popup;
+    }
+
+    public T ShowPopupUI<T>(GameObject go) where T : UI_Popup
+    {
         T popup = Util.GetOrAddComponent<T>(go);
         _popupStack.Push(popup);
 

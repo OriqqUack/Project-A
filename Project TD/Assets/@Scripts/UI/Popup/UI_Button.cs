@@ -39,7 +39,7 @@ public class UI_Button : UI_Popup
 
         PlayerStat _stat = _player.GetComponent<PlayerStat>();
 
-        GetText((int)Texts.GoldText).text = $"Gold : {_stat.Gold}";
+        //GetText((int)Texts.GoldText).text = $"Gold : {_stat.Gold}";
         //GetButton((int)Buttons.PointButton).gameObject.BindEvent(OnButtonClicked);
 
         // Images을 뽑아오고 GameObject에 집어넣는 과정

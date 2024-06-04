@@ -9,12 +9,10 @@ public class Managers : MonoBehaviour
 
 	#region Contents
 	GameManagerEx _game = new GameManagerEx();
-    BuildManager _build = new BuildManager();
-    QuestSystem _quest = new QuestSystem();
+    CharacterManager _character = new CharacterManager();
 
     public static GameManagerEx Game {  get { return Instance._game; } }
-    public static BuildManager Build { get { return Instance._build; } }
-    public static QuestSystem Quest { get { return Instance._quest; } }
+    public static CharacterManager Character { get { return Instance._character; } }
 	#endregion
 
 	#region Core
@@ -44,6 +42,11 @@ public class Managers : MonoBehaviour
         _input.OnUpdate();
     }
 
+    private void Start()
+    {
+
+    }
+
     static void Init()
     {
         if (s_instance == null)
@@ -61,7 +64,6 @@ public class Managers : MonoBehaviour
             s_instance._data.Init();
             s_instance._pool.Init();
             s_instance._sound.Init();
-            s_instance._build.Init();
         }		
 	}
 

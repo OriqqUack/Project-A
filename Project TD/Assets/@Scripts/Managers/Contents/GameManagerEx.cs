@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class GameManagerEx : SingletonMonoBehaivour<GameManagerEx>
 {
-    #region GameManagerEX
     GameObject _player;
     int _gold;
     //Dictionary<int, GameObject> _players = new Dictionary<int, GameObject>();
     HashSet<GameObject> _monsters = new HashSet<GameObject>();
+    public CharacterManager characterManager;
     public GameObject _currentTower { get; set; }
 
     public Action<int> OnSpawnEvent;
+
+    public Action wasChangedHP;
 
     public GameObject GetPlayer() { return _player; }
     public GameObject GetTower() { return _currentTower; }
 
     public void GetGold(int gold)
     {
-        if(_gold+gold>10000)
+        if (_gold + gold > 10000)
             return;
         _gold += gold;
     }
@@ -35,28 +36,12 @@ public class GameManagerEx : SingletonMonoBehaivour<GameManagerEx>
         _gold -= gold;
     }
 
-    public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
+    public void SetPlayer(GameObject player)
     {
-        GameObject go = Managers.Resource.Instantiate(path, parent);
-
-        switch (type)
-        {
-            case Define.WorldObject.Monster:
-                _monsters.Add(go);
-                if (OnSpawnEvent != null)
-                    OnSpawnEvent.Invoke(1);
-                break;
-            case Define.WorldObject.Player:
-                _player = go;
-                break;
-            case Define.WorldObject.Tower:
-                _currentTower = go;
-                break;
-        }
-        return go;
+        _player = player;
     }
 
-    public GameObject Spawn(Define.WorldObject type, string path, Vector3 position, Quaternion quaternion, Transform parent = null)
+    public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
     {
         GameObject go = Managers.Resource.Instantiate(path, parent);
 
@@ -98,21 +83,20 @@ public class GameManagerEx : SingletonMonoBehaivour<GameManagerEx>
                     {
                         _monsters.Remove(go);
                         if (OnSpawnEvent != null)
-							OnSpawnEvent.Invoke(-1);
-					}   
+                            OnSpawnEvent.Invoke(-1);
+                    }
                 }
                 break;
             case Define.WorldObject.Player:
                 {
-					if (_player == go)
-						_player = null;
-				}
+                    if (_player == go)
+                        _player = null;
+                }
                 break;
         }
 
         Managers.Resource.Destroy(go);
     }
-    #endregion GameManagerEX
 
     [HideInInspector] public GameState gameState;
     [HideInInspector] public float inGameTimer;
@@ -120,7 +104,7 @@ public class GameManagerEx : SingletonMonoBehaivour<GameManagerEx>
     private Player player;
     private float tileTimer;
 
-    private int currentTileIndex=0;
+    private int currentTileIndex = 0;
 
     private void Update()
     {
@@ -135,7 +119,7 @@ public class GameManagerEx : SingletonMonoBehaivour<GameManagerEx>
     protected override void Awake()
     {
         base.Awake();
-        
+
         playerDetails = GameResources.Instance.currentPlayer.playerDetails;
 
         InstantiatePlayer();
@@ -206,7 +190,7 @@ public class GameManagerEx : SingletonMonoBehaivour<GameManagerEx>
             MapBuilder.Instance.tileObjects[currentTileIndex++].SetActive(true);
             tileTimer = UnityEngine.Random.Range(Settings.randomAppearTileTime1, Settings.randomAppearTileTime2);
         }
-        
+
     }
 
     public Player ReturnPlayer()
@@ -214,5 +198,4 @@ public class GameManagerEx : SingletonMonoBehaivour<GameManagerEx>
         return player;
     }
 
-    
 }

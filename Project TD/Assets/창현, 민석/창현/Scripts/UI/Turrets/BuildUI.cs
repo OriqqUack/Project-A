@@ -21,16 +21,16 @@ public class BuildUI : MonoBehaviour {
 		ui.SetActive(false);
 	}
 
-	public void Upgrade ()
+	/*public void Upgrade ()
 	{
 		//target.UpgradeTurret();
-		Managers.Build.DeselectNode();
+		BuildManager.Instance.DeselectNode();
 	}
 
 	public void Sell ()
 	{
 		//target.SellTurret();
-		Managers.Build.DeselectNode();
-	}
+		BuildManager.Instance.DeselectNode();
+	}*/
 
 }

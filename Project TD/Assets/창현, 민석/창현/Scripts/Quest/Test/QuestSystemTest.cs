@@ -13,7 +13,7 @@ public class QuestSystemTest : MonoBehaviour
 
     private void Start()
     {
-        var questSystem = Managers.Quest;
+        var questSystem = QuestSystem.Instance;
 
         questSystem.onQuestRegistered += (quest) =>
         {
@@ -37,6 +37,6 @@ public class QuestSystemTest : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            Managers.Quest.ReceiveReport(category, target, 1);
+            QuestSystem.Instance.ReceiveReport(category, target, 1);
     }
 }
