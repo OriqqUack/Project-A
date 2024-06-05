@@ -47,14 +47,14 @@ public class SpawningPool : MonoBehaviour
         while (true)
         {
             Vector3 randDir = Random.insideUnitSphere * Random.Range(0, _spawnRadius);
-			randDir.y = 0;
-			randPos = _spawnPos + randDir;
+            randDir.y = 0;
+            randPos = _spawnPos + randDir;
 
             // 갈 수 있나
             NavMeshPath path = new NavMeshPath();
             if (nma.CalculatePath(randPos, path))
                 break;
-		}
+        }
 
         obj.transform.position = randPos;
         _reserveCount--;

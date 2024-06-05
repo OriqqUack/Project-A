@@ -1,12 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Reflection.Emit;
 using UnityEngine;
 
 public class Define
 {
     public static bool _hasEnerge = false;
-    public static bool _InvenActive = false;
+    public static bool _TabletActive = false;
+
+    public enum Collection
+    {
+        // 도감이 채울 수 있는 갯수
+        Achievement = 32,
+        Monster = 32,
+        Weapon = 32,
+    }
+
     public enum WorldObject
     {
         Unknown,
@@ -72,19 +80,21 @@ public class Define
     public enum Scene
     {
         Unknown,
+        Loading,
         Start,
         Main,
         Login,
         City,
         Lobby,
         Game,
-        Home
+        Home,
+        GridTestScene //삭제 해야함
     }
 
     public enum Sound
     {
-        Bgm,
-        Effect,
+        BGM,
+        SFX,
         MaxCount,
     }
 

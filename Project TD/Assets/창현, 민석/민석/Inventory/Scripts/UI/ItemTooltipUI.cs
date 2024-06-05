@@ -105,7 +105,7 @@ namespace Rito.InventorySystem
             float slotHeight = slotRect.rect.height * ratio;
 
             // 툴팁 초기 위치(슬롯 우하단) 설정
-            _rt.position = slotRect.position + new Vector3(slotWidth, -slotHeight);
+            _rt.position = slotRect.position + new Vector3(slotWidth, slotHeight);
             Vector2 pos = _rt.position;
 
             // 툴팁의 크기

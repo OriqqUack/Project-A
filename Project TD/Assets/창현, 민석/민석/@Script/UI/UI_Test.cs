@@ -19,17 +19,6 @@ public class UI_Test : MonoBehaviour
 
     private void Start()
     {
-        if (_itemDataArray?.Length > 0)
-        {
-            for (int i = 0; i < _itemDataArray.Length; i++)
-            {
-                _inventory.Add(_itemDataArray[i], 3);
-
-                if (_itemDataArray[i] is CountableItemData)
-                    _inventory.Add(_itemDataArray[i], 255);
-            }
-        }
-
         _removeAllButton.onClick.AddListener(() =>
         {
             int capacity = _inventory.Capacity;
@@ -37,6 +26,6 @@ public class UI_Test : MonoBehaviour
                 _inventory.Remove(i);
         });
 
-        _AddItem.onClick.AddListener(() => _inventory.Add(_itemDataArray[1]));
+        _AddItem.onClick.AddListener(() => _inventory.Add(_itemDataArray[UnityEngine.Random.Range(0, 6)]));
     }
 }

@@ -6,22 +6,23 @@ public class UI_TablePopup : UI_Base
 {
     public void Setting()
     {
+        Define._TabletActive = true;
         Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Tablet");
         Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Setting");
-
     }
 
     public void PlayerStat()
     {
         Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Tablet");
         Managers.UI.ShowPopupUI<UI_Popup>("Tablet/PlayerStat");
-
+        Define._TabletActive = true;
     }
 
     public void Inventory()
     {
         Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Tablet");
-        Define._InvenActive = true;
+        Managers.UI.ShowPopupUI<UI_Popup>("Inven");
+        Define._TabletActive = true;
     }
 
     public override void Init()

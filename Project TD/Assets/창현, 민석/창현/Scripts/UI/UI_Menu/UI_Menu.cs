@@ -52,7 +52,7 @@ public class UI_Menu : UI_Base
             activeInfoUI.SetActive(true);
         }
 
-        //GetText((int)UI.MenuName).text = gameObject.name;
+        GetText((int)UI.MenuName).text = gameObject.name;
     }
 
     public void OnClickLeftArrowEvent()

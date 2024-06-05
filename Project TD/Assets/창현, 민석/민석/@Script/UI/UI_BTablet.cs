@@ -7,7 +7,7 @@ public class UI_BTablet : UI_Base
 {
     public void Setting_Popup()
     {
-        if (Define._InvenActive)
+        /*if (Define._InvenActive)
         {
             Define._InvenActive = false;
             Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Setting");
@@ -16,14 +16,14 @@ public class UI_BTablet : UI_Base
         {
             Managers.UI.ClosePopupUI();
             Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Setting");
-        }
-        //Managers.UI.ClosePopupUI();
-        //Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Setting");
+        }*/
+        Managers.UI.ClosePopupUI();
+        Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Setting");
     }
 
     public void PlayerStat_Popup()
     {
-        if (Define._InvenActive)
+        /*if (Define._InvenActive)
         {
             Define._InvenActive = false;
             Managers.UI.ShowPopupUI<UI_Popup>("Tablet/PlayerStat");
@@ -32,19 +32,30 @@ public class UI_BTablet : UI_Base
         {
             Managers.UI.ClosePopupUI();
             Managers.UI.ShowPopupUI<UI_Popup>("Tablet/PlayerStat");
-        }
+        }*/
+        Managers.UI.ClosePopupUI();
+        Managers.UI.ShowPopupUI<UI_Popup>("Tablet/PlayerStat");
     }
 
     public void Inventory_Popup()
     {
+        /*if (Define._InvenActive)
+        {
+            Define._InvenActive = false;
+            Managers.UI.ShowPopupUI<UI_Popup>("Inven");
+        }
+        else
+        {
+            Managers.UI.ClosePopupUI();
+            Managers.UI.ShowPopupUI<UI_Popup>("Inven");
+        }*/
         Managers.UI.ClosePopupUI();
-        Define._InvenActive = true;
-        //Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Inventory");
+        Managers.UI.ShowPopupUI<UI_Popup>("Inven");
     }
 
     public void Collection_Popup()
     {
-        if (Define._InvenActive)
+        /*if (Define._InvenActive)
         {
             Define._InvenActive = false;
             Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Collection");
@@ -53,9 +64,15 @@ public class UI_BTablet : UI_Base
         {
             Managers.UI.ClosePopupUI();
             Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Collection");
-        }
-        //Managers.UI.ClosePopupUI();
-        //Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Collection");
+        }*/
+        Managers.UI.ClosePopupUI();
+        Managers.UI.ShowPopupUI<UI_Popup>("Tablet/Collection");
+    }
+
+    public void Back()
+    {
+        Define._TabletActive = false;
+        Managers.UI.CloseAllPopupUI();
     }
 
     public override void Init()

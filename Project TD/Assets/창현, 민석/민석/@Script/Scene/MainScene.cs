@@ -5,29 +5,28 @@ using UnityEngine;
 
 public class MainScene : BaseScene
 {
-    [SerializeField]
-    public GameObject _Inven;
+    private GameObject _energe;
+
     protected override void Init()
     {
         base.Init();
         SceneType = Define.Scene.Main;
-        GameObject go = Util.FindChild(_Inven, "Inven", false);
-        Canvas ca = go.GetComponent<Canvas>();
-        ca.sortingOrder = 12;
-        _Inven.SetActive(false);
         Managers.UI.ShowSceneUI<UI_Scene>("MainScene/Energe");
+
+        _energe = GameObject.Find("Energe");
+
     }
 
     public void Update()
     {
-        if (Define._InvenActive)
-            _Inven.SetActive(true);
+        if (Define._TabletActive)
+            _energe.SetActive(false);
         else
-            _Inven.SetActive(false);
+            _energe.SetActive(true);
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Define._InvenActive = false;
+            Define._TabletActive = false;
             Managers.UI.CloseAllPopupUI();
         }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PlayerStat : Stat, IDataPersistence
+public class PlayerStat : Stat, IGameDataPersistence
 {
 	[SerializeField]
 	protected string _name;
@@ -30,9 +30,6 @@ public class PlayerStat : Stat, IDataPersistence
 
 			while (true)
 			{
-				Data.Stat stat;
-				if (Managers.Data.StatDict.TryGetValue(_level, out stat) == false)
-					break;
 				if (_exp < _totalExp)
 					break;
 				Level++;
@@ -61,17 +58,14 @@ public class PlayerStat : Stat, IDataPersistence
 
 	private void Start()
     {
-		_moveSpeed = 5.0f;
     }
 
     public void SetStat(int level)
 	{
-		Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
-		Data.Stat stat = dict[level];
-		Hp = stat.maxHp;
+		/*Hp = stat.maxHp;
 		MaxHp = stat.maxHp;
 		Attack = stat.attack;
-		TotalExp = stat.totalExp;
+		TotalExp = stat.totalExp;*/
 	}
 
 	protected override void OnDead(Stat attacker)
@@ -93,7 +87,7 @@ public class PlayerStat : Stat, IDataPersistence
 		Debug.Log($"EXP : { data._exp}");
 		Debug.Log($"TotalEXP : { data._totalExp}");
 
-		this.Energe = data._energe;
+		this._energe = data._energe;
 		this.Luck = data._luck;
 
 		this.Defense = data._defense;

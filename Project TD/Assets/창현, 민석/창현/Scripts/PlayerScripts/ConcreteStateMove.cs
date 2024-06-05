@@ -21,6 +21,7 @@ public class ConcreteStateMove : State
         {
             InputX = Input.GetAxisRaw("Horizontal");
             InputZ = Input.GetAxisRaw("Vertical");
+            Debug.Log(InputX.ToString() + " " + InputZ.ToString());
             Vector3 dir = new Vector3(InputX, 0, InputZ).normalized;
 
             //넘어지기 체크

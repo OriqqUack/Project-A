@@ -85,8 +85,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3551e31eb2a83434f80a971130c0c7d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inventory: {fileID: 589517166315580009, guid: 1a616018b71a620408db1e9aff118a21,
-    type: 3}
 --- !u!1 &1170429630723805994
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +823,7 @@ GameObject:
   - component: {fileID: 882984623705317497}
   - component: {fileID: 6277284776455588590}
   m_Layer: 5
-  m_Name: external Inventory
+  m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

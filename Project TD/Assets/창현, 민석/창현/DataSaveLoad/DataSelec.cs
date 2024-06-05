@@ -5,10 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
 using TMPro;
+using MoreMountains.Feedbacks;
 
-public class DataSelec : MonoBehaviour
+public class DataSelec : MonoBehaviour, IGlobalDataPersistence
 {
     public GameObject _create;
+    public GameObject _deletePopup;
     public SaveSlot[] _slot;
     public TextMeshProUGUI _newPlayerName;
 
@@ -16,26 +18,23 @@ public class DataSelec : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            if (File.Exists(Path.Combine("save", i.ToString())))
-            {
-                _saveFile[i] = true;
-                _slot[i].slotName = DataPersistenceManager.instance.GameData._name;
-            }
-            else
-                _slot[i].slotName = "비어있음";
-        }
     }
 
     public void Slot(int number)
     {
-        if (_saveFile[number])
+        Debug.Log(DataPersistenceManager.instance.nowSlot);
+        if (DataPersistenceManager.instance.nowSlot == number)
         {
-            DataPersistenceManager.instance.LoadGame(number);
+            if (_saveFile[number])
+            {
+                Managers.Scene.LoadScene(Define.Scene.GridTestScene);
+            }
+            else
+            {
+                Create();
+            }
         }
-        else
-            Create();
+        DataPersistenceManager.instance.nowSlot = number;
     }
 
     public void Create()
@@ -45,14 +44,45 @@ public class DataSelec : MonoBehaviour
 
     public void CreateName()
     {
-        _slot[DataController.instance.nowSlot].slotName = _newPlayerName.text;
-        _slot[DataController.instance.nowSlot].playTime = 0;
+        int slotNum = DataPersistenceManager.instance.nowSlot;
+
+        _slot[slotNum].SlotName = _newPlayerName.text;
+        _slot[slotNum].PlayTime = 0;
+        
         _newPlayerName.text = "";
-        _saveFile[DataController.instance.nowSlot] = true;
+        _saveFile[slotNum] = true;
+
+        DataPersistenceManager.instance.nowSlot = slotNum;
+
+        DataPersistenceManager.instance.LoadGame();
+        DataPersistenceManager.instance.SaveGameData();
+        DataPersistenceManager.instance.SaveGlobalData();
 
         _create.gameObject.SetActive(false);
     }
 
-    
+    public void ShowDeletePopup()
+    {
+        _deletePopup.SetActive(true);
+    }
 
+    public void LoadData(GlobalData data)
+    {
+        for (int i = 0; i < _slot.Length; i++)
+        {
+            _saveFile[i] = data.existSaveFile[i];
+            _slot[i].SlotName = data.SaveSlotName[i];
+            _slot[i].PlayTime = data.SaveSlotPlayTime[i];
+        }
+    }
+
+    public void SaveData(ref GlobalData data)
+    {
+        for (int i = 0; i < _slot.Length; i++)
+        {
+            data.existSaveFile[i] = _saveFile[i];
+            data.SaveSlotName[i] = _slot[i].SlotName;
+            data.SaveSlotPlayTime[i] = _slot[i].PlayTime;
+        }
+    }
 }

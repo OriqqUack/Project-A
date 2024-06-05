@@ -35,4 +35,5 @@ public class Buff : MonoBehaviour
         }
         activeEffects.Clear();
     }
+    
 }
