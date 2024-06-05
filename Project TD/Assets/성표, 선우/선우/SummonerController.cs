@@ -6,35 +6,93 @@ using UnityEngine.AI;
 public class SummonerController : MonsterController
 {
     [SerializeField]
-    private GameObject suicideBomberPrefab; // 자폭병 프리팹을 넣어야함
-    private List<GameObject> summonedBombers = new List<GameObject>();
-    private int maxBombers = 3;
+    public string bomberPrefabPath = "Monsters/SuicideBomber"; // 자폭병 프리팹의 경로
+    private List<GameObject> summonedBombers = new List<GameObject>(); // 소환수 개체를 관리하기 위한 리스트
+    private float summonCooldown = 4.0f; // 공격에 의해 디스폰되었을 때의 쿨타임
+    private int maxBombers = 3; // 최대 소환 개체 수
+    private bool canSummon = true; // 소환가능한지 여부를 판단
 
     public override void Init()
     {
         base.Init();
-        // 추가 초기화 코드가 필요하면 여기에 작성
+
     }
 
-    protected override void UpdateSkill()
+    // 자폭병 소환 로직, 디스폰시 쿨타임 적용 여부 확인
+    private void SummonBomber()
     {
-        base.UpdateSkill();
-        // 스킬 사용 중일 때 자폭병 소환 로직
-        if (summonedBombers.Count < maxBombers)
+        // 랜덤으로 소환 위치값 적용
+        Vector3 summonPosition = GetRandomPositionInAttackRange();
+
+        GameObject bomber = Managers.Resource.Instantiate(bomberPrefabPath);
+        // 소환 불발시 나타날 에러코드
+        if (bomber == null)
         {
-            StartCoroutine(SummonBomber());
+            Debug.LogError($"Failed to load bomber prefab from path: {bomberPrefabPath}");
+            return;
         }
-    }
 
-    private IEnumerator SummonBomber()
-    {
-        // 자폭병 소환
-        GameObject bomber = Instantiate(suicideBomberPrefab, transform.position + transform.forward * 2, Quaternion.identity);
+        bomber.transform.position = summonPosition;
         summonedBombers.Add(bomber);
 
-        // 자폭병이 소멸될 때 리스트에서 제거
-        bomber.GetComponent<SuicideBomberController>().OnDespawn += () => summonedBombers.Remove(bomber);
 
-        yield return null;
+        var bomberController = bomber.GetComponent<SuicideBomberController>();
+        bomberController.OnDespawn += reason =>
+        {
+            summonedBombers.Remove(bomber);
+            if (reason == SuicideBomberController.DespawnReason.Attacked)
+            {
+                StartCoroutine(SummonCooldownRoutine());
+            }
+            else if (reason == SuicideBomberController.DespawnReason.SelfDestruct)
+            {
+                SummonBomber();
+            }
+        };
+    }
+
+    // 소환사의 공격범위 내에서 랜덤으로 소환되게끔 만듬
+    private Vector3 GetRandomPositionInAttackRange()
+    {
+        float radius = _stat.AttackRange;
+        Vector2 randomPoint = Random.insideUnitCircle * radius;
+        Vector3 summonPosition = new Vector3(randomPoint.x, 0, randomPoint.y) + transform.position;
+
+        // Optional: Adjust y position based on terrain height
+        // summonPosition.y = Terrain.activeTerrain.SampleHeight(summonPosition);
+
+        return summonPosition;
+    }
+
+    private IEnumerator SummonCooldownRoutine()
+    {
+        canSummon = false;
+        yield return new WaitForSeconds(summonCooldown);
+        canSummon = true;
+
+        // 넣어야할지 말지 모르겠음
+        //if (summonedBombers.Count < 3)
+        //{
+        //    SummonBomber();
+        //}
+    }
+
+
+    // 위에 코드를 넣어야할지말지 OnHitEvent가 호출되는 방식을 같이 생각해봐야할듯
+    protected override void OnHitEvent()
+    {
+        // 기본 경직 로직을 호출
+        if (_stat.Hp <= _stat.MaxHp / 3 && stunCount < maxStunCount && !_isStunning)
+        {
+            if (_stunCoroutine != null)
+                StopCoroutine(_stunCoroutine);
+            _stunCoroutine = StartCoroutine(Stun());
+        }
+
+        // 소환사 공격 시 자폭병 소환
+        if (canSummon && summonedBombers.Count < maxBombers)
+        {
+            SummonBomber();
+        }
     }
 }

@@ -148,7 +148,7 @@ public class MonsterController : BaseController
     }
 
     // ScanRange안에 있는 애들을 감지하는 메서드
-    public GameObject FindClosestObject(string[] tags)
+    public GameObject FindClosestObject()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _stat.ScanRange, targetLayerMask);
         GameObject closestObject = rocket;
