@@ -14,4 +14,7 @@ public static class Settings
     public const float randomAppearTileTime2 = 80f;
     #endregion Random Appear Tile Time Range
 
+    #region PLAYER ANIMATION PARAMETERS
+    public static float baseSpeedForPlayerAnimatons = 10f;
+    #endregion PLAYER ANIMATION PARAMETERS
 }
