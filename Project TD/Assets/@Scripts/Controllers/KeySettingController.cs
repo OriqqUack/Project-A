@@ -19,7 +19,7 @@ public class KeySettingController : MonoBehaviour
 
     private void OnEnable()
     {
-        mOriginKeyCode = KeyManager.instance.GetKeyCode(mKeyBindingName);
+        mOriginKeyCode = KeyManager.Instance.GetKeyCode(mKeyBindingName);
         string Keycode = mOriginKeyCode.ToString();
         if (Keycode.Contains("Alpha"))
         {
@@ -49,11 +49,11 @@ public class KeySettingController : MonoBehaviour
                         if (mKeyButtonColorCor != null) { StopCoroutine(mKeyButtonColorCor); }
 
                         // 키 설정을 할 수 있는경우?
-                        if (KeyManager.instance.CheckKey(kcode, mOriginKeyCode))
+                        if (KeyManager.Instance.CheckKey(kcode, mOriginKeyCode))
                         {
-                            KeyManager.instance.isKeyChanged = true;
+                            KeyManager.Instance.isKeyChanged = true;
                             // 키 지정
-                            KeyManager.instance.AssignKey(kcode, mKeyBindingName);
+                            KeyManager.Instance.AssignKey(kcode, mKeyBindingName);
                             mOriginKeyCode = kcode;
 
                             // 키 레이블을 변경

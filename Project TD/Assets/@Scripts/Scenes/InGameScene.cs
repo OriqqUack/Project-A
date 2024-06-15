@@ -9,7 +9,7 @@ public class InGameScene : BaseScene
         base.Init();
 
         Managers.UI.Root.transform.Find("Menu").gameObject.SetActive(false);
-        DataPersistenceManager.instance.LoadGame();
+        DataPersistenceManager.Instance.LoadGame();
 
         /*base.Init();
 

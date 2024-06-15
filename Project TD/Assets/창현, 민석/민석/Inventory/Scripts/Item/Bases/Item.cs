@@ -15,17 +15,10 @@ namespace Rito.InventorySystem
             - EquipmentItem : 장비 아이템
             - CountableItem : 수량이 존재하는 아이템
     */
+    [System.Serializable]
     public abstract class Item
     {
-        enum ItemType
-        {
-            None,
-            Sword,
-            Gun,
-            Wand
-        }
-
-        public ItemData Data { get; private set; }
+        public ItemData Data { get; set; }
 
         
         public Item(ItemData data) => Data = data;

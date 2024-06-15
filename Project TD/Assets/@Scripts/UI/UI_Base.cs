@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using Rito.InventorySystem;
 
 public abstract class UI_Base : MonoBehaviour
 {
@@ -63,6 +64,7 @@ public abstract class UI_Base : MonoBehaviour
 	protected Image GetImage(int idx) { return Get<Image>(idx); }
 	protected Toggle GetToggle(int idx) { return Get<Toggle>(idx); }
 	protected Slider GetSlider(int idx) { return Get<Slider>(idx); }
+	protected ItemSlotUI GetItemSlot(int idx) { return Get<ItemSlotUI>(idx); }
 
 	public static void BindEvent(GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
 	{

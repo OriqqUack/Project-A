@@ -53,12 +53,13 @@ namespace Rito.InventorySystem
         public RectTransform SlotRect => _slotRect;
         public RectTransform IconRect => _iconRect;
 
+        public ItemData item;
+
         #endregion
         /***********************************************************************
         *                               Fields
         ***********************************************************************/
-        #region .
-        private InventoryUI _inventoryUI;
+        #region .;
 
         private RectTransform _slotRect;
         private RectTransform _iconRect;
@@ -69,6 +70,7 @@ namespace Rito.InventorySystem
         private GameObject _highlightGo;
 
         private Image _slotImage;
+
 
         // 현재 하이라이트 알파값
         private float _currentHLAlpha = 0f;
@@ -92,6 +94,11 @@ namespace Rito.InventorySystem
             InitValues();
         }
 
+        private void Start()
+        {
+            Debug.Log(this + $" : {Index} ");
+        }
+
         #endregion
         /***********************************************************************
         *                               Private Methods
@@ -99,8 +106,6 @@ namespace Rito.InventorySystem
         #region .
         private void InitComponents()
         {
-            _inventoryUI = GetComponentInParent<InventoryUI>();
-
             // Rects
             _slotRect = GetComponent<RectTransform>();
             _iconRect = _iconImage.rectTransform;
@@ -204,6 +209,9 @@ namespace Rito.InventorySystem
             if (!other.IsAccessible) return;
 
             var temp = _iconImage.sprite;
+            var temp1 = item;
+            item = other.item;
+            other.item = temp1;
 
             // 1. 대상에 아이템이 있는 경우 : 교환
             if (other.HasItem) SetItem(other._iconImage.sprite);
@@ -234,6 +242,7 @@ namespace Rito.InventorySystem
         public void RemoveItem()
         {
             _iconImage.sprite = null;
+            item = null;
             HideIcon();
             HideText();
         }

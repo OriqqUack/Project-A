@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System.IO;
 
-public class DataPersistenceManager : MonoBehaviour
+public class DataPersistenceManager : Singleton<DataPersistenceManager>
 {
     public string fileName;
     public int nowSlot;
@@ -15,30 +15,9 @@ public class DataPersistenceManager : MonoBehaviour
     private List<IGlobalDataPersistence> globalDataPersistenceObjects;
     private FileDataHandler dataHandler;
 
-    public static DataPersistenceManager instance { get; private set; }
-
-    private void Awake()
-    {
-
-        if (instance == null)
-        {
-            GameObject go = GameObject.Find("@DataManager");
-            if (go == null)
-            {
-                go = new GameObject { name = "@DataManager" };
-                go.AddComponent<DataPersistenceManager>();
-            }
-
-            DontDestroyOnLoad(go);
-            instance = go.GetComponent<DataPersistenceManager>();
-
-            instance.nowSlot = 4;
-        }
-
-    }
-
     private void Start()
     {
+        nowSlot = 4;
         LoadStartScene();
         SaveGlobalData();
     }

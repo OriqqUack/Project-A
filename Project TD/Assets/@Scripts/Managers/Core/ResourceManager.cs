@@ -38,19 +38,6 @@ public class ResourceManager
         return go;
     }
 
-    public GameObject Instantiate(GameObject gameObject, Vector3 position, Quaternion rotation , Transform parent = null, int count = 5 )
-    {
-        GameObject go;
-        if (gameObject.GetComponent<Poolable>() != null)
-        {
-            go = Managers.Pool.Pop(gameObject, parent, count).gameObject;
-            go.transform.position = position;
-            go.transform.rotation = rotation;
-        }
-        else go = Instantiate(gameObject, position, rotation);
-        return go;
-    }
-
     public void Destroy(GameObject go)
     {
         if (go == null)

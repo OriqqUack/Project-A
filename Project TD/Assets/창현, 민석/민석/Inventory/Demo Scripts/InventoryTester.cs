@@ -10,7 +10,6 @@ using Rito.InventorySystem;
 
 public class InventoryTester : MonoBehaviour
 {
-    public Inventory _inventory;
 
     public ItemData[] _itemDataArray;
     
@@ -29,34 +28,34 @@ public class InventoryTester : MonoBehaviour
 
     private void Start()
     {
-        if (_itemDataArray?.Length > 0)
+        /*if (_itemDataArray?.Length > 0)
         {
             for (int i = 0; i < _itemDataArray.Length; i++)
             {
-                _inventory.Add(_itemDataArray[i], 3);
+                Inventory.Instance.Add(_itemDataArray[i], 3);
 
                 if(_itemDataArray[i] is CountableItemData)
-                    _inventory.Add(_itemDataArray[i], 255);
+                    Inventory.Instance.Add(_itemDataArray[i], 255);
             }
-        }
+        }*/
 
         _removeAllButton.onClick.AddListener(() =>
         {
-            int capacity = _inventory.Capacity;
+            int capacity = Inventory.Instance.Capacity;
             for(int i = 0; i < capacity; i++)
-                _inventory.Remove(i);
+                Inventory.Instance.Remove(i);
         });
 
-        _AddArmorA1.onClick.AddListener(() => _inventory.Add(_itemDataArray[0]));
-        _AddArmorB1.onClick.AddListener(() => _inventory.Add(_itemDataArray[1]));
+        _AddArmorA1.onClick.AddListener(() => Inventory.Instance.Add(_itemDataArray[0]));
+        _AddArmorB1.onClick.AddListener(() => Inventory.Instance.Add(_itemDataArray[1]));
 
-        _AddSwordA1.onClick.AddListener(() => _inventory.Add(_itemDataArray[2]));
-        _AddSwordB1.onClick.AddListener(() => _inventory.Add(_itemDataArray[3]));
+        _AddSwordA1.onClick.AddListener(() => Inventory.Instance.Add(_itemDataArray[2]));
+        _AddSwordB1.onClick.AddListener(() => Inventory.Instance.Add(_itemDataArray[3]));
 
-        _AddPortionA1.onClick.AddListener(() => _inventory.Add(_itemDataArray[4]));
-        _AddPortionA50.onClick.AddListener(() => _inventory.Add(_itemDataArray[4], 50));
-        _AddPortionB1.onClick.AddListener(() => _inventory.Add(_itemDataArray[5]));
-        _AddPortionB50.onClick.AddListener(() => _inventory.Add(_itemDataArray[5], 50));
+        _AddPortionA1.onClick.AddListener(() => Inventory.Instance.Add(_itemDataArray[4]));
+        _AddPortionA50.onClick.AddListener(() => Inventory.Instance.Add(_itemDataArray[4], 50));
+        _AddPortionB1.onClick.AddListener(() => Inventory.Instance.Add(_itemDataArray[5]));
+        _AddPortionB50.onClick.AddListener(() => Inventory.Instance.Add(_itemDataArray[5], 50));
     }
 
 }

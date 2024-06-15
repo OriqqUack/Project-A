@@ -57,7 +57,6 @@ namespace Rito.InventorySystem
             TryGetComponent(out _rt);
             _rt.pivot = LeftTop;
             _canvasScaler = GetComponentInParent<CanvasScaler>();
-
             DisableAllChildrenRaycastTarget(transform);
         }
 

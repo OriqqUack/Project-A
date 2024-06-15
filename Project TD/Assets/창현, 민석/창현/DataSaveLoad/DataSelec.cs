@@ -22,8 +22,8 @@ public class DataSelec : MonoBehaviour, IGlobalDataPersistence
 
     public void Slot(int number)
     {
-        Debug.Log(DataPersistenceManager.instance.nowSlot);
-        if (DataPersistenceManager.instance.nowSlot == number)
+        Debug.Log(DataPersistenceManager.Instance.nowSlot);
+        if (DataPersistenceManager.Instance.nowSlot == number)
         {
             if (_saveFile[number])
             {
@@ -34,7 +34,7 @@ public class DataSelec : MonoBehaviour, IGlobalDataPersistence
                 Create();
             }
         }
-        DataPersistenceManager.instance.nowSlot = number;
+        DataPersistenceManager.Instance.nowSlot = number;
     }
 
     public void Create()
@@ -44,7 +44,7 @@ public class DataSelec : MonoBehaviour, IGlobalDataPersistence
 
     public void CreateName()
     {
-        int slotNum = DataPersistenceManager.instance.nowSlot;
+        int slotNum = DataPersistenceManager.Instance.nowSlot;
 
         _slot[slotNum].SlotName = _newPlayerName.text;
         _slot[slotNum].PlayTime = 0;
@@ -52,11 +52,11 @@ public class DataSelec : MonoBehaviour, IGlobalDataPersistence
         _newPlayerName.text = "";
         _saveFile[slotNum] = true;
 
-        DataPersistenceManager.instance.nowSlot = slotNum;
+        DataPersistenceManager.Instance.nowSlot = slotNum;
 
-        DataPersistenceManager.instance.LoadGame();
-        DataPersistenceManager.instance.SaveGameData();
-        DataPersistenceManager.instance.SaveGlobalData();
+        DataPersistenceManager.Instance.LoadGame();
+        DataPersistenceManager.Instance.SaveGameData();
+        DataPersistenceManager.Instance.SaveGlobalData();
 
         _create.gameObject.SetActive(false);
     }

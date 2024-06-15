@@ -27,9 +27,8 @@ public class KeyData
 /// <summary>
 /// 키 입력에 대한 정보를 가지고있고, 특정한 기능에 대응하는 키를 관리하는 매니저 클래스
 /// </summary>
-public class KeyManager : MonoBehaviour
+public class KeyManager : Singleton<KeyManager>
 {
-    public static KeyManager instance { get; private set; }
 
     private static string mOptionDataFileName = "/KeyData.json"; //키 데이터 파일 이름
     private static string mFilePath;
@@ -39,20 +38,9 @@ public class KeyManager : MonoBehaviour
 
     public bool isKeyChanged = false;
 
-    void Awake()
+    protected override void Awake()
     {
-        if (instance == null)
-        {
-            GameObject go = GameObject.Find("@KeyManager");
-            if (go == null)
-            {
-                go = new GameObject { name = "@KeyManager" };
-                go.AddComponent<KeyManager>();
-            }
-
-            DontDestroyOnLoad(go);
-            instance = go.GetComponent<KeyManager>();
-        }
+        base.Awake();
 
         mKeyDictionary = new Dictionary<string, KeyCode>();
         mFilePath = Application.persistentDataPath + mOptionDataFileName;

@@ -139,4 +139,12 @@ public class Define
         Ground,
         HexTile
     }
+
+    public enum ItemGrade
+    {
+        Normal,
+        Rear,
+        Epic,
+        Legendary
+    }
 }

@@ -36,19 +36,19 @@ public class KeySettingPopup : UI_Base
 
     public void OnClickedConfirmBtn()
     {
-        KeyManager.instance.SaveOptionData();
+        KeyManager.Instance.SaveOptionData();
         Managers.UI.ClosePopupUI();
     }
 
     public void OnClickedCancelBtn()
     {
-        KeyManager.instance.LoadOptionData();
+        KeyManager.Instance.LoadOptionData();
         Managers.UI.ClosePopupUI();
     }
 
     public void OnClickedButtonClose()
     {
-        if (!KeyManager.instance.isKeyChanged)
+        if (!KeyManager.Instance.isKeyChanged)
         {
             Managers.UI.ClosePopupUI();
             return;
@@ -59,13 +59,13 @@ public class KeySettingPopup : UI_Base
 
     public void OnClickedSaveBtn()
     {
-        KeyManager.instance.SaveOptionData();
+        KeyManager.Instance.SaveOptionData();
         Managers.UI.ClosePopupUI();
     }
     
     public void OnClickedPopupCancel()
     {
-        KeyManager.instance.LoadOptionData();
+        KeyManager.Instance.LoadOptionData();
         Managers.UI.ClosePopupUI();
     }
 
@@ -73,7 +73,7 @@ public class KeySettingPopup : UI_Base
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (KeyManager.instance.isKeyChanged)
+            if (KeyManager.Instance.isKeyChanged)
             {
                 confirmPopup.SetActive(true);
             }

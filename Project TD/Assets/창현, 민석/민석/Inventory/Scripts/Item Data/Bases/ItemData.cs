@@ -20,13 +20,23 @@ namespace Rito.InventorySystem
                 - ArmorItemData
 
     */
-
+    [System.Serializable]
     public abstract class ItemData : ScriptableObject
     {
+        private enum ItemGrade
+        {
+            Normal,
+            Rear,
+            Epic,
+            Legendery
+        }
+
         public int ID => _id;
         public string Name => _name;
         public string Tooltip => _tooltip;
         public Sprite IconSprite => _iconSprite;
+        public Define.ItemGrade itemGrade;
+
 
         [SerializeField] private int      _id;
         [SerializeField] private string   _name;    // 아이템 이름

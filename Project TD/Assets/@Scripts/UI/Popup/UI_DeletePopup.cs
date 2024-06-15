@@ -19,8 +19,8 @@ public class UI_DeletePopup : UI_Base
 
     public void OnClickedDeleteBtn()
     {
-        int nowSlot = DataPersistenceManager.instance.nowSlot;
-        DataPersistenceManager.instance.DataClear(nowSlot);
+        int nowSlot = DataPersistenceManager.Instance.nowSlot;
+        DataPersistenceManager.Instance.DataClear(nowSlot);
         this.gameObject.SetActive(false);
     }
 
