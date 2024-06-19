@@ -96,7 +96,7 @@ namespace Rito.InventorySystem
 
         private void Start()
         {
-            Debug.Log(this + $" : {Index} ");
+            
         }
 
         #endregion
@@ -266,6 +266,26 @@ namespace Rito.InventorySystem
                 HideText();
 
             _amountText.text = amount.ToString();
+        }
+
+        public int GetItemAmount()
+        {
+            string textValue = _amountText.text;
+
+            // int 형식으로 변환 시도
+            int intValue;
+            bool isConverted = int.TryParse(textValue, out intValue);
+
+            if (isConverted)
+            {
+                Debug.Log("TextMeshProUGUI 텍스트를 int로 변환 성공: " + intValue);
+            }
+            else
+            {
+                Debug.LogError("TextMeshProUGUI 텍스트를 int로 변환 실패: 유효한 정수 형식이 아닙니다. 입력값: " + textValue);
+            }
+
+            return intValue;
         }
 
         /// <summary> 슬롯에 하이라이트 표시/해제 </summary>

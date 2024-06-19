@@ -12,7 +12,6 @@ public class CraftingUI : MonoBehaviour
 
     private void Awake()
     {
-        Inventory.Instance.onChangedSlotUI += new Inventory.OnChangedSlotUI(UpdateCraftingUI);
     }
 
     private void Start()

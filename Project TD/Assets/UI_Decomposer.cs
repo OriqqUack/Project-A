@@ -55,7 +55,6 @@ public class UI_Decomposer : UI_Popup
         Bind<ItemSlotUI>(typeof(BeforeItemSlots));
         Bind<ItemSlotUI>(typeof(AfterItemSlots));
 
-        Inventory.Instance.onChangedSlotUI += new Inventory.OnChangedSlotUI(UpdateSlotUI);
 
         InitializeList();
     }
@@ -69,21 +68,12 @@ public class UI_Decomposer : UI_Popup
         gradeToMaterials[Define.ItemGrade.Epic] = epicItemDecomposer;
         gradeToMaterials[Define.ItemGrade.Legendary] = legendaryItemDecomposer;
 
-        int index = 18;
-
-        Get<ItemSlotUI>((int)BeforeItemSlots.ItemSlot1).SetSlotIndex(++index);
         b_slot1 = Get<ItemSlotUI>((int)BeforeItemSlots.ItemSlot1);
-        b_slot1.SetSlotIndex(++index);
         b_slot2 = Get<ItemSlotUI>((int)BeforeItemSlots.ItemSlot2);
-        b_slot2.SetSlotIndex(++index);
         b_slot3 = Get<ItemSlotUI>((int)BeforeItemSlots.ItemSlot3);
-        b_slot3.SetSlotIndex(++index);
         b_slot4 = Get<ItemSlotUI>((int)BeforeItemSlots.ItemSlot4);
-        b_slot4.SetSlotIndex(++index);
         b_slot5 = Get<ItemSlotUI>((int)BeforeItemSlots.ItemSlot5);
-        b_slot5.SetSlotIndex(++index);
         b_slot6 = Get<ItemSlotUI>((int)BeforeItemSlots.ItemSlot6);
-        b_slot6.SetSlotIndex(++index);
 
 
         a_slot1 = Get<ItemSlotUI>((int)AfterItemSlots.ItemSlot_1);
