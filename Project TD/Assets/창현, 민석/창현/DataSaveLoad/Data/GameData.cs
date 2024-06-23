@@ -54,12 +54,12 @@ public class GameData
 
         Characters = new Dictionary<string, Character>()
         {
-            { "Knight", new Character("Knight") },
-            { "Gunner", new Character("Gunner") },
-            { "Engineer", new Character("Engineer") },
-            { "Normal", new Character("Normal") },
-            { "Miner", new Character("Miner") },
-            { "Researcher", new Character("Researcher") },
+            { "Knight", new Character("Knight", new List<ITrait>{ new SpeedBoostTrait(), new SpeedBoostTrait() , new SpeedBoostTrait() }) },
+            { "Gunner", new Character("Gunner", new List<ITrait>{ }) },
+            { "Engineer", new Character("Engineer", new List<ITrait>{ }) },
+            { "Normal", new Character("Normal", new List<ITrait>{ }) },
+            { "Miner", new Character("Miner", new List<ITrait>{ }) },
+            { "Researcher", new Character("Researcher", new List<ITrait>{ }) }
         };
 
         RocketStat = new RocketStat();

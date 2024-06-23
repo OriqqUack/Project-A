@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterManager
+public class CharacterManager : IGameDataPersistence
 {
     public Dictionary<string, Character> _characters;
     public RocketStat _rocketStat;
+    public TraitManager _traitManager;
+
+    public string _nowClass;
 
     public int[] _levelUpXpTable = new int[10]
     {
@@ -16,17 +19,10 @@ public class CharacterManager
 
     public CharacterManager()
     {
-        _characters = new Dictionary<string, Character>
-        {
-            { "Knight", new Character("Knight") },
-            { "Gunner", new Character("Gunner") },
-            { "Engineer", new Character("Engineer") },
-            { "Normal", new Character("Normal") },
-            { "Miner", new Character("Miner") },
-            { "Researcher", new Character("Researcher") },
-        };
-
+        _characters = new Dictionary<string, Character>();
+        _traitManager = new TraitManager();
         _rocketStat = new RocketStat();
+        _nowClass = "Knight";
     }
     #region CharacterStat
     public void IncreaseCharacterStat(string characterName, string statName, float amount)
@@ -88,6 +84,11 @@ public class CharacterManager
         {
             throw new ArgumentException("Invalid character name");
         }
+    }
+
+    public Character GetNowCharacter()
+    {
+        return _characters[_nowClass];
     }
 
     public void IsCharacterLevelUp(string characterName)

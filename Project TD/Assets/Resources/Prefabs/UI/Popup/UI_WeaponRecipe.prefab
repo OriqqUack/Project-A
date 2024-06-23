@@ -2055,7 +2055,7 @@ GameObject:
   - component: {fileID: 2320216614351507326}
   - component: {fileID: 5111995927106968698}
   m_Layer: 5
-  m_Name: Popup
+  m_Name: CraftingDestroy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5308,7 +5308,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!1 &4702687186957734294
 GameObject:
   m_ObjectHideFlags: 0
@@ -6397,12 +6397,26 @@ MonoBehaviour:
   _itemTooltip: {fileID: 5184865395086220372}
   _popup: {fileID: 0}
   _mouseReversed: 0
+  _grPopup: {fileID: 2074641971408973543}
   _showDebug: 1
   __showPreview: 0
   __previewAlpha: 0.1
   _destroyButton: {fileID: 9090151658363664162}
   _beforeContents: {fileID: 5089558822826612194}
   _afterContents: {fileID: 4312924833731813585}
+  normalItemDecomposer:
+  - {fileID: 11400000, guid: c76044d8a642b6341882e805becf92df, type: 2}
+  - {fileID: 11400000, guid: 04eef8332317ca946adaf6a2a23b00ca, type: 2}
+  rearItemDecomposer:
+  - {fileID: 11400000, guid: e73a0198a0431f04a8ff190aae00be09, type: 2}
+  - {fileID: 11400000, guid: e44506062b1a62e4f9afc1bf9cf480fd, type: 2}
+  - {fileID: 11400000, guid: 04eef8332317ca946adaf6a2a23b00ca, type: 2}
+  epicItemDecomposer:
+  - {fileID: 11400000, guid: e7e18c97d59896341a1a487bee626a6d, type: 2}
+  - {fileID: 11400000, guid: e44506062b1a62e4f9afc1bf9cf480fd, type: 2}
+  - {fileID: 11400000, guid: e73a0198a0431f04a8ff190aae00be09, type: 2}
+  legendaryItemDecomposer:
+  - {fileID: 11400000, guid: e73a0198a0431f04a8ff190aae00be09, type: 2}
 --- !u!1 &5232905626833176065
 GameObject:
   m_ObjectHideFlags: 0
@@ -11401,6 +11415,7 @@ MonoBehaviour:
   _itemTooltip: {fileID: 5184865395086220372}
   _popup: {fileID: 6884072373655333750}
   _mouseReversed: 0
+  _grPopup: {fileID: 2074641971408973543}
   _showDebug: 1
   __showPreview: 0
   __previewAlpha: 1

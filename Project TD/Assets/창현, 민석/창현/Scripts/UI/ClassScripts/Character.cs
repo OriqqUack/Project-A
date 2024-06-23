@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Linq;
 using UnityEngine;
 
 [JsonObject(MemberSerialization.OptIn)]
@@ -11,9 +12,22 @@ public class Character
     private Dictionary<string, IStat> _stats;
     [JsonProperty]
     private float _nowExp = 0;
+    [JsonProperty]
+    private List<ITrait> _traits;
+    [JsonProperty]
+    private string _className;
 
-    public Character(string className)
+    public string ClassName => _className;  // Getter for _className
+    public List<ITrait> Traits => _traits;  // Getter for _traits
+
+    public Character(string className, List<ITrait> traits)
     {
+        _traits = new List<ITrait>();
+        if(traits != null)
+            _traits = traits;
+
+        _className = className;
+
         //TODO : 클래스별로 switch로 나누어야함
         _stats = new Dictionary<string, IStat>
         {
@@ -27,6 +41,7 @@ public class Character
             { "CriticalPer", new CriticalPer(0) },
             { "CriticalAtk", new CriticalAtk(0) }
         };
+        _className = className;
     }
 
     public void IncreaseStat(string statName, float amount)
@@ -79,5 +94,4 @@ public class Character
     {
         return _nowExp;
     }
-
 }
