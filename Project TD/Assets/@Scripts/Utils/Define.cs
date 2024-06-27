@@ -6,6 +6,7 @@ public class Define
 {
     public static bool _hasEnerge = false;
     public static bool _TabletActive = false;
+    public static bool _Tooltip = false;
 
     public enum Collection
     {

@@ -1,4 +1,4 @@
-using Rito.InventorySystem;
+using Minseok.CollectionSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

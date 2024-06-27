@@ -55,7 +55,7 @@ namespace Minseok.CollectionSystem
         }
 
         /// <summary> 툴팁 UI에 아이템 정보 등록 </summary>
-        public void SetItemInfo(ItemData data)
+        public void SetItemInfo(CollectionData data)
         {
             _titleText.text = data.Name;
             _contentText.text = data.Tooltip;
