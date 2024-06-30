@@ -14,6 +14,7 @@ TagManager:
   - Monster8
   - Monster9
   - Monster10
+  - Tower
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,8 @@ TagManager:
   - Water
   - UI
   - HexTile
-  - 
-  - 
+  - Player
+  - Tower
   - 
   - 
   - 

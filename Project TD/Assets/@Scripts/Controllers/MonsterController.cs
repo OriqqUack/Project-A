@@ -18,12 +18,6 @@ public class MonsterController : BaseController
     protected float _aggroDuration = 3.0f; // 어그로 지속 시간
     protected bool _isAggroTimeoutActive = false; // 어그로 타임아웃 활성화 여부
 
-    protected int stunCount = 0; // 경직 횟수를 축적
-    protected int maxStunCount = 1; // 최대 경직 횟수
-    protected bool _isStunning = false; // 경직중인지 여부
-    protected float _stunDuration = 3.0f; // 경직 지속 시간
-    protected Coroutine _stunCoroutine; // 경직 상태 코루틴
-
     [SerializeField]
     private LayerMask targetLayerMask; // 감지할 타깃 레이어 마스크 (직접 설정해서 해야함, 레이어마스크 아직 미설정)
 
@@ -67,7 +61,7 @@ public class MonsterController : BaseController
     protected override void UpdateMoving()
     {
         // 경직 상태일 때 이동하지 않음
-        if (_isStunning) // 코루틴이 시작일때 true였다가 코루틴이 끝나면 false가 되어야한다
+        if (_stat._isStunning) // 코루틴이 시작일때 true였다가 코루틴이 끝나면 false가 되어야한다
         {
             State = Define.State.Stun;
             return;
@@ -76,10 +70,8 @@ public class MonsterController : BaseController
         // 플레이어가 내 사정거리보다 가까우면 공격
         if (_lockTarget != null)
         {
-            // player태그와 tower태그를 감지
-            string[] tags = { "Player", "Tower" };
             // 스캔 범위에 들어오는 오브젝트의 태그를 확인해 lockTarget 변경
-            GameObject closestObject = FindClosestObject(tags);
+            GameObject closestObject = FindClosestObject();
 
             if (closestObject != rocket && closestObject != _lockTarget)
             {
@@ -102,7 +94,7 @@ public class MonsterController : BaseController
             else if (closestObject == rocket && !_isAggroTimeoutActive)
             {
                 // 타겟이 사정거리 밖으로 나갔을 때 어그로 해제 타이머 작동
-                _aggroCoroutine = StartCoroutine(AggroTimeout());
+                _aggroCoroutine = StartCoroutine(Co_AggroTimeout());
             }
         }
 
@@ -124,7 +116,7 @@ public class MonsterController : BaseController
     protected override void UpdateSkill()
     {
         // 경직 상태일 때 스킬 사용하지 않음
-        if (_isStunning)
+        if (_stat._isStunning)
         {
             State = Define.State.Stun;
             return;
@@ -143,7 +135,7 @@ public class MonsterController : BaseController
         _navMeshAgent.speed = 0;
         
         // 스턴중일때 상태가 바뀌지 않게 함
-        if (!_isStunning)
+        if (!_stat._isStunning)
             State = Define.State.Idle;
     }
 
@@ -168,25 +160,15 @@ public class MonsterController : BaseController
     }
 
     // 어그로 타이머 코루틴
-    private IEnumerator AggroTimeout()
+    private IEnumerator Co_AggroTimeout()
     {
         _isAggroTimeoutActive = true;
         yield return new WaitForSeconds(_aggroDuration);
         _lockTarget = rocket;
         _isAggroTimeoutActive = false;
     }
-
-    // 경직 상태 코루틴(한번만 걸리면 true로 바뀌어서 안걸림)
-    // 스턴중일때 false였다가 코루틴이 끝나면 true로 바뀌는 변수가 필요 = _isStunning.
-    protected virtual IEnumerator Stun()
-    {
-        stunCount++; // 경직 횟수 증가
-        _isStunning = true;
-        yield return new WaitForSeconds(_stunDuration);
-        _isStunning = false;
-    }
-
-    // HitEvent를 통해 경직 상태를 체크하고 적용
+    
+    // OnAttacked를 통해 경직 상태를 체크하고 적용
     protected virtual void OnHitEvent()
     {
         if (_lockTarget != null)
@@ -202,14 +184,6 @@ public class MonsterController : BaseController
                     State = Define.State.Skill;
                 else
                     State = Define.State.Moving;
-
-                // 경직 상태 체크 및 적용
-                if (_stat.Hp <= _stat.MaxHp / 3 && stunCount < maxStunCount && !_isStunning)
-                {
-                    if (_stunCoroutine != null)
-                        StopCoroutine(_stunCoroutine);
-                    _stunCoroutine = StartCoroutine(Stun());
-                }
             }
             else
             {

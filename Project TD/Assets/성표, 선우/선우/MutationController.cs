@@ -11,9 +11,4 @@ public class MutationController : MonsterController
     {
         base.OnHitEvent(); // 기본 경직 로직을 호출
     }
-
-    protected override IEnumerator Stun()
-    {
-        return base.Stun(); // 기본 경직 코루틴 호출
-    }
 }

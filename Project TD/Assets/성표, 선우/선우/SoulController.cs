@@ -28,14 +28,6 @@ public class SoulController : MonsterController
                     State = Define.State.Skill;
                 else
                     State = Define.State.Moving;
-
-                // 경직 상태 체크 및 적용
-                if (_stat.Hp <= _stat.MaxHp / 3 && stunCount < maxStunCount && !_isStunning)
-                {
-                    if (_stunCoroutine != null)
-                        StopCoroutine(_stunCoroutine);
-                    _stunCoroutine = StartCoroutine(Stun());
-                }
             }
             else
             {

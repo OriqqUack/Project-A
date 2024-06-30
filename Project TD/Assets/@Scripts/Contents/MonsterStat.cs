@@ -39,24 +39,64 @@ public class MonsterStat : Stat
     // 설정할 수 있게끔 만들어야하는데 어떻게 해야할까
     // 태그로 할까? 아님 타입으로 바로 지정해서 넣는게 가능할까?
 
+    protected int _stunCount = 0; // 경직 횟수를 축적
+    protected int _maxStunCount = 2; // 경직 최대 횟수 
+    public bool _isStunning = false; // 경직중인지 여부
+    protected float _stunDuration = 3.0f; // 경직 시간
+    protected Coroutine _stunCoroutine; // 경직 코루틴 변수
+    private float nextStunHpThreshold; // 경직 기준 체력값 설정
+    
     void Start()
     {
         SetStat(MonsterName);
+        nextStunHpThreshold = MaxHp * 2 / 3; // 첫번째 경직 기준 체력 설정
     }
 
+    // 경직을 체크하고 적용
+    public override void OnAttacked(Stat attacker)
+    {
+        int baseDamage = Mathf.Max(0, attacker.Attack - Defense);
+        int damage = baseDamage;
 
-    //public void SetMonster(string monsterName)
-    //{
-    //    switch (MonsterType)
-    //    {
-    //        case Define.Monsters.Slime:
-    //            SetStat("Slime");
-    //            break;
-    //        case Define.Monsters.Ork:
-    //            SetStat("Ork");
-    //            break;
-    //    }
-    //}
+        BaseController attackerController = attacker.GetComponent<BaseController>();
+        if (attackerController != null && attackerController.WorldObjectType == Define.WorldObject.Player)
+        {
+            int additionalDamage = Mathf.FloorToInt(baseDamage * 0.1f);
+            damage += additionalDamage;
+        }
+
+        Hp -= damage;
+        if (Hp <= 0)
+        {
+            Hp = 0;
+            OnDead(attacker);
+        }
+        else
+        {
+            if (Hp <= nextStunHpThreshold && _stunCount < _maxStunCount && !_isStunning)
+            {
+                if (_stunCoroutine != null)
+                    StopCoroutine(_stunCoroutine);
+                _stunCoroutine = StartCoroutine(Co_Stun());
+            }
+        }
+    }
+
+    // 경직 상태 코루틴(한번만 걸리면 true로 바뀌어서 안걸림)
+    // 스턴중일때 false였다가 코루틴이 끝나면 true로 바뀌는 변수가 필요 = _isStunning.
+    protected virtual IEnumerator Co_Stun()
+    {
+        _stunCount++;
+        _isStunning = true;
+        yield return new WaitForSeconds(_stunDuration);
+        _isStunning = false;
+        UpdateNextStunHpThreshold();
+    }
+
+    private void UpdateNextStunHpThreshold()
+    {
+        nextStunHpThreshold = MaxHp * (_maxStunCount - _stunCount) / 3;
+    }
 
     public void SetStat(string monsterName)
     {

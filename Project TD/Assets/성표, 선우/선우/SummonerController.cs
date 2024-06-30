@@ -81,14 +81,6 @@ public class SummonerController : MonsterController
     // 위에 코드를 넣어야할지말지 OnHitEvent가 호출되는 방식을 같이 생각해봐야할듯
     protected override void OnHitEvent()
     {
-        // 기본 경직 로직을 호출
-        if (_stat.Hp <= _stat.MaxHp / 3 && stunCount < maxStunCount && !_isStunning)
-        {
-            if (_stunCoroutine != null)
-                StopCoroutine(_stunCoroutine);
-            _stunCoroutine = StartCoroutine(Stun());
-        }
-
         // 소환사 공격 시 자폭병 소환
         if (canSummon && summonedBombers.Count < maxBombers)
         {
