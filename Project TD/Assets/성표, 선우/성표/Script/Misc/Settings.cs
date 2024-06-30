@@ -15,6 +15,12 @@ public static class Settings
     #endregion Random Appear Tile Time Range
 
     #region PLAYER ANIMATION PARAMETERS
+    public static int isMoving = Animator.StringToHash("Movement");
+    public static int isIdle = Animator.StringToHash("Idle");
+    public static int isRolling = Animator.StringToHash("Rolling");
+    public static int movementDirection = Animator.StringToHash("moveDirection");
+
     public static float baseSpeedForPlayerAnimatons = 10f;
     #endregion PLAYER ANIMATION PARAMETERS
+
 }

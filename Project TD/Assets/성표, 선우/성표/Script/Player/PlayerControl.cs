@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
@@ -13,12 +14,15 @@ public class PlayerControl : MonoBehaviour
     private bool isPlayerRolling = false;
     private float playerRollCooldownTimer = 0f;
 
+    private LayerMask groundLayerMask;
+
     private void Awake()
     {
         // load component
         player = GetComponent<Player>();
 
         moveSpeed = movementDetails.MoveSpeed;
+        groundLayerMask = LayerMask.GetMask("BaseRaycastLayer");
     }
 
     private void Start()
@@ -38,6 +42,8 @@ public class PlayerControl : MonoBehaviour
     private void Update()
     {
         if (isPlayerRolling) return;
+
+        RotatePlayerToAim();
 
         // 이동 관련 입력 처리 함수
         MovementInput();
@@ -152,6 +158,17 @@ public class PlayerControl : MonoBehaviour
 
             isPlayerRolling = false;
         }
+    }
+
+    private void RotatePlayerToAim()
+    {
+        Vector3 targetPosition = HelperUtilitie.GetMouseWorldPosition(groundLayerMask);
+        Debug.Log(targetPosition);
+        targetPosition.y = gameObject.transform.position.y;
+
+        Vector3 direction = targetPosition - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 10f);
     }
 
     #region Validation

@@ -9,6 +9,8 @@ public class MovementByVelocity : MonoBehaviour
     private Rigidbody rb;
     private MovementByVelocityEvent movementByVelocityEvent;
 
+    [HideInInspector] public float moveAngle;
+
     private void Awake()
     {
         // load component
@@ -39,5 +41,17 @@ public class MovementByVelocity : MonoBehaviour
     {
         //이동 속도 설정
         rb.velocity = moveDirection * moveSpeed;
+
+        moveAngle = GetMoveDirectionAngle(moveDirection);
+
+        Debug.Log(moveAngle);
     }
+
+    private float GetMoveDirectionAngle(Vector3 moveDirection)
+    {
+        Vector3 forwardVector = gameObject.transform.forward;
+
+        return HelperUtilitie.GetAngleBetweenVectors(moveDirection, forwardVector);
+    }
+    
 }

@@ -11,9 +11,9 @@ public class MovementDetailsSO : ScriptableObject
     [Header("MOVEMENT DETAILS")]
     #endregion Header Movement Details
     public float MoveSpeed = 8f;
-    public float rollSpeed; // for player   
-    public float rollDistance; // for player
-    public float rollCooldownTime; // for player
+    public float rollSpeed; 
+    public float rollDistance; 
+    public float rollCooldownTime; 
 
     #region Validation
 #if UNITY_EDITOR

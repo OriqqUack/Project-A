@@ -8,10 +8,9 @@ public static class HelperUtilitie
     #region Raycast Variable
     public static Camera mainCamera;
     public static Vector3 mouseWorldPosition;
-    public static LayerMask worldPositionLayerMask;
     #endregion Raycast Variable
 
-    public static Vector3 GetMouseWorldPosition()
+    public static Vector3 GetMouseWorldPosition(LayerMask worldPositionLayerMask)
     {
         if (mainCamera == null) mainCamera = Camera.main;
 
@@ -35,6 +34,19 @@ public static class HelperUtilitie
         return degrees;
     }
 
+    /// <summary>
+    /// Vector3를 두개 입력받아 X, Z 좌표만을 고려해 각도 계산
+    /// </summary>
+    /// <param name="vectorA"></param>
+    /// <param name="vectorB"></param>
+    /// <returns></returns>
+    public static float GetAngleBetweenVectors(Vector3 vectorA, Vector3 vectorB)
+    {
+        Vector3 fromVectorXZ = new Vector3(vectorA.x, 0, vectorA.z);
+        Vector3 toVectorXZ = new Vector3(vectorB.x, 0, vectorB.z);
+
+        return Vector3.SignedAngle(fromVectorXZ, toVectorXZ, Vector3.up);
+    } 
 
     public static bool ValidateCheckEmptySring(Object thisObject, string fieldName, string stringToCheck)
     {
@@ -175,6 +187,7 @@ public static class HelperUtilitie
 
         return error;
     }
+
 
     public static void Suffle<T>(this IList<T> list)
     {
