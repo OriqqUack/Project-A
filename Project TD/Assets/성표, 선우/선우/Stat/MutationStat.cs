@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class MutationStat : MonsterStat
 {
-    protected new int _maxStunCount = 3; // 돌연변이는 경직 총 4번
 
     protected override void Start()
     {
-        base.Start();
+        SetStat(MonsterName);
+        _maxStunCount = 3;
         nextStunHpThreshold = MaxHp * 3 / 4; // 첫번째 경직 기준 체력
     }
 

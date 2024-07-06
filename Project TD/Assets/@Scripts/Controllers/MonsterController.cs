@@ -11,15 +11,15 @@ public class MonsterController : BaseController
     [SerializeField]
     protected MonsterStat _stat;
 
-    GameObject player;
-    GameObject rocket;
+    protected GameObject player;
+    protected GameObject rocket;
 
     protected Coroutine _aggroCoroutine; // 어그로 해제 코루틴
     protected float _aggroDuration = 3.0f; // 어그로 지속 시간
     protected bool _isAggroTimeoutActive = false; // 어그로 타임아웃 활성화 여부
 
     [SerializeField]
-    private LayerMask targetLayerMask; // 감지할 타깃 레이어 마스크 (직접 설정해서 해야함, 레이어마스크 아직 미설정)
+    protected LayerMask targetLayerMask; // 감지할 타깃 레이어 마스크 (직접 설정해서 해야함, 레이어마스크 아직 미설정)
 
     protected NavMeshAgent _navMeshAgent;
 

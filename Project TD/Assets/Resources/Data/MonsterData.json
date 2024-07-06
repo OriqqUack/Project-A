@@ -32,80 +32,10 @@
       "attackRange": "1.5f"
     },
     {
-      "monsterName": "Monster4",
+      "monsterName": "SuicideBomber",
       "level": "1",
       "maxHp": "200",
-      "attack": "20",
-      "moveSpeed": "1.0f",
-      "attackSpeed": "0.8f",
-      "scanRange": "10.0f",
-      "attackRange": "1.5f"
-    },
-    {
-      "monsterName": "Monster5",
-      "level": "1",
-      "maxHp": "200",
-      "attack": "20",
-      "moveSpeed": "1.0f",
-      "attackSpeed": "0.8f",
-      "scanRange": "10.0f",
-      "attackRange": "1.5f"
-    },
-    {
-      "monsterName": "Monster6",
-      "level": "1",
-      "maxHp": "200",
-      "attack": "20",
-      "moveSpeed": "1.0f",
-      "attackSpeed": "0.8f",
-      "scanRange": "10.0f",
-      "attackRange": "1.5f"
-    },
-    {
-      "monsterName": "Monster7",
-      "level": "1",
-      "maxHp": "200",
-      "attack": "20",
-      "moveSpeed": "1.0f",
-      "attackSpeed": "0.8f",
-      "scanRange": "10.0f",
-      "attackRange": "1.5f"
-    },
-    {
-      "monsterName": "Monster8",
-      "level": "1",
-      "maxHp": "200",
-      "attack": "20",
-      "moveSpeed": "1.0f",
-      "attackSpeed": "0.8f",
-      "scanRange": "10.0f",
-      "attackRange": "1.5f"
-    },
-    {
-      "monsterName": "Monster9",
-      "level": "1",
-      "maxHp": "200",
-      "attack": "20",
-      "moveSpeed": "1.0f",
-      "attackSpeed": "0.8f",
-      "scanRange": "10.0f",
-      "attackRange": "1.5f"
-    },
-    {
-      "monsterName": "Monster10",
-      "level": "1",
-      "maxHp": "200",
-      "attack": "20",
-      "moveSpeed": "1.0f",
-      "attackSpeed": "0.8f",
-      "scanRange": "10.0f",
-      "attackRange": "1.5f"
-    },
-    {
-      "monsterName": "Monster11",
-      "level": "1",
-      "maxHp": "200",
-      "attack": "20",
+      "attack": "10",
       "moveSpeed": "1.0f",
       "attackSpeed": "0.8f",
       "scanRange": "10.0f",

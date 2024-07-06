@@ -24,7 +24,7 @@ public class SummonerController : MonsterController
         // 랜덤으로 소환 위치값 적용
         Vector3 summonPosition = GetRandomPositionInAttackRange();
 
-        GameObject bomber = Managers.Resource.Instantiate(bomberPrefabPath);
+        GameObject bomber = Managers.Game.Spawn(Define.WorldObject.Monster, bomberPrefabPath);
         // 소환 불발시 나타날 에러코드
         if (bomber == null)
         {
@@ -44,10 +44,7 @@ public class SummonerController : MonsterController
             {
                 StartCoroutine(SummonCooldownRoutine());
             }
-            else if (reason == SuicideBomberController.DespawnReason.SelfDestruct)
-            {
-                SummonBomber();
-            }
+            
         };
     }
 
@@ -81,10 +78,32 @@ public class SummonerController : MonsterController
     // 위에 코드를 넣어야할지말지 OnHitEvent가 호출되는 방식을 같이 생각해봐야할듯
     protected override void OnHitEvent()
     {
-        // 소환사 공격 시 자폭병 소환
-        if (canSummon && summonedBombers.Count < maxBombers)
+        if (_lockTarget != null)
         {
-            SummonBomber();
+            Stat targetStat = _lockTarget.GetComponent<Stat>();
+
+            if (targetStat.Hp > 0)
+            {
+                float distance = (_lockTarget.transform.position - transform.position).magnitude;
+                if (distance <= _stat.AttackRange)
+                    State = Define.State.Skill;
+                else
+                    State = Define.State.Moving;
+            }
+            else
+            {
+                State = Define.State.Idle;
+            }
+
+            // 소환사 공격 시 자폭병 소환
+            if (canSummon && summonedBombers.Count < maxBombers)
+            {
+                SummonBomber();
+            }
+        }
+        else
+        {
+            State = Define.State.Idle;
         }
     }
 }
