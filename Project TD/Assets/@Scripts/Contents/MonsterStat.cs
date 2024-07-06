@@ -44,9 +44,9 @@ public class MonsterStat : Stat
     public bool _isStunning = false; // 경직중인지 여부
     protected float _stunDuration = 3.0f; // 경직 시간
     protected Coroutine _stunCoroutine; // 경직 코루틴 변수
-    private float nextStunHpThreshold; // 경직 기준 체력값 설정
+    protected float nextStunHpThreshold; // 경직 기준 체력값 설정
     
-    void Start()
+    protected virtual void Start()
     {
         SetStat(MonsterName);
         nextStunHpThreshold = MaxHp * 2 / 3; // 첫번째 경직 기준 체력 설정
@@ -57,13 +57,6 @@ public class MonsterStat : Stat
     {
         int baseDamage = Mathf.Max(0, attacker.Attack - Defense);
         int damage = baseDamage;
-
-        BaseController attackerController = attacker.GetComponent<BaseController>();
-        if (attackerController != null && attackerController.WorldObjectType == Define.WorldObject.Player)
-        {
-            int additionalDamage = Mathf.FloorToInt(baseDamage * 0.1f);
-            damage += additionalDamage;
-        }
 
         Hp -= damage;
         if (Hp <= 0)
@@ -93,7 +86,7 @@ public class MonsterStat : Stat
         UpdateNextStunHpThreshold();
     }
 
-    private void UpdateNextStunHpThreshold()
+    protected virtual void UpdateNextStunHpThreshold()
     {
         nextStunHpThreshold = MaxHp * (_maxStunCount - _stunCount) / 3;
     }

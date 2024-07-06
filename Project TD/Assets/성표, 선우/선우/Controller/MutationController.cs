@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MutationController : MonsterController
 {
-    protected new int maxStunCount = 4; // 최대 경직 횟수
+    
 
     // 재정의 할 수 있는 가능성을 열어둠
     protected override void OnHitEvent()
