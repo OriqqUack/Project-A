@@ -11,9 +11,9 @@ public class Define
     public enum Collection
     {
         // 도감이 채울 수 있는 갯수
-        Achievement = 32,
-        Monster = 32,
-        Weapon = 32,
+        Achievement = 20,
+        Monster = 20,
+        Weapon = 20,
     }
 
     public enum WorldObject

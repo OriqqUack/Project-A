@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Data;
+using Minseok.Collection;
+using System.IO;
 
 public interface ILoader<Key, Value>
 {
@@ -11,6 +14,8 @@ public interface ILoader<Key, Value>
 public class DataManager
 {
     public Dictionary<string, Data.MonsterStat> MonsterDict { get; private set; } = new Dictionary<string, Data.MonsterStat>();
+
+    public Dictionary<string, CollectionData.Collection> collectionDic = new Dictionary<string, CollectionData.Collection>();
 
 
     public void Init()

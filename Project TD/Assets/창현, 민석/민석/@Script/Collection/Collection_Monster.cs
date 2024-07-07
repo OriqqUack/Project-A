@@ -1,323 +1,390 @@
 using Minseok.Collection;
+using Data;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Collection_Monster : MonoBehaviour
+
+namespace Minseok.Collection
 {
-    [SerializeField]
-    public GameObject _tooltip;
-
-    [SerializeField]
-    public TextMeshProUGUI _title;
-
-    [SerializeField]
-    public TextMeshProUGUI _content;
-
-    private void Update()
+    // 몬스터 도감에 제목과 내용을 적으면 됨
+    public class Collection_Monster : MonoBehaviour
     {
-        if (Input.GetKey(KeyCode.D))
-            _tooltip.SetActive(false);
-    }
+        [SerializeField]
+        public GameObject _tooltip;
 
-    public void Monster0()
-    {
-        if (FindCollection.FCMonster0)
-        {
-            // TODO
-            _tooltip.SetActive(true);
-        }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
+        [SerializeField]
+        public TextMeshProUGUI _title;
 
-    public void Monster1()
-    {
-        if (FindCollection.FCMonster1)
-        {
-            // TODO
-            _tooltip.SetActive(true);
-        }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
+        [SerializeField]
+        public TextMeshProUGUI _content;
 
-    public void Monster2()
-    {
-        if (FindCollection.FCMonster2)
+        private void Update()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Input.GetKey(KeyCode.D))
+                _tooltip.SetActive(false);
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster3()
-    {
-        if (FindCollection.FCMonster3)
+        public void Monster0()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[0])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster4()
-    {
-        if (FindCollection.FCMonster4)
+        public void Monster1()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[1])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster5()
-    {
-        if (FindCollection.FCMonster5)
+        public void Monster2()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[2])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster6()
-    {
-        if (FindCollection.FCMonster6)
+        public void Monster3()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[3])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster7()
-    {
-        if (FindCollection.FCMonster7)
+        public void Monster4()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[4])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster8()
-    {
-        if (FindCollection.FCMonster8)
+        public void Monster5()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[5])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster9()
-    {
-        if (FindCollection.FCMonster9)
+        public void Monster6()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[6])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster10()
-    {
-        if (FindCollection.FCMonster10)
+        public void Monster7()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[7])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster11()
-    {
-        if (FindCollection.FCMonster11)
+        public void Monster8()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[8])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster12()
-    {
-        if (FindCollection.FCMonster12)
+        public void Monster9()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[9])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster13()
-    {
-        if (FindCollection.FCMonster13)
+        public void Monster10()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[10])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster14()
-    {
-        if (FindCollection.FCMonster14)
+        public void Monster11()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[11])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster15()
-    {
-        if (FindCollection.FCMonster15)
+        public void Monster12()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[12])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster16()
-    {
-        if (FindCollection.FCMonster16)
+        public void Monster13()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[13])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster17()
-    {
-        if (FindCollection.FCMonster17)
+        public void Monster14()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[14])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster18()
-    {
-        if (FindCollection.FCMonster18)
+        public void Monster15()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[15])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Monster19()
-    {
-        if (FindCollection.FCMonster19)
+        public void Monster16()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[16])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
+
+        public void Monster17()
         {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[17])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
+        }
+
+        public void Monster18()
+        {
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[18])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
+        }
+
+        public void Monster19()
+        {
+            if (Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[19])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
     }
 }
+

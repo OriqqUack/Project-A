@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Minseok.Collection;
 
 namespace Data
 { 
@@ -147,22 +148,6 @@ namespace Data
         public string name;
         public string description;
         public string imagePath;
-    }
-
-    [Serializable]
-    public class CollectionData : ILoader<int, CollectionEntry>
-    {
-        public List<CollectionEntry> collections = new List<CollectionEntry>();
-
-        public Dictionary<int, CollectionEntry> MakeDict()
-        {
-            Dictionary<int, CollectionEntry> dict = new Dictionary<int, CollectionEntry>();
-            foreach (CollectionEntry c in collections)
-            {
-                dict.Add(c.itemNumber, c);
-            }
-            return dict;
-        }
     }
     #endregion
 }

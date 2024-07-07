@@ -1,323 +1,389 @@
 using Minseok.Collection;
+using Data;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Collection_Weapon : MonoBehaviour
+namespace Minseok.Collection
 {
-    [SerializeField]
-    public GameObject _tooltip;
-
-    [SerializeField]
-    public TextMeshProUGUI _title;
-
-    [SerializeField]
-    public TextMeshProUGUI _content;
-
-    private void Update()
+    // 무기 도감에 제목과 내용을 적으면 됨
+    public class Collection_Weapon : MonoBehaviour
     {
-        if (Input.GetKey(KeyCode.D))
-            _tooltip.SetActive(false);
-    }
+        [SerializeField]
+        public GameObject _tooltip;
 
-    public void Weapon0()
-    {
-        if (FindCollection.FCWeapon0)
-        {
-            // TODO
-            _tooltip.SetActive(true);
-        }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
+        [SerializeField]
+        public TextMeshProUGUI _title;
 
-    public void Weapon1()
-    {
-        if (FindCollection.FCWeapon1)
-        {
-            // TODO
-            _tooltip.SetActive(true);
-        }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
+        [SerializeField]
+        public TextMeshProUGUI _content;
 
-    public void Weapon2()
-    {
-        if (FindCollection.FCWeapon2)
+        private void Update()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Input.GetKey(KeyCode.D))
+                _tooltip.SetActive(false);
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon3()
-    {
-        if (FindCollection.FCWeapon3)
+        public void Weapon0()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[0])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon4()
-    {
-        if (FindCollection.FCWeapon4)
+        public void Weapon1()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[1])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon5()
-    {
-        if (FindCollection.FCWeapon5)
+        public void Weapon2()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[2])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon6()
-    {
-        if (FindCollection.FCWeapon6)
+        public void Weapon3()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[3])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon7()
-    {
-        if (FindCollection.FCWeapon7)
+        public void Weapon4()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[4])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon8()
-    {
-        if (FindCollection.FCWeapon8)
+        public void Weapon5()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[5])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon9()
-    {
-        if (FindCollection.FCWeapon9)
+        public void Weapon6()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[6])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon10()
-    {
-        if (FindCollection.FCWeapon10)
+        public void Weapon7()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[7])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon11()
-    {
-        if (FindCollection.FCWeapon11)
+        public void Weapon8()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[8])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon12()
-    {
-        if (FindCollection.FCWeapon12)
+        public void Weapon9()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[9])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon13()
-    {
-        if (FindCollection.FCWeapon13)
+        public void Weapon10()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[10])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon14()
-    {
-        if (FindCollection.FCWeapon14)
+        public void Weapon11()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[11])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon15()
-    {
-        if (FindCollection.FCWeapon15)
+        public void Weapon12()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[12])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon16()
-    {
-        if (FindCollection.FCWeapon16)
+        public void Weapon13()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[13])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon17()
-    {
-        if (FindCollection.FCWeapon17)
+        public void Weapon14()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[14])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon18()
-    {
-        if (FindCollection.FCWeapon18)
+        public void Weapon15()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[15])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
-        {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
-        }
-    }
 
-    public void Weapon19()
-    {
-        if (FindCollection.FCWeapon19)
+        public void Weapon16()
         {
-            // TODO
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[16])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
-        else
+
+        public void Weapon17()
         {
-            _title.text = "???";
-            _content.text = "???";
-            _tooltip.SetActive(true);
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[17])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
+        }
+
+        public void Weapon18()
+        {
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[18])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
+        }
+
+        public void Weapon19()
+        {
+            if (Managers.Data.collectionDic.TryGetValue("Weapon", out CollectionData.Collection value))
+            {
+                if (value.Index[19])
+                {
+                    // TODO
+                    _tooltip.SetActive(true);
+                }
+                else
+                {
+                    _title.text = "???";
+                    _content.text = "???";
+                    _tooltip.SetActive(true);
+                }
+            }
         }
     }
 }
+

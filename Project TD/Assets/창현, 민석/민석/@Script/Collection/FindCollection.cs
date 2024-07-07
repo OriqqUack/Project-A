@@ -1,83 +1,15 @@
+using System;
+using Data;
+using Minseok.Collection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Minseok.Collection
 {
+    // 도감을 열 수 있는 조건을 적으면 됨
     public class FindCollection : MonoBehaviour
     {
-        // Achievement
-        #region
-        public static bool FCAchievement0 = false;
-        public static bool FCAchievement1 = false;
-        public static bool FCAchievement2 = false;
-        public static bool FCAchievement3 = false;
-        public static bool FCAchievement4 = false;
-        public static bool FCAchievement5 = false;
-        public static bool FCAchievement6 = false;
-        public static bool FCAchievement7 = false;
-        public static bool FCAchievement8 = false;
-        public static bool FCAchievement9 = false;
-        public static bool FCAchievement10 = false;
-        public static bool FCAchievement11 = false;
-        public static bool FCAchievement12 = false;
-        public static bool FCAchievement13 = false;
-        public static bool FCAchievement14 = false;
-        public static bool FCAchievement15 = false;
-        public static bool FCAchievement16 = false;
-        public static bool FCAchievement17 = false;
-        public static bool FCAchievement18 = false;
-        public static bool FCAchievement19 = false;
-        #endregion
-
-        // Monster
-        #region
-        public static bool FCMonster0 = false;
-        public static bool FCMonster1 = false;
-        public static bool FCMonster2 = false;
-        public static bool FCMonster3 = false;
-        public static bool FCMonster4 = false;
-        public static bool FCMonster5 = false;
-        public static bool FCMonster6 = false;
-        public static bool FCMonster7 = false;
-        public static bool FCMonster8 = false;
-        public static bool FCMonster9 = false;
-        public static bool FCMonster10 = false;
-        public static bool FCMonster11 = false;
-        public static bool FCMonster12 = false;
-        public static bool FCMonster13 = false;
-        public static bool FCMonster14 = false;
-        public static bool FCMonster15 = false;
-        public static bool FCMonster16 = false;
-        public static bool FCMonster17 = false;
-        public static bool FCMonster18 = false;
-        public static bool FCMonster19 = false;
-        #endregion
-
-        // Weapon
-        #region
-        public static bool FCWeapon0 = false;
-        public static bool FCWeapon1 = false;
-        public static bool FCWeapon2 = false;
-        public static bool FCWeapon3 = false;
-        public static bool FCWeapon4 = false;
-        public static bool FCWeapon5 = false;
-        public static bool FCWeapon6 = false;
-        public static bool FCWeapon7 = false;
-        public static bool FCWeapon8 = false;
-        public static bool FCWeapon9 = false;
-        public static bool FCWeapon10 = false;
-        public static bool FCWeapon11 = false;
-        public static bool FCWeapon12 = false;
-        public static bool FCWeapon13 = false;
-        public static bool FCWeapon14 = false;
-        public static bool FCWeapon15 = false;
-        public static bool FCWeapon16 = false;
-        public static bool FCWeapon17 = false;
-        public static bool FCWeapon18 = false;
-        public static bool FCWeapon19 = false;
-        #endregion
-
         private void Update()
         {
             // Achievement
@@ -161,13 +93,16 @@ namespace Minseok.Collection
 
             // 테블릿을 열면 업적 달성
             GameObject go = Util.FindChild(root, "Tablet", true);
-            if (go)
-                FCAchievement0 = true;
+            if (go && Managers.Data.collectionDic.TryGetValue("Achievement", out CollectionData.Collection value))
+            {
+                value.Index[0] = true;
+            }
         }
 
         private void FindAchievement1()
         {
-            // TODO
+            if (Input.GetKey(KeyCode.P) && Managers.Data.collectionDic.TryGetValue("Achievement", out CollectionData.Collection value))
+                value.Index[1] = true;
         }
 
         private void FindAchievement2()

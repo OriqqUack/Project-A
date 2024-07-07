@@ -5,6 +5,7 @@ using UnityEngine;
 public class Managers : MonoBehaviour
 {
     static Managers s_instance; // 유일성이 보장된다
+
     static Managers Instance { get { Init(); return s_instance; } } // 유일한 매니저를 갖고온다
 
 	#region Contents
@@ -35,16 +36,12 @@ public class Managers : MonoBehaviour
 
 	void Awake()
     {
-	}
+        
+    }
 
     void Update()
     {
         _input.OnUpdate();
-    }
-
-    private void Start()
-    {
-
     }
 
     static void Init()
