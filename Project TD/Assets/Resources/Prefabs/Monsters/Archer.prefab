@@ -265,11 +265,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7908717886836890410}
   - component: {fileID: 7908717886836890409}
-  - component: {fileID: 3303542371598808658}
   - component: {fileID: 7908717886836890583}
-  - component: {fileID: 7908717886836890411}
+  - component: {fileID: 7622215401445634616}
   m_Layer: 0
-  m_Name: Knight
+  m_Name: Archer
   m_TagString: Monster3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -319,29 +318,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3303542371598808658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7908717886836890582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90820ad3e6adc4f419e600f83455b763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _level: 0
-  _hp: 0
-  _maxHp: 0
-  _attack: 0
-  _defense: 0
-  _moveSpeed: 0
-  _monsterName: TestWarrior
-  _attackSpeed: 0
-  _scanRange: 0
-  _attackRange: 0
-  _isStunning: 0
 --- !u!136 &7908717886836890583
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -365,7 +341,7 @@ CapsuleCollider:
   m_Height: 2.1753025
   m_Direction: 1
   m_Center: {x: -0.018514067, y: 0.888664, z: 0.08389783}
---- !u!114 &7908717886836890411
+--- !u!114 &7622215401445634616
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -374,16 +350,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 7908717886836890582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a61db26d0692fa14bb38d93bb396be83, type: 3}
+  m_Script: {fileID: 11500000, guid: 25e2be7c2f8d48641b99be3fb50e0d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destPos: {x: 0, y: 0, z: 0}
-  _state: 2
-  _lockTarget: {fileID: 0}
-  _stat: {fileID: 0}
-  targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 384
+  _level: 0
+  _hp: 0
+  _maxHp: 0
+  _attack: 0
+  _defense: 0
+  _moveSpeed: 0
+  _monsterName: TestArcher
+  _attackSpeed: 0
+  _scanRange: 0
+  _attackRange: 0
+  _isStunning: 0
 --- !u!1 &7908717886868789901
 GameObject:
   m_ObjectHideFlags: 0

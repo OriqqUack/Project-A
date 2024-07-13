@@ -221,10 +221,11 @@ MonoBehaviour:
   _attack: 0
   _defense: 0
   _moveSpeed: 0
-  _monsterName: Monster2
+  _monsterName: TestWarrior
   _attackSpeed: 0
   _scanRange: 0
   _attackRange: 0
+  _isStunning: 0
 --- !u!114 &943974134721062161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +242,9 @@ MonoBehaviour:
   _state: 2
   _lockTarget: {fileID: 0}
   _stat: {fileID: 0}
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!136 &1900002914067588726
 CapsuleCollider:
   m_ObjectHideFlags: 0

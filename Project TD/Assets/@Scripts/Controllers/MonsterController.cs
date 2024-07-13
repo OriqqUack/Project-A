@@ -70,7 +70,6 @@ public class MonsterController : BaseController
         // 플레이어가 내 사정거리보다 가까우면 공격
         if (_lockTarget != null)
         {
-            // 스캔 범위에 들어오는 오브젝트의 태그를 확인해 lockTarget 변경
             GameObject closestObject = FindClosestObject();
 
             if (closestObject != rocket && closestObject != _lockTarget)
