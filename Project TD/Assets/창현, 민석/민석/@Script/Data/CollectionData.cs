@@ -41,6 +41,8 @@ namespace Minseok.Collection
 
             CollectionList collection = new CollectionList();
             collection._collection = Managers.Data.collectionDic;
+
+            LoadCollection();
         }
 
         public void SaveCollection()
@@ -54,6 +56,7 @@ namespace Minseok.Collection
                 Directory.CreateDirectory(path);
             }
             File.WriteAllText(path + "/CollectionData.txt", jsonData);
+            Debug.Log("저장하기 성공!!");
         }
 
         public void LoadCollection()
@@ -66,6 +69,7 @@ namespace Minseok.Collection
             //CollectionList CollectionFromJson = new CollectionList();
             Managers.Data.collectionDic = DictionaryJsonUtility.FromJson<string, Collection>(fromJsonData);
             print(Managers.Data.collectionDic);
+            Debug.Log("불러오기 성공!!");
         }
 
     }

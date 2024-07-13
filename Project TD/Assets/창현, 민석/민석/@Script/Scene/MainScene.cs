@@ -37,6 +37,11 @@ public class MainScene : BaseScene
         }
     }
 
+    private void OnApplicationQuit()
+    {
+        _collectionData.SaveCollection();
+    }
+
     public void CollectionSave()
     {
         _collectionData.SaveCollection();

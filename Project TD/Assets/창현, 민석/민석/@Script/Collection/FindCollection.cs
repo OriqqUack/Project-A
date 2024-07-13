@@ -4,14 +4,28 @@ using Minseok.Collection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace Minseok.Collection
 {
     // 도감을 열 수 있는 조건을 적으면 됨
     public class FindCollection : MonoBehaviour
     {
+        [SerializeField]
+        public GameObject _activateImage;
+
+        [SerializeField]
+        public TextMeshProUGUI _title;
+
+        [SerializeField]
+        public TextMeshProUGUI _content;
+
+
         private void Update()
         {
+            if (Input.GetKey(KeyCode.D))
+                _activateImage.SetActive(false);
+
             // Achievement
             #region
             FindAchievement0();
@@ -95,14 +109,36 @@ namespace Minseok.Collection
             GameObject go = Util.FindChild(root, "Tablet", true);
             if (go && Managers.Data.collectionDic.TryGetValue("Achievement", out CollectionData.Collection value))
             {
-                value.Index[0] = true;
+                if (value.Index[0] == true)
+                    return;
+                else
+                {
+                    // 업적 활성화 창 띄우기
+                    _title.text = "업적 첫번째 해금!!!";
+                    _content.text = "테블릿을 열었습니다~~";
+                    _activateImage.SetActive(true);
+                    value.Index[0] = true;
+                }
+                
             }
         }
 
         private void FindAchievement1()
         {
+            // P키를 누르면 업적 달성
             if (Input.GetKey(KeyCode.P) && Managers.Data.collectionDic.TryGetValue("Achievement", out CollectionData.Collection value))
-                value.Index[1] = true;
+            {
+                if (value.Index[1] == true)
+                    return;
+                else
+                {
+                    // 업적 활성화 창 띄우기
+                    _title.text = "업적 두번째 해금!!!";
+                    _content.text = "P키를 눌러보기";
+                    _activateImage.SetActive(true);
+                    value.Index[1] = true;
+                }
+            }
         }
 
         private void FindAchievement2()

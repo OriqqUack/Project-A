@@ -162,7 +162,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6466320819986709806}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &3138979806082856569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +318,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7336140526205037784}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &4187523142595034546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,6 +466,18 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1226939580590555256, guid: 27547b233187e6542aa1b0b4444ced24,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
+        'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
+        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
+        'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftShoulder'\n\tand
+        more ...\n\tFrom animation clip 'Attack1.com'\n\tFrom animation clip 'Attack2.com'\n\tFrom
+        animation clip 'Attack3.com'"
       objectReference: {fileID: 0}
     - target: {fileID: 1226939580590555256, guid: 27547b233187e6542aa1b0b4444ced24,
         type: 3}
@@ -764,6 +776,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3723204836694898286}
+    - targetCorrespondingSourceObject: {fileID: 5525084912211329208, guid: 27547b233187e6542aa1b0b4444ced24,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5619979536371240870}
   m_SourcePrefab: {fileID: 100100000, guid: 27547b233187e6542aa1b0b4444ced24, type: 3}
 --- !u!4 &1478278584585987033 stripped
 Transform:
@@ -841,7 +857,7 @@ MonoBehaviour:
   _name: 
   _exp: 0
   _totalExp: 0
-  _gold: 0
+  _energe: 0
   _luck: 0
 --- !u!114 &6384704129236077121
 MonoBehaviour:
@@ -865,5 +881,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3a4f8792c4a7154f8193dd3b9ddbda8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackDistance: 5
+--- !u!114 &5619979536371240870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9121424429891428465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba58304166f1b84988e1ccf77090ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
