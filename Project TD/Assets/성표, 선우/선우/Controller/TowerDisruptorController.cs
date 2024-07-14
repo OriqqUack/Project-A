@@ -54,8 +54,14 @@ public class TowerDisruptorController : SoulController
         {
             // Ã¼·Â
             Stat targetStat = _lockTarget.GetComponent<Stat>();
+            TowerController tower = _lockTarget.GetComponent<TowerController>();
 
             targetStat.OnAttacked(_stat);
+
+            if (tower != null && !tower.isDisabled)
+            {
+                TryDisableTower(tower);
+            }
 
             if (targetStat.Hp > 0)
             {
@@ -76,5 +82,12 @@ public class TowerDisruptorController : SoulController
         }
     }
 
+    private void TryDisableTower(TowerController tower)
+    {
+        if (Random.value < disableChance)
+        {
+            tower.DisableTower();
+        }
+    }
 
 }
