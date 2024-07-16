@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Define
 {
-    public static bool _hasEnerge = false;
-    public static bool _TabletActive = false;
+    public static bool _hasEnerge = false;      // 에너지 갯수 파악용 bool
+    public static bool _TabletActive = false;   // 에너지 UI SetActive bool
     public static bool _Tooltip = false;
+    public static bool _AttackCombo1 = true;   // 애니메이션 맨주먹 콤보 bool
+    public static bool _AxeCombo1 = false;      // 애니메이션 도끼 콤보 bool
 
     public enum Collection
     {
