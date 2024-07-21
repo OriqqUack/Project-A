@@ -38,6 +38,39 @@ public class MonsterController : BaseController
         player = Managers.Game.GetPlayer();
     }
 
+    public override Define.State State
+    {
+        get { return _state; }
+        set
+        {
+            _state = value;
+
+            Animator anim = GetComponent<Animator>();
+            switch (_state)
+            {
+                case Define.State.Die:
+                    break;
+                case Define.State.Idle:
+                    anim.speed = 1.0f;
+                    anim.CrossFade("WAIT", 0.1f);
+                    break;
+                case Define.State.Moving:
+                    anim.speed = 1.0f;
+                    anim.CrossFade("RUN", 0.1f);
+                    break;
+                case Define.State.Skill:
+                    anim.speed = _stat.AttackSpeed;
+                    anim.CrossFade("ATTACK", 0.1f, -1, 0);
+                    break;
+                case Define.State.Stun:
+                    anim.speed = 1.0f;
+                    anim.CrossFade("STUN", 0.1f);
+                    break;
+
+            }
+        }
+    }
+
     protected override void UpdateIdle()
     {
         // 처음 lockTarget을 rocket으로 설정

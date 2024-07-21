@@ -33,6 +33,12 @@ public class TowerStat : Stat
 
     void Start()
     {
-
+        _level = 1;
+        _hp = 100;
+        _maxHp = 100;
+        _attack = 50;
+        _defense = 5;
+        _attackSpeed = 1.0f;
+        _attackRange = 10f;
     }
 }

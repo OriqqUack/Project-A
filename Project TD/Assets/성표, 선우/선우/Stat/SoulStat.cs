@@ -6,15 +6,21 @@ public class SoulStat : MonsterStat
 {
     public override void OnAttacked(Stat attacker)
     {
+        if (attacker == null)
+        {
+            Debug.LogError("Attacker is null in SoulStat.OnAttacked");
+            return;
+        }
+
         int baseDamage = Mathf.Max(0, attacker.Attack - Defense);
         int damage = baseDamage;
 
-        BaseController attackerController = attacker.GetComponent<BaseController>();
-        if (attackerController != null && attackerController.WorldObjectType == Define.WorldObject.Player) // 플레이어에게 공격 받을 시
-        {
-            int additionalDamage = Mathf.FloorToInt(baseDamage * 0.1f); // 10프로 데미지 추가
-            damage += additionalDamage;
-        }
+        //BaseController attackerController = attacker.GetComponent<BaseController>();
+        //if (attackerController != null && attackerController.WorldObjectType == Define.WorldObject.Player) // 플레이어에게 공격 받을 시
+        //{
+        //    int additionalDamage = Mathf.FloorToInt(baseDamage * 0.1f); // 10프로 데미지 추가
+        //    damage += additionalDamage;
+        //}
 
         Hp -= damage;
         if (Hp <= 0)

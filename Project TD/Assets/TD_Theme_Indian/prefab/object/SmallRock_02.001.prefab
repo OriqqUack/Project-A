@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3093687437952035960}
   - component: {fileID: 5538903528513297435}
   - component: {fileID: 8349693349007697972}
+  - component: {fileID: 5497851820114429210}
   m_Layer: 0
   m_Name: SmallRock_02.001
   m_TagString: Untagged
@@ -83,3 +84,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &5497851820114429210
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8973486496511556354}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.3285675
+  m_Height: 3.037567
+  m_Direction: 1
+  m_Center: {x: 0.1634674, y: 0.43331373, z: -0.3666787}

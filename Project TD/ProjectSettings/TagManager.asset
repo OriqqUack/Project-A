@@ -15,6 +15,8 @@ TagManager:
   - Monster9
   - Monster10
   - Tower
+  - Missile
+  - Target
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - HexTile
   - Player
   - Tower
-  - 
+  - Monster
   - 
   - 
   - 
