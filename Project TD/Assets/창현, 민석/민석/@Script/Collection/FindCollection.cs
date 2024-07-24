@@ -237,7 +237,20 @@ namespace Minseok.Collection
         #region
         private void FindMonster0()
         {
-            // TODO
+            // P키를 누르면 업적 달성
+            if (Define._Monster0 && Managers.Data.collectionDic.TryGetValue("Monster", out CollectionData.Collection value))
+            {
+                if (value.Index[0] == true)
+                    return;
+                else
+                {
+                    // 업적 활성화 창 띄우기
+                    _title.text = "업적 첫번째 해금!!!";
+                    _content.text = "몬스터 만나기 테스트";
+                    _activateImage.SetActive(true);
+                    value.Index[0] = true;
+                }
+            }
         }
 
         private void FindMonster1()

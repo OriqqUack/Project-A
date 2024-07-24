@@ -9,6 +9,7 @@ public class Define
     public static bool _Tooltip = false;
     public static bool _AttackCombo1 = true;   // 애니메이션 맨주먹 콤보 bool
     public static bool _AxeCombo1 = false;      // 애니메이션 도끼 콤보 bool
+    public static bool _Monster0 = false;
 
     public enum Collection
     {

@@ -27,6 +27,15 @@ public class MyAction : MonoBehaviour
 
     private void Update()
     {
+        if (Define._TabletActive)
+        {
+            anim.enabled = false;
+        }
+        else
+        {
+            anim.enabled = true;
+        }
+
         switch (state)
         {
             case Define.State.Die:

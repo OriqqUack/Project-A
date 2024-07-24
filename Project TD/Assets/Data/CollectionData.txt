@@ -31,7 +31,7 @@
             "Key": "Monster",
             "Value": {
                 "Index": [
-                    false,
+                    true,
                     false,
                     false,
                     false,

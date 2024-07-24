@@ -33,6 +33,8 @@ namespace Minseok.Collection
                 if (value.Index[0])
                 {
                     // TODO
+                    _title.text = "테스트";
+                    _content.text = "테스트0";
                     _tooltip.SetActive(true);
                 }
                 else
