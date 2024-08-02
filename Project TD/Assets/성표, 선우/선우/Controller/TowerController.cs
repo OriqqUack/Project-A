@@ -5,29 +5,29 @@ using UnityEngine;
 
 public class TowerController : MonoBehaviour
 {
-    TowerStat _towerStat;
+    protected TowerStat _towerStat;
 
     public GameObject bulletPrefab; // 불릿 프리팹
     public Transform firePoint; // 불릿이 발사되는 지점
     public float range = 10f; // 타워의 사정거리
     public float fireRate = 1f; // 발사 속도 (초당 발사 수)
 
-    private float fireCountdown = 0f;
+    protected float fireCountdown = 0f;
 
     [SerializeField]
-    private GameObject target;
+    protected GameObject target;
 
     [SerializeField]
     protected LayerMask targetLayerMask;
 
     public bool isDisabled = false;
 
-    private void Start()
+    protected virtual void Start()
     {
         _towerStat = GetComponent<TowerStat>();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (isDisabled)
         {
@@ -49,7 +49,7 @@ public class TowerController : MonoBehaviour
         fireCountdown -= Time.deltaTime;
     }
 
-    public GameObject UpdateTarget()
+    public virtual GameObject UpdateTarget()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _towerStat.AttackRange, targetLayerMask);
         GameObject closestObject = null;
@@ -66,32 +66,9 @@ public class TowerController : MonoBehaviour
         }
 
         return closestObject;
-
-        //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        //float shortestDistance = Mathf.Infinity;
-        //GameObject nearestEnemy = null;
-
-        //foreach (GameObject enemy in enemies)
-        //{
-        //    float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-        //    if (distanceToEnemy < shortestDistance)
-        //    {
-        //        shortestDistance = distanceToEnemy;
-        //        nearestEnemy = enemy;
-        //    }
-        //}
-
-        //if (nearestEnemy != null && shortestDistance <= range)
-        //{
-        //    target = nearestEnemy.transform;
-        //}
-        //else
-        //{
-        //    target = null;
-        //}
     }
 
-    void Shoot()
+    protected virtual void Shoot()
     {
         GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation, transform);
         BombBullet bullet = bulletGO.GetComponent<BombBullet>();
@@ -102,13 +79,13 @@ public class TowerController : MonoBehaviour
         }
     }
 
-    public void DisableTower()
+    public virtual void DisableTower()
     {
         isDisabled = true;
         // 타워 고장 시 추가 로직이 필요하면 여기 추가
     }
 
-    public void RepairTower()
+    public virtual void RepairTower()
     {
         isDisabled = false;
         // 타워 수리 시 추가 로직이 필요하면 여기 추가
