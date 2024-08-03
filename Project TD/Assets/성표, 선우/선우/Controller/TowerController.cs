@@ -8,6 +8,7 @@ public class TowerController : MonoBehaviour
     protected TowerStat _towerStat;
 
     public GameObject bulletPrefab; // 불릿 프리팹
+    public Transform fireHead; // 타겟을 따라갈 머리
     public Transform firePoint; // 불릿이 발사되는 지점
     public float range = 10f; // 타워의 사정거리
     public float fireRate = 1f; // 발사 속도 (초당 발사 수)
@@ -40,6 +41,7 @@ public class TowerController : MonoBehaviour
         if (target == null)
             return;
 
+        RotateTowardsTarget();
         if (fireCountdown <= 0f)
         {
             Shoot();
@@ -66,6 +68,16 @@ public class TowerController : MonoBehaviour
         }
 
         return closestObject;
+    }
+
+    protected void RotateTowardsTarget()
+    {
+        if (target != null)
+        {
+            Vector3 direction = target.transform.position - fireHead.position;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            fireHead.rotation = Quaternion.Lerp(fireHead.rotation, lookRotation, Time.deltaTime * 5f);
+        }
     }
 
     protected virtual void Shoot()

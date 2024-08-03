@@ -6,7 +6,6 @@ public class FireBullet : MonoBehaviour
 {
     public TowerStat towerStat;
     public float radius = 5f; // 화염이 닿는 범위
-    public ParticleSystem fireParticles; // 화염 파티클 시스템
     public LayerMask targetLayer; // 데미지를 입힐 대상의 레이어
 
     private float damageInterval = 0.5f; // 데미지 적용 간격
@@ -15,11 +14,6 @@ public class FireBullet : MonoBehaviour
     void Start()
     {
         towerStat = GetComponentInParent<TowerStat>();
-        if (fireParticles == null)
-        {
-            fireParticles = GetComponent<ParticleSystem>();
-        }
-        fireParticles.Play(); // 파티클 시스템을 활성화
     }
 
     void Update()
