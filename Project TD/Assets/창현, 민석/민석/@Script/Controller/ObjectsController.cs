@@ -20,6 +20,9 @@ public class ObjectsController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Monster"))
+            return;
+
         if (other.CompareTag("NPC"))
         {
             if (gameObject.GetComponentInChildren<UI_NPC>() == null)

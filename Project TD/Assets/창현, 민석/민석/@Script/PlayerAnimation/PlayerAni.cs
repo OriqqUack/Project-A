@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Minseok.Attack;
 
 namespace Minseok.Animation
 {
     public class PlayerAni : MonoBehaviour
     {
+        [SerializeField]
+        public GameObject First;
+
+        [SerializeField]
+        public GameObject Second;
+
+        private Weapon equipWeapon = null;
         private Animator animator;
         public float cooldownTime = 2f;
         private float nextFireTime = 0f;
@@ -16,24 +24,14 @@ namespace Minseok.Animation
 
         private void Awake()
         {
+            First.SetActive(true);
+            equipWeapon = First.GetComponent<Weapon>();
             animator = GetComponent<Animator>();
         }
 
         private void LateUpdate()
         {
-            // ¹«±â »©±â
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                Define._AttackCombo1 = true;
-                Define._AxeCombo1 = false;
-            }
-
-            // ¹«±â ÀåÂø
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                Define._AxeCombo1 = true;
-                Define._AttackCombo1 = false;
-            }
+            WeaponSwap();
 
             #region Attack
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("hit1"))
@@ -75,13 +73,47 @@ namespace Minseok.Animation
             if (Time.time > nextFireTime && Define._AttackCombo1)
             {
                 if (Input.GetMouseButtonDown(0))
+                {
+                    equipWeapon.Use();
                     AttackCombo();
+                }
+                    
             }
 
             if (Time.time > nextFireTime && Define._AxeCombo1)
             {
                 if (Input.GetMouseButtonDown(0))
+                {
+                    equipWeapon.Use();
                     AxeCombo();
+                }
+                    
+            }
+        }
+
+        void WeaponSwap()
+        {
+            if (equipWeapon == null)
+                return;
+
+            // ¹«±â »©±â
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                First.SetActive(true);
+                Second.SetActive(false);
+                equipWeapon = First.GetComponent<Weapon>();
+                Define._AttackCombo1 = true;
+                Define._AxeCombo1 = false;
+            }
+
+            // ¹«±â ÀåÂø
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                First.SetActive(false);
+                Second.SetActive(true);
+                equipWeapon = Second.GetComponent<Weapon>();
+                Define._AxeCombo1 = true;
+                Define._AttackCombo1 = false;
             }
         }
 
@@ -126,4 +158,3 @@ namespace Minseok.Animation
         }
     }
 }
-
