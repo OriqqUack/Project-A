@@ -44,12 +44,12 @@ public class MonsterStat : Stat
     public bool _isStunning = false; // 경직중인지 여부
     protected float _stunDuration = 3.0f; // 경직 시간
     protected Coroutine _stunCoroutine; // 경직 코루틴 변수
-    protected float nextStunHpThreshold; // 경직 기준 체력값 설정
+    protected float _nextStunHpThreshold; // 경직 기준 체력값 설정
     
-    protected virtual void Start()
+    protected override void Start()
     {
         SetStat(MonsterName);
-        nextStunHpThreshold = MaxHp * 2 / 3; // 첫번째 경직 기준 체력 설정
+        _nextStunHpThreshold = MaxHp * 2 / 3; // 첫번째 경직 기준 체력 설정
     }
 
     // 경직을 체크하고 적용
@@ -66,7 +66,7 @@ public class MonsterStat : Stat
         }
         else
         {
-            if (Hp <= nextStunHpThreshold && _stunCount < _maxStunCount && !_isStunning)
+            if (Hp <= _nextStunHpThreshold && _stunCount < _maxStunCount && !_isStunning)
             {
                 if (_stunCoroutine != null)
                     StopCoroutine(_stunCoroutine);
@@ -88,7 +88,7 @@ public class MonsterStat : Stat
 
     protected virtual void UpdateNextStunHpThreshold()
     {
-        nextStunHpThreshold = MaxHp * (_maxStunCount - _stunCount) / 3;
+        _nextStunHpThreshold = MaxHp * (_maxStunCount - _stunCount) / 3;
     }
 
     public void SetStat(string monsterName)

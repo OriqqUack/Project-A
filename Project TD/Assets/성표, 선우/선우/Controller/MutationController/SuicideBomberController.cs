@@ -10,9 +10,9 @@ public class SuicideBomberController : MonsterController
     public enum DespawnReason { SelfDestruct, Attacked } // 죽은 이유 (자폭 or 죽임당함)
     public event Action<DespawnReason> OnDespawn; // 자폭병이 소멸될 때 이벤트
 
-    private float explosionRadius = 4.0f; // 자폭 범위
-    private float detonationTime = 3.0f; // 점화 후 폭발까지의 시간
-    private Coroutine detonationCoroutine; // 점화 코루틴
+    private float _explosionRadius = 4.0f; // 자폭 범위
+    private float _detonationTime = 3.0f; // 점화 후 폭발까지의 시간
+    private Coroutine _detonationCoroutine; // 점화 코루틴
 
 
     public override void Init()
@@ -26,7 +26,7 @@ public class SuicideBomberController : MonsterController
         {
             GameObject closestObject = FindClosestObject();
 
-            if (closestObject != rocket && closestObject != _lockTarget)
+            if (closestObject != _rocket && closestObject != _lockTarget)
             {
                 _lockTarget = closestObject;
                
@@ -41,9 +41,9 @@ public class SuicideBomberController : MonsterController
 
             // 공격 범위 내에 타겟이 들어오면 자폭
             float distance = Vector3.Distance(transform.position, _lockTarget.transform.position);
-            if (distance <= _stat.AttackRange && detonationCoroutine == null)
+            if (distance <= _stat.AttackRange && _detonationCoroutine == null)
             {
-                detonationCoroutine = StartCoroutine(DetonationCoroutine());
+                _detonationCoroutine = StartCoroutine(Co_DetonationCoroutine());
             }
         }
     }
@@ -58,10 +58,10 @@ public class SuicideBomberController : MonsterController
     private void Despawn(DespawnReason reason)
     {
         // 점화된 뒤에 죽었다면 코루틴 중지
-        if (detonationCoroutine != null)
+        if (_detonationCoroutine != null)
         {
-            StopCoroutine(detonationCoroutine);
-            detonationCoroutine = null;
+            StopCoroutine(_detonationCoroutine);
+            _detonationCoroutine = null;
         }
 
         OnDespawn?.Invoke(reason);
@@ -75,7 +75,7 @@ public class SuicideBomberController : MonsterController
     private void Explode()
     {
         // 자폭 로직: 일정 범위 내에 있는 적에게 데미지를 입힘
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius, targetLayerMask);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _explosionRadius, _targetLayerMask);
         foreach (var hitCollider in hitColliders)
         {
             Stat targetStat = hitCollider.GetComponent<Stat>();
@@ -87,10 +87,10 @@ public class SuicideBomberController : MonsterController
     }
     
     // 점화 코루틴
-    private IEnumerator DetonationCoroutine()
+    private IEnumerator Co_DetonationCoroutine()
     {
-        yield return new WaitForSeconds(detonationTime);
-        if (detonationCoroutine != null) // 코루틴이 정상적으로 완료된 경우에만 폭발
+        yield return new WaitForSeconds(_detonationTime);
+        if (_detonationCoroutine != null) // 코루틴이 정상적으로 완료된 경우에만 폭발
         {
             Despawn(DespawnReason.SelfDestruct);
         }

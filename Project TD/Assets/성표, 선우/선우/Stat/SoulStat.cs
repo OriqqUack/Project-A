@@ -15,12 +15,13 @@ public class SoulStat : MonsterStat
         int baseDamage = Mathf.Max(0, attacker.Attack - Defense);
         int damage = baseDamage;
 
-        //BaseController attackerController = attacker.GetComponent<BaseController>();
-        //if (attackerController != null && attackerController.WorldObjectType == Define.WorldObject.Player) // 플레이어에게 공격 받을 시
-        //{
-        //    int additionalDamage = Mathf.FloorToInt(baseDamage * 0.1f); // 10프로 데미지 추가
-        //    damage += additionalDamage;
-        //}
+        // 공격자가 플레이어일 경우 10% 추가 데미지 적용
+        BaseController attackerController = attacker.GetComponent<BaseController>();
+        if (attackerController != null && attackerController.WorldObjectType == Define.WorldObject.Player)
+        {
+            int additionalDamage = Mathf.FloorToInt(baseDamage * 0.1f); // 10% 추가 데미지
+            damage += additionalDamage;
+        }
 
         Hp -= damage;
         if (Hp <= 0)
@@ -30,7 +31,7 @@ public class SoulStat : MonsterStat
         }
         else
         {
-            if (Hp <= nextStunHpThreshold && _stunCount < _maxStunCount && !_isStunning)
+            if (Hp <= _nextStunHpThreshold && _stunCount < _maxStunCount && !_isStunning)
             {
                 if (_stunCoroutine != null)
                     StopCoroutine(_stunCoroutine);

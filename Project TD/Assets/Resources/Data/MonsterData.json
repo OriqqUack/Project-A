@@ -5,7 +5,7 @@
       "level": "1",
       "maxHp": "200",
       "attack": "10",
-      "moveSpeed": "1.0f",
+      "moveSpeed": "3.0f",
       "attackSpeed": "0.8f",
       "scanRange": "10.0f",
       "attackRange": "1.5f"
@@ -13,22 +13,32 @@
     {
       "monsterName": "TestArcher",
       "level": "1",
-      "maxHp": "200",
+      "maxHp": "1000",
       "attack": "10",
-      "moveSpeed": "1.0f",
+      "moveSpeed": "3.0f",
       "attackSpeed": "0.8f",
       "scanRange": "10.0f",
-      "attackRange": "5f"
+      "attackRange": "8.0f"
     },
     {
       "monsterName": "TestWarrior",
       "level": "1",
-      "maxHp": "200",
+      "maxHp": "1000",
       "attack": "10",
-      "moveSpeed": "1.0f",
+      "moveSpeed": "3.0f",
       "attackSpeed": "0.8f",
       "scanRange": "10.0f",
       "attackRange": "1.5f"
+    },
+    {
+      "monsterName": "HealSpirit",
+      "level": "1",
+      "maxHp": "1000",
+      "attack": "10",
+      "moveSpeed": "3.0f",
+      "attackSpeed": "0.5f",
+      "scanRange": "10.0f",
+      "attackRange": "8.0f"
     }
   ]
 }

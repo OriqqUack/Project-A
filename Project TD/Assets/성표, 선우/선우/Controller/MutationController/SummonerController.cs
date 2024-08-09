@@ -6,11 +6,11 @@ using UnityEngine.AI;
 public class SummonerController : MonsterController
 {
     [SerializeField]
-    public string bomberPrefabPath = "Monsters/SuicideBomber"; // 자폭병 프리팹의 경로
-    private List<GameObject> summonedBombers = new List<GameObject>(); // 소환수 개체를 관리하기 위한 리스트
-    private float summonCooldown = 4.0f; // 공격에 의해 디스폰되었을 때의 쿨타임
-    private int maxBombers = 3; // 최대 소환 개체 수
-    private bool canSummon = true; // 소환가능한지 여부를 판단
+    public string _bomberPrefabPath = "Monsters/SuicideBomber"; // 자폭병 프리팹의 경로
+    private List<GameObject> _summonedBombers = new List<GameObject>(); // 소환수 개체를 관리하기 위한 리스트
+    private float _summonCooldown = 4.0f; // 공격에 의해 디스폰되었을 때의 쿨타임
+    private int _maxBombers = 3; // 최대 소환 개체 수
+    private bool _canSummon = true; // 소환가능한지 여부를 판단
 
     public override void Init()
     {
@@ -24,25 +24,25 @@ public class SummonerController : MonsterController
         // 랜덤으로 소환 위치값 적용
         Vector3 summonPosition = GetRandomPositionInAttackRange();
 
-        GameObject bomber = Managers.Game.Spawn(Define.WorldObject.Monster, bomberPrefabPath);
+        GameObject bomber = Managers.Game.Spawn(Define.WorldObject.Monster, _bomberPrefabPath);
         // 소환 불발시 나타날 에러코드
         if (bomber == null)
         {
-            Debug.LogError($"Failed to load bomber prefab from path: {bomberPrefabPath}");
+            Debug.LogError($"Failed to load bomber prefab from path: {_bomberPrefabPath}");
             return;
         }
 
         bomber.transform.position = summonPosition;
-        summonedBombers.Add(bomber);
+        _summonedBombers.Add(bomber);
 
 
         var bomberController = bomber.GetComponent<SuicideBomberController>();
         bomberController.OnDespawn += reason =>
         {
-            summonedBombers.Remove(bomber);
+            _summonedBombers.Remove(bomber);
             if (reason == SuicideBomberController.DespawnReason.Attacked)
             {
-                StartCoroutine(SummonCooldownRoutine());
+                StartCoroutine(Co_SummonCooldownRoutine());
             }
             
         };
@@ -61,11 +61,11 @@ public class SummonerController : MonsterController
         return summonPosition;
     }
 
-    private IEnumerator SummonCooldownRoutine()
+    private IEnumerator Co_SummonCooldownRoutine()
     {
-        canSummon = false;
-        yield return new WaitForSeconds(summonCooldown);
-        canSummon = true;
+        _canSummon = false;
+        yield return new WaitForSeconds(_summonCooldown);
+        _canSummon = true;
 
         // 넣어야할지 말지 모르겠음
         //if (summonedBombers.Count < 3)
@@ -96,7 +96,7 @@ public class SummonerController : MonsterController
             }
 
             // 소환사 공격 시 자폭병 소환
-            if (canSummon && summonedBombers.Count < maxBombers)
+            if (_canSummon && _summonedBombers.Count < _maxBombers)
             {
                 SummonBomber();
             }

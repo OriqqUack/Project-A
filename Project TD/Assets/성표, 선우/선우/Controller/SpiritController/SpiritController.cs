@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoulController : MonsterController
+public class SpiritController : MonsterController
 {
     
 }

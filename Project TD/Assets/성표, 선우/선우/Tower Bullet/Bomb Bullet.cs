@@ -8,8 +8,8 @@ public class BombBullet : MonoBehaviour
     private TowerStat _towerStat;
 
     [SerializeField]
-    private GameObject target;
-    public float speed = 70f;
+    private GameObject _target;
+    public float _speed = 70f;
 
     private void Start()
     {
@@ -28,21 +28,21 @@ public class BombBullet : MonoBehaviour
         }
     }
 
-    public void Seek(GameObject _target)
+    public void Seek(GameObject target)
     {
-        target = _target;
+        _target = target;
     }
 
     void Update()
     {
-        if (target == null)
+        if (_target == null)
         {
             Destroy(gameObject);
             return;
         }
 
-        Vector3 direction = target.transform.position - transform.position;
-        float distanceThisFrame = speed * Time.deltaTime;
+        Vector3 direction = _target.transform.position - transform.position;
+        float distanceThisFrame = _speed * Time.deltaTime;
 
         if (direction.magnitude <= distanceThisFrame)
         {
@@ -51,7 +51,7 @@ public class BombBullet : MonoBehaviour
         }
 
         transform.Translate(direction.normalized * distanceThisFrame, Space.World);
-        transform.LookAt(target.transform);
+        transform.LookAt(_target.transform);
     }
 
     void HitTarget()
@@ -63,7 +63,7 @@ public class BombBullet : MonoBehaviour
 
     void Damage()
     {
-        Stat targetStat = target.GetComponent<Stat>();
+        Stat targetStat = _target.GetComponent<Stat>();
 
         if (targetStat != null)
         {

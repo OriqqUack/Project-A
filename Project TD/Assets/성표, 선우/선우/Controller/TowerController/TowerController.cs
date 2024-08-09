@@ -7,53 +7,54 @@ public class TowerController : MonoBehaviour
 {
     protected TowerStat _towerStat;
 
-    public GameObject bulletPrefab; // 불릿 프리팹
-    public Transform fireHead; // 타겟을 따라갈 머리
-    public Transform firePoint; // 불릿이 발사되는 지점
-    public float range = 10f; // 타워의 사정거리
-    public float fireRate = 1f; // 발사 속도 (초당 발사 수)
+    public GameObject _bulletPrefab; // 불릿 프리팹
+    public Transform _fireHead; // 타겟을 따라갈 머리
+    public Transform _firePoint; // 불릿이 발사되는 지점
+    public float _range = 10f; // 타워의 사정거리
+    public float _fireRate = 1f; // 발사 속도 (초당 발사 수)
 
-    protected float fireCountdown = 0f;
-
-    [SerializeField]
-    protected GameObject target;
+    protected float _fireCountdown = 0f;
 
     [SerializeField]
-    protected LayerMask targetLayerMask;
+    protected GameObject _target;
 
-    public bool isDisabled = false;
+    [SerializeField]
+    protected LayerMask _targetLayerMask;
+
+    public bool _isDisabled = false;
 
     protected virtual void Start()
     {
         _towerStat = GetComponent<TowerStat>();
+        _targetLayerMask = LayerMask.GetMask("Monster");
     }
 
     protected virtual void Update()
     {
-        if (isDisabled)
+        if (_isDisabled)
         {
             // 타워의 기능이 고장나 있는 상태
             return;
         }
 
-        target = UpdateTarget();
+        _target = UpdateTarget();
 
-        if (target == null)
+        if (_target == null)
             return;
 
         RotateTowardsTarget();
-        if (fireCountdown <= 0f)
+        if (_fireCountdown <= 0f)
         {
             Shoot();
-            fireCountdown = 1f / fireRate;
+            _fireCountdown = 1f / _fireRate;
         }
 
-        fireCountdown -= Time.deltaTime;
+        _fireCountdown -= Time.deltaTime;
     }
 
     public virtual GameObject UpdateTarget()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _towerStat.AttackRange, targetLayerMask);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _towerStat.AttackRange, _targetLayerMask);
         GameObject closestObject = null;
         float closestDistance = Mathf.Infinity;
 
@@ -72,40 +73,40 @@ public class TowerController : MonoBehaviour
 
     protected void RotateTowardsTarget()
     {
-        if (target != null)
+        if (_target != null)
         {
-            Vector3 direction = target.transform.position - fireHead.position;
+            Vector3 direction = _target.transform.position - _fireHead.position;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
-            fireHead.rotation = Quaternion.Lerp(fireHead.rotation, lookRotation, Time.deltaTime * 5f);
+            _fireHead.rotation = Quaternion.Lerp(_fireHead.rotation, lookRotation, Time.deltaTime * 5f);
         }
     }
 
     protected virtual void Shoot()
     {
-        GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation, transform);
+        GameObject bulletGO = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation, transform);
         BombBullet bullet = bulletGO.GetComponent<BombBullet>();
 
         if (bullet != null)
         {
-            bullet.Seek(target);
+            bullet.Seek(_target);
         }
     }
 
     public virtual void DisableTower()
     {
-        isDisabled = true;
+        _isDisabled = true;
         // 타워 고장 시 추가 로직이 필요하면 여기 추가
     }
 
     public virtual void RepairTower()
     {
-        isDisabled = false;
+        _isDisabled = false;
         // 타워 수리 시 추가 로직이 필요하면 여기 추가
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.DrawWireSphere(transform.position, _range);
     }
 }

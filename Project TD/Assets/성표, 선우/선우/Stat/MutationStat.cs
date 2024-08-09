@@ -10,11 +10,11 @@ public class MutationStat : MonsterStat
     {
         SetStat(MonsterName);
         _maxStunCount = 3;
-        nextStunHpThreshold = MaxHp * 3 / 4; // 첫번째 경직 기준 체력
+        _nextStunHpThreshold = MaxHp * 3 / 4; // 첫번째 경직 기준 체력
     }
 
     protected override void UpdateNextStunHpThreshold()
     {
-        nextStunHpThreshold = MaxHp * (_maxStunCount - _stunCount) / 4;
+        _nextStunHpThreshold = MaxHp * (_maxStunCount - _stunCount) / 4;
     }
 }

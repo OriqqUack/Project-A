@@ -31,12 +31,12 @@ public class TowerStat : Stat
     public float ScanRange { get { return _scanRange; } set { _scanRange = value; } }
     public float AttackRange { get { return _attackRange; } set { _attackRange = value; } }
 
-    void Start()
+    protected override void Start()
     {
         _level = 1;
-        _hp = 100;
-        _maxHp = 100;
-        _attack = 50;
+        _hp = 1000;
+        _maxHp = 1000;
+        _attack = 10;
         _defense = 5;
         _attackSpeed = 1.0f;
         _attackRange = 10f;

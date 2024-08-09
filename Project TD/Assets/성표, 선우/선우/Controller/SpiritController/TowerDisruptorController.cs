@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerDisruptorController : SoulController
+public class TowerDisruptorController : SpiritController
 {
-    private float disableChance = 0.7f; // °íÀå È®·ü
+    private float _disableChance = 0.7f; // °íÀå È®·ü
 
     public override void Init()
     {
@@ -25,7 +25,7 @@ public class TowerDisruptorController : SoulController
         {
             GameObject closestObject = FindClosestObject();
 
-            if (closestObject != rocket && closestObject != _lockTarget)
+            if (closestObject != _rocket && closestObject != _lockTarget)
             {
                 _lockTarget = closestObject;
             }
@@ -58,7 +58,7 @@ public class TowerDisruptorController : SoulController
 
             targetStat.OnAttacked(_stat);
 
-            if (tower != null && !tower.isDisabled)
+            if (tower != null && !tower._isDisabled)
             {
                 TryDisableTower(tower);
             }
@@ -84,7 +84,7 @@ public class TowerDisruptorController : SoulController
 
     private void TryDisableTower(TowerController tower)
     {
-        if (Random.value < disableChance)
+        if (Random.value < _disableChance)
         {
             tower.DisableTower();
         }

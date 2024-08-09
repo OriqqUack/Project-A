@@ -25,7 +25,7 @@ public class Stat : MonoBehaviour
     public int Defense { get { return _defense; } set { _defense = value; } }
     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
 
-    private void Start()
+    protected virtual void Start()
     {
         _level = 1;
         _hp = 100;

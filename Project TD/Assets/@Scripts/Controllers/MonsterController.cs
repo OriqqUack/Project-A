@@ -11,15 +11,15 @@ public class MonsterController : BaseController
     [SerializeField]
     protected MonsterStat _stat;
 
-    protected GameObject player;
-    protected GameObject rocket;
+    protected GameObject _player;
+    protected GameObject _rocket;
 
     protected Coroutine _aggroCoroutine; // 어그로 해제 코루틴
     protected float _aggroDuration = 3.0f; // 어그로 지속 시간
     protected bool _isAggroTimeoutActive = false; // 어그로 타임아웃 활성화 여부
 
     [SerializeField]
-    protected LayerMask targetLayerMask; // 감지할 타깃 레이어 마스크 (직접 설정해서 해야함, 레이어마스크 아직 미설정)
+    protected LayerMask _targetLayerMask; // 감지할 타깃 레이어 마스크 (직접 설정해서 해야함, 레이어마스크 아직 미설정)
 
     protected NavMeshAgent _navMeshAgent;
 
@@ -27,15 +27,15 @@ public class MonsterController : BaseController
     {
         WorldObjectType = Define.WorldObject.Monster;
 
-        rocket = GameObject.Find("rocket");
+        _rocket = GameObject.Find("rocket");
         _stat = gameObject.GetComponent<MonsterStat>();
         _navMeshAgent = gameObject.GetOrAddComponent<NavMeshAgent>();
-
+        _targetLayerMask = LayerMask.GetMask("Player", "Tower");
 
         if (gameObject.GetComponentInChildren<UI_HPBar>() == null)
             Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform);
 
-        player = Managers.Game.GetPlayer();
+        _player = Managers.Game.GetPlayer();
     }
 
     public override Define.State State
@@ -74,9 +74,9 @@ public class MonsterController : BaseController
     protected override void UpdateIdle()
     {
         // 처음 lockTarget을 rocket으로 설정
-        _lockTarget = rocket;
+        _lockTarget = _rocket;
 
-        if (player == null || rocket == null)
+        if (_player == null || _rocket == null)
             return;
 
         if (_lockTarget != null)
@@ -105,7 +105,7 @@ public class MonsterController : BaseController
         {
             GameObject closestObject = FindClosestObject();
 
-            if (closestObject != rocket && closestObject != _lockTarget)
+            if (closestObject != _rocket && closestObject != _lockTarget)
             {
                 _lockTarget = closestObject;
                 if (_aggroCoroutine != null)
@@ -123,7 +123,7 @@ public class MonsterController : BaseController
                 State = Define.State.Skill;
                 return;
             }
-            else if (closestObject == rocket && !_isAggroTimeoutActive)
+            else if (closestObject == _rocket && !_isAggroTimeoutActive)
             {
                 // 타겟이 사정거리 밖으로 나갔을 때 어그로 해제 타이머 작동
                 _aggroCoroutine = StartCoroutine(Co_AggroTimeout());
@@ -174,8 +174,8 @@ public class MonsterController : BaseController
     // ScanRange안에 있는 애들을 감지하는 메서드
     public GameObject FindClosestObject()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _stat.ScanRange, targetLayerMask);
-        GameObject closestObject = rocket;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _stat.ScanRange, _targetLayerMask);
+        GameObject closestObject = _rocket;
         float closestDistance = Mathf.Infinity;
 
         foreach (var collider in colliders)
@@ -196,7 +196,7 @@ public class MonsterController : BaseController
     {
         _isAggroTimeoutActive = true;
         yield return new WaitForSeconds(_aggroDuration);
-        _lockTarget = rocket;
+        _lockTarget = _rocket;
         _isAggroTimeoutActive = false;
     }
     

@@ -38,7 +38,7 @@ public class PlayerStat : Stat
 
 	public int Gold { get { return _gold; } set { _gold = value; } }
 
-	private void Start()
+	protected override void Start()
 	{
 		_level = 1;
 		_exp = 0;
