@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HealingSpiritStat : SoulStat
+public class HealingSpiritStat : SpiritStat
 {
     public override void OnAttacked(Stat attacker)
     {

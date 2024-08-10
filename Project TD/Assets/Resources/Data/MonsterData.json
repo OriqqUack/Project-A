@@ -39,6 +39,16 @@
       "attackSpeed": "0.5f",
       "scanRange": "10.0f",
       "attackRange": "8.0f"
+    },
+    {
+      "monsterName": "LaserSpirit",
+      "level": "1",
+      "maxHp": "1000",
+      "attack": "1",
+      "moveSpeed": "3.0f",
+      "attackSpeed": "1.0f",
+      "scanRange": "10.0f",
+      "attackRange": "8.0f"
     }
   ]
 }

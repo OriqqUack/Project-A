@@ -102,12 +102,13 @@ public class PixelArsenalBeamStatic : MonoBehaviour
 		if (beamLineRendererPrefab)
 		{
 			beam = Instantiate(beamLineRendererPrefab);
-			beam.transform.position = transform.position;
+            beam.transform.position = transform.position;
 			beam.transform.parent = transform;
 			beam.transform.rotation = transform.rotation;
 
 			line = beam.GetComponent<LineRenderer>();
 			line.useWorldSpace = true;
+
 
 			#if UNITY_5_5_OR_NEWER
 			line.positionCount = 2;
@@ -124,5 +125,42 @@ public class PixelArsenalBeamStatic : MonoBehaviour
 		}
 	}
 
-}
+        // 추가(빔 켜기, 끄기)
+
+        public void EnableOrSpawnBeam()
+        {
+            if (beam == null)
+            {
+                // 빔이 없을 경우에만 새로 생성
+                SpawnBeam();
+            }
+            else
+            {
+                // 빔이 이미 존재하면 활성화
+                beam.SetActive(true);
+            }
+        }
+        public void DisableBeam()
+        {
+            if (beam != null)
+            {
+                beam.SetActive(false);
+            }
+        }
+        // 빔이 현재 활성화되어 있는지 여부를 반환하는 프로퍼티
+        public bool IsBeamActive
+		{
+			get
+				{
+					return beam != null && beam.activeSelf;
+				}
+		}
+
+		// 빔 길이를 외부에서 조절 가능하게 만듬
+        public float BeamLength
+        {
+            get { return beamLength; }
+            set { beamLength = value; }
+        }
+    }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoulStat : MonsterStat
+public class SpiritStat : MonsterStat
 {
     public override void OnAttacked(Stat attacker)
     {

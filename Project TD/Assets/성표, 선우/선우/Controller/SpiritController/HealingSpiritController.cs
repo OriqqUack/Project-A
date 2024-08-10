@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class HealingSpiritController : MonsterController
+public class HealingSpiritController : SpiritController
 {
     [SerializeField]
     private float _healingRadius = 5f; // Èú ¹üÀ§
@@ -37,14 +37,8 @@ public class HealingSpiritController : MonsterController
 
     protected override void UpdateSkill()
     {
-        if (_isHealing)
+        if (_isHealing || _stat._isStunning)
             return;
-
-        if (_stat._isStunning)
-        {
-            State = Define.State.Stun;
-            return;
-        }
 
         if (_lockTarget != null)
         {
