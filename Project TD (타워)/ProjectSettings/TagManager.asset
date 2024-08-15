@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Monster1
+  - Monster2
+  - Monster3
+  - Monster4
+  - Monster5
+  - Monster6
+  - Monster7
+  - Monster8
+  - Monster9
+  - Monster10
+  - Tower
+  - Missile
+  - Target
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - HexTile
+  - Player
+  - Tower
+  - Monster
+  - Repeater
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
