@@ -17,10 +17,10 @@ public class GameScene : BaseScene
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "character");
         Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);
 
-        Managers.Game.Spawn(Define.WorldObject.Monster, "Monsters/Knight");
-        GameObject go = new GameObject { name = "SpawningPool" };
-        SpawningPool pool = go.GetOrAddComponent<SpawningPool>();
-        pool.SetKeepMonsterCount(2);
+        //Managers.Game.Spawn(Define.WorldObject.Monster, "Monsters/Knight");
+        //GameObject go = new GameObject { name = "SpawningPool" };
+        //SpawningPool pool = go.GetOrAddComponent<SpawningPool>();
+        //pool.SetKeepMonsterCount(2);
     }
     
     public override void Clear()

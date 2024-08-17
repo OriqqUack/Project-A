@@ -381,9 +381,9 @@ MonoBehaviour:
   _state: 2
   _lockTarget: {fileID: 0}
   _stat: {fileID: 0}
-  targetLayerMask:
+  _targetLayerMask:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 0
 --- !u!1 &7908717886868789901
 GameObject:
   m_ObjectHideFlags: 0
