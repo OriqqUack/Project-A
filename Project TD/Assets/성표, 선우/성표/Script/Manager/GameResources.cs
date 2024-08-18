@@ -19,17 +19,10 @@ public class GameResources : MonoBehaviour
         }
     }
 
-    #region Header Map Type List
-    [Space(10)]
-    [Header("¸Ê ¸®½ºÆ®")]
-    #endregion Header Map Type List
-    public MapTypeListSO mapTypeList;
-
     #region Header Player
     [Space(10)]
     [Header("PLAYER")]
     #endregion Header Player
     public CurrentPlayerSO currentPlayer;
-
 }
 

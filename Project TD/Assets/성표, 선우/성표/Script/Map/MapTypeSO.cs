@@ -9,27 +9,16 @@ public class MapTypeSO : ScriptableObject
 
     #region Header Map Type List;
     [Space(10)]
-    [Header("∏  ≈∏¿‘")]
+    [Header("MAP BASIE SETTINGS")]
     #endregion Header Map Type List;
     public MapType mapType;
-
-    #region Header Map Type List;
-    [Space(10)]
-    [Header("∏  ∑π∫ß")]
-    #endregion Header Map Type List;
-    public MapLevel mapLevel;
-
-    #region Header Map Template
-    [Space(10)]
-    [Header("∏  «¡∏Æ∆’")]
-    #endregion Header Map Template
-    public List<GameObject> prefabs;
+    public GameObject prefab;
 
     #region Validation
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        HelperUtilitie.ValidateCheckEnumerableValues(this, nameof(prefabs), prefabs);
+        HelperUtilitie.ValidateCheckNullValue(this, nameof(prefab), prefab);
     }
 #endif
     #endregion Validation

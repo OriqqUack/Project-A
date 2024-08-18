@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: PlayerDetails_
   m_EditorClassIdentifier: 
   playerCharacterName: 1
-  playerPrefab: {fileID: 7041573327769232310, guid: 536d3f532501ea64fade168a9945406c,
+  playerPrefab: {fileID: 8643669016814502415, guid: 2ab4b1abf9b04d343936402664cc6d41,
     type: 3}
-  runtimeAnimatorController: {fileID: 22100000, guid: 7b3b034a6e099a642990097e756d2555,
-    type: 2}
   playerHealthAmount: 100

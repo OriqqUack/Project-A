@@ -163,12 +163,12 @@ public class PlayerControl : MonoBehaviour
     private void RotatePlayerToAim()
     {
         Vector3 targetPosition = HelperUtilitie.GetMouseWorldPosition(groundLayerMask);
-        Debug.Log(targetPosition);
         targetPosition.y = gameObject.transform.position.y;
 
         Vector3 direction = targetPosition - transform.position;
-        Quaternion rotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 10f);
+        //Quaternion rotation = Quaternion.LookRotation(direction);
+
+        //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 10f);
     }
 
     #region Validation

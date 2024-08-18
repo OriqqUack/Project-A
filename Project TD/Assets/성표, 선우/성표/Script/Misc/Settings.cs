@@ -7,6 +7,8 @@ public static class Settings
     #region Map Create Settings
     public const int maxMapDepth = 3; // Level = Depth
     public const int maxMapTileCount = 30;
+
+    public const float mapTileCreateAnimationTime = 3f;
     #endregion Map Create  Settings
 
     #region Random Appear Tile Time Range

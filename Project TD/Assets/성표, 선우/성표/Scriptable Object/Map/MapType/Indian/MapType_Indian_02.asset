@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d2a2d79535e66f4dbe26ac4c3b3acaf, type: 3}
+  m_Name: MapType_Indian_02
+  m_EditorClassIdentifier: 
+  mapTypeName: Indian_02
+  mapType: 5
+  mapLevel: 1
+  prefab: {fileID: 8760557484607928878, guid: a4dc7e6c5d78c47469194649c30f9931, type: 3}

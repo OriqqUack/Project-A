@@ -1,19 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
-
-
 
 [DisallowMultipleComponent]
 public class MapBuilder : SingletonMonoBehaivour<MapBuilder>
 {
-    private List<Vector3> mapTilePostion;
     public Tilemap tilemap;
-    public MapTypeListSO mapTypeList; //추후 변경
+
+    private List<Vector3> mapTilePostion;
     private bool mapCreateSucessful;
 
     [HideInInspector] public Dictionary<int, List<Vector3>> mapTileDictionary = new Dictionary<int, List<Vector3>>();
@@ -33,7 +28,6 @@ public class MapBuilder : SingletonMonoBehaivour<MapBuilder>
     /// </summary>
     private void InitalizeTileDictionary()
     {
-
         mapTileDictionary.Clear();
 
         for (int i = 0; i <= Settings.maxMapDepth; i++)
@@ -46,38 +40,21 @@ public class MapBuilder : SingletonMonoBehaivour<MapBuilder>
     }
 
     /// <summary>
-    /// GameResouce로 부터 맵 타입 리스트를 로드함
-    /// </summary>
-    private bool LoadMapTypeList()
-    {
-        mapTypeList = GameResources.Instance.mapTypeList;
-
-        if (mapTypeList == null)
-        {
-            Debug.Log("GameResource map type list load fail");
-            return false;
-        }
-
-        return true;
-    }
-
-    /// <summary>
     /// 맵 생성
     /// </summary>
-    public bool GenerateMap()
+    public bool GenerateMap(List<MapLevelSO> mapLevelList)
     {
         // 맵 타일 위치리스트 생성
         CreateTilePostionList();
 
         // 맵 타일 프리팹 생성
-        InstantiateTile();
+        InstantiateTile(mapLevelList);
 
         return mapCreateSucessful;
     }
 
     private void CreateTilePostionList()
     {
-
         int tileCount = 0;
         int currentDepth = 1000; // 최초 깊이 NULL
         Vector3Int startTile = Vector3Int.zero; // Vector3(0,0,0)
@@ -108,6 +85,7 @@ public class MapBuilder : SingletonMonoBehaivour<MapBuilder>
         while (queue.Count > 0)
         {
             var (current, depth) = queue.Dequeue();
+
             // 구한 좌표값과 BFS깊이를 딕셔너리에 저장
             AddTilePositionDictionary(current, depth);
             tileCount++;
@@ -151,19 +129,18 @@ public class MapBuilder : SingletonMonoBehaivour<MapBuilder>
                 }
             }
         }
-
     }
 
     /// <summary>
     /// 맵 타일 생성
     /// </summary>
-    private void InstantiateTile()
+    private void InstantiateTile(List<MapLevelSO> mapLevelList)
     {
         int listCount = 0;
 
         for (int depth = 0; depth <= Settings.maxMapDepth; depth++)
         {
-            if (!mapTileDictionary.ContainsKey(depth))
+            if (!mapTileDictionary.ContainsKey(depth) && listCount < Settings.maxMapTileCount)
             {
                 mapCreateSucessful = false;
                 return;
@@ -171,20 +148,19 @@ public class MapBuilder : SingletonMonoBehaivour<MapBuilder>
 
             foreach (Vector3 tilePosition in mapTileDictionary[depth])
             {
-                if (mapTypeList.list[depth] == null)
+                if (mapLevelList[depth] != null)
+                {
+                    MapTypeSO mapType = mapLevelList[depth].list[Random.Range(0, mapLevelList[depth].list.Count)];
+                    tileObjects.Add(Instantiate(mapType.prefab, tilePosition, Quaternion.identity));
+                    tileObjects[listCount++].SetActive(false);
+                }
+                else
                 {
                     Debug.Log("tile map prefabs null error");
                     mapCreateSucessful = false;
-                    return;
                 }
-                MapTypeSO mapType = mapTypeList.list[depth].list[Random.Range(0, mapTypeList.list[depth].list.Count)];
-                tileObjects.Add(Instantiate(mapType.prefabs[Random.Range(0, mapType.prefabs.Count)]
-                    , tilePosition, Quaternion.identity));
-
-                tileObjects[listCount++].SetActive(false);
             }
         }
-
         mapCreateSucessful = true;
         return;
     }

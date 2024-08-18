@@ -150,10 +150,10 @@ public class GameManagerEx : SingletonMonoBehaivour<GameManagerEx>
             case GameState.gameStarted:
                 PlayInGame();
                 inGameTimer = 0f;
-                gameState = GameState.playingGame;
+                gameState = GameState.playingInGame;
                 break;
 
-            case GameState.playingGame:
+            case GameState.playingInGame:
                 OnInGameTimer();
                 InGameTileControl();
                 break;
@@ -162,7 +162,7 @@ public class GameManagerEx : SingletonMonoBehaivour<GameManagerEx>
 
     private void PlayInGame()
     {
-        bool SucessfulMapGenerate = MapBuilder.Instance.GenerateMap();
+        bool SucessfulMapGenerate = true; //MapBuilder.Instance.GenerateMap();
 
         if (!SucessfulMapGenerate)
         {

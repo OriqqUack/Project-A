@@ -6,11 +6,11 @@ public enum MapType
 {
     None,
     Rocket,
-    spirit_forest,
-    polluted_forest,
-    corrupted_forest,
-    indian_territory,
-    Carpenter_forest
+    spiritForest,
+    deadForest,
+    corruptedForest,
+    indianTerritory,
+    CarpenterForest
 }
 
 public enum MapLevel
@@ -24,7 +24,8 @@ public enum MapLevel
 public enum GameState
 {
     gameStarted,
-    playingGame,
+    playinglobby,
+    playingInGame,
     gameWon,
     gameLost,
     gamePaused,

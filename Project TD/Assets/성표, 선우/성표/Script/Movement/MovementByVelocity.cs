@@ -44,7 +44,6 @@ public class MovementByVelocity : MonoBehaviour
 
         moveAngle = GetMoveDirectionAngle(moveDirection);
 
-        Debug.Log(moveAngle);
     }
 
     private float GetMoveDirectionAngle(Vector3 moveDirection)

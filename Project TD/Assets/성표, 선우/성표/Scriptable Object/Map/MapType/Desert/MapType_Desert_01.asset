@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d2a2d79535e66f4dbe26ac4c3b3acaf, type: 3}
+  m_Name: MapType_Desert_01
+  m_EditorClassIdentifier: 
+  mapTypeName: Desert01
+  mapType: 0
+  mapLevel: 1
+  prefab: {fileID: 8320310761523185030, guid: a66a806b14cd08d438f9b067044ce060, type: 3}

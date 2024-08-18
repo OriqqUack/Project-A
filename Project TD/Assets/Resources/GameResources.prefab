@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f205cc18abd0de46ab68bafe99cee2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapTypeList: {fileID: 11400000, guid: 27f34828ba9b2ec40bf9fb31b7880d66, type: 2}
   currentPlayer: {fileID: 11400000, guid: ecc1f4b25eac99b459f34e6fce4e365d, type: 2}
+  defaultTileMaterializeEffect: {fileID: 11400000, guid: 3dd3f4a9ff0ec2e41babcc6d6912913c,
+    type: 2}

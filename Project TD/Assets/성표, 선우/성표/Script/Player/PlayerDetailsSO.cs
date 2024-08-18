@@ -18,10 +18,6 @@ public class PlayerDetailsSO : ScriptableObject
     [Tooltip("캐릭터 프리팹")]
     #endregion Tooltip
     public GameObject playerPrefab;
-    #region Tooltip
-    [Tooltip("애니메이션 컨틀롤러")]
-    #endregion Tooltip
-    public RuntimeAnimatorController runtimeAnimatorController;
 
     #region 체력 헤더
     [Space(10)]
@@ -40,7 +36,6 @@ public class PlayerDetailsSO : ScriptableObject
         HelperUtilitie.ValidateCheckEmptyString(this, nameof(playerCharacterName), playerCharacterName);
         HelperUtilitie.ValidateCheckNullValue(this, nameof(playerPrefab), playerPrefab);
         HelperUtilitie.ValidateCheckPositiveValue(this, nameof(playerHealthAmount), playerHealthAmount, false);
-        HelperUtilitie.ValidateCheckNullValue(this, nameof(runtimeAnimatorController), runtimeAnimatorController);
     }
 #endif
     #endregion Validattion

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MapTypeLevel_", menuName = "Scriptable Objects/Map/Map Level")]
+[CreateAssetMenu(fileName = "MapLevel_", menuName = "Scriptable Objects/Map/Map Level")]
 public class MapLevelSO : ScriptableObject
 {
     public string levelName;
