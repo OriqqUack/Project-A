@@ -45,7 +45,10 @@ public class MonsterStat : Stat
     protected float _stunDuration = 3.0f; // 경직 시간
     protected Coroutine _stunCoroutine; // 경직 코루틴 변수
     protected float _nextStunHpThreshold; // 경직 기준 체력값 설정
-    
+
+    public event System.Action OnDeath; // 몬스터가 죽었을 때 발생하는 이벤트
+    public bool IsInfected { get; private set; } = false;
+
     protected override void Start()
     {
         SetStat(MonsterName);
@@ -62,6 +65,13 @@ public class MonsterStat : Stat
         if (Hp <= 0)
         {
             Hp = 0;
+
+            // 몬스터가 감염 상태일 때만 OnDeath 이벤트를 발생시킴
+            if (IsInfected && OnDeath != null)
+            {
+                OnDeath.Invoke(); // 감염된 몬스터가 죽었을 때 이벤트 발생
+            }
+
             OnDead(attacker);
         }
         else
@@ -103,5 +113,12 @@ public class MonsterStat : Stat
         _attackSpeed = monsterStat.attackSpeed;
         _scanRange = monsterStat.scanRange;
         _attackRange = monsterStat.attackRange;
+    }
+
+    public void Infect()
+    {
+        IsInfected = true;
+        // 감염되었을 때 스컬 루프 파티클을 방출하는 로직을 여기에 추가합니다.
+        Debug.Log($"{MonsterName} 감염됨");
     }
 }

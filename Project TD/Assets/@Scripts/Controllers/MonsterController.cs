@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -156,9 +155,7 @@ public class MonsterController : BaseController
 
         if (_lockTarget != null)
         {
-            Vector3 dir = _lockTarget.transform.position - transform.position;
-            Quaternion quat = Quaternion.LookRotation(dir);
-            transform.rotation = Quaternion.Lerp(transform.rotation, quat, 20 * Time.deltaTime);
+            RotateTowardsTarget();
         }
     }
 
@@ -171,7 +168,7 @@ public class MonsterController : BaseController
             State = Define.State.Idle;
     }
 
-    // ScanRange안에 있는 애들을 감지하는 메서드
+    // ScanRange안에 있는 애들을 감지하는 메서드 (자기 자신을 감지 대상으로 제외하는 로직을 추가)
     public GameObject FindClosestObject()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _stat.ScanRange, _targetLayerMask);
@@ -180,6 +177,10 @@ public class MonsterController : BaseController
 
         foreach (var collider in colliders)
         {
+            // 자기 자신을 감지 대상으로 제외
+            if (collider.gameObject == gameObject)
+                continue;
+
             float distance = Vector3.Distance(transform.position, collider.transform.position);
             if (distance < closestDistance)
             {
@@ -225,6 +226,18 @@ public class MonsterController : BaseController
         else
         {
             State = Define.State.Idle;
+        }
+    }
+
+    // 타깃을 향해 회전 (이건 MonsterController에 옮길 예정)
+    protected void RotateTowardsTarget()
+    {
+        Vector3 direction = _lockTarget.transform.position - transform.position;
+        // 방향 벡터가 0인지 확인 (목표물과 현제 객체의 방향이 0.0.0으로 겹치지 않을때만 실행)
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
         }
     }
 }

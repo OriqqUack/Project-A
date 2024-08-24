@@ -42,9 +42,7 @@ public class HealingSpiritController : SpiritController
 
         if (_lockTarget != null)
         {
-            Vector3 dir = _lockTarget.transform.position - transform.position;
-            Quaternion quat = Quaternion.LookRotation(dir);
-            transform.rotation = Quaternion.Lerp(transform.rotation, quat, 20 * Time.deltaTime);
+            RotateTowardsTarget();
         }
     }
 

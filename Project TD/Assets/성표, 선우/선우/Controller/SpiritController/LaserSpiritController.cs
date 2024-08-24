@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using PixelArsenal;
 
-public class LaserSpiritController : MonsterController
+public class LaserSpiritController : SpiritController
 {
     [SerializeField] private float _damageIncreaseInterval = 3f; // 데미지 증가 간격
     [SerializeField] private float _damageIncreaseAmount = 1f; // 증가하는 피해량
@@ -136,14 +136,6 @@ public class LaserSpiritController : MonsterController
     private void ResetAttack()
     {
         _stat.Attack = _originalAttackValue;
-    }
-
-    // 타깃을 향해 회전 (이건 MonsterController에 옮길 예정)
-    private void RotateTowardsTarget()
-    {
-        Vector3 direction = _lockTarget.transform.position - transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
     }
 
     protected override void OnHitEvent()
