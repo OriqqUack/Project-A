@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Audio;
 
 public class GameResources : MonoBehaviour
 {
@@ -24,5 +24,11 @@ public class GameResources : MonoBehaviour
     [Header("PLAYER")]
     #endregion Header Player
     public CurrentPlayerSO currentPlayer;
+
+    #region Header SOUNDS
+    [Space(10)]
+    [Header("SOUNDS")]
+    #endregion Header SOUNDS
+    public AudioMixerGroup soundsMasterMixerGroup;
 }
 

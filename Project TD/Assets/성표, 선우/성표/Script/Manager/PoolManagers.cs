@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
+
 [DisallowMultipleComponent]
-public class PoolManager : SingletonMonoBehaivour<PoolManager>
+public class PoolManagers : SingletonMonoBehaivour<PoolManagers>
 {
     [SerializeField] private Pool[] poolArray = null;
     private Transform objectPoolTransform;
@@ -120,4 +120,3 @@ public class PoolManager : SingletonMonoBehaivour<PoolManager>
 #endif
     #endregion
 }
-*/
